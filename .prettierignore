@@ -1,0 +1,13 @@
+# Ignore all files in the build directory
+build/
+
+# Ignore a specific file
+
+
+# Ignore all Markdown files
+*.md
+
+# Ignore all files in the logs directory
+logs/**
+
+.d.ts
