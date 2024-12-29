@@ -9,6 +9,8 @@
     }
   ],
   "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "dist",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

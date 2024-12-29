@@ -1,6 +1,6 @@
 # Ignore all files in the build directory
 build/
-
+node_modules/
 # Ignore a specific file
 
 
