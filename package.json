@@ -20,8 +20,8 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "pnpm run clean && rollup -c",
-    "dev": "rollup -c -w",
+    "build": "npm run clean && vite build",
+    "dev": "vite",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
@@ -40,20 +40,9 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.0",
-    "@babel/preset-env": "^7.26.0",
-    "@babel/preset-react": "^7.25.9",
-    "@babel/preset-typescript": "^7.26.0",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/invariant": "^2.2.37",
     "@types/node": "^22.9.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
-    "@types/shallowequal": "^1.1.5",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.3.3",
@@ -66,10 +55,9 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "postcss": "^8.4.32",
     "prettier": "^3.0.3",
-    "rollup": "^4.9.6",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.2",
-    "typescript": "^5.2.2",
-    "vite": "^6.0.6"
+    "typescript": "^5.7.2",
+    "vite": "^6.0.6",
+    "vite-plugin-dts": "^4.4.0",
+    "vite-plugin-lib-inject-css": "^2.2.0"
   }
 }

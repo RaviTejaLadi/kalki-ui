@@ -1,33 +1,46 @@
+// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import dts from 'vite-plugin-dts';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export default defineConfig({
-  root: path.resolve(__dirname, 'src/playground'),
-  plugins: [react()],
+  plugins: [
+    react(),
+    dts({
+      include: ['src'],
+      exclude: ['src/**/*.test.tsx', 'src/**/*.test.ts'],
+      insertTypesEntry: true
+    }),
+    libInjectCss()
+  ],
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/index.ts'),
+      name: 'kalki-ui',
+      formats: ['es'],
+      fileName: (format) => `index.${format}.js`
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom', 'tailwindcss'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') return 'index.css';
+          return assetInfo.name ?? '[name][extname]';
+        },
+      }
+    },
+    cssCodeSplit: false,
+    sourcemap: true
+  },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      'ui-essentials-react': 'ui-essentials-react',
-    },
-    dedupe: ['react', 'react-dom'],
-  },
-  optimizeDeps: {
-    include: ['ui-essentials-react'],
-  },
-  build: {
-    outDir: path.resolve(__dirname, '../../dist'),
-    emptyOutDir: true,
-    sourcemap: true,
-    rollupOptions: {
-      input: path.resolve(__dirname, 'src/playground/index.html'),
-    },
-    commonjsOptions: {
-      include: [/ui-essentials-react/, /node_modules/],
-    },
-  },
-  server: {
-    port: 8000,
-    open: true,
-  },
+      '@': path.resolve(__dirname, './src')
+    }
+  }
 });
