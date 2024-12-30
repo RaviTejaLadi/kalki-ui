@@ -1,4 +1,4 @@
-import './tailwind.css';
+import './index.css';
 
 export {
   default as Accordion,

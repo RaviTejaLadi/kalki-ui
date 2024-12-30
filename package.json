@@ -5,21 +5,23 @@
   "files": [
     "dist"
   ],
-  "main": "dist/kalki-ui.umd.js",
-  "module": "dist/kalki-ui.mjs",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "style": "dist/index.css",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/kalki-ui.mjs",
-      "require": "./dist/kalki-ui.umd.js"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./dist/index.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
+    }
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && tsc && vite build",
+    "build": "npm run clean && rollup --bundleConfigAsCjs -c",
     "dev": "vite",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
@@ -59,7 +61,19 @@
     "typescript": "^5.7.2",
     "vite": "^6.0.6",
     "vite-plugin-dts": "^4.4.0",
-    "vite-plugin-lib-inject-css": "^2.2.0"
+    "vite-plugin-lib-inject-css": "^2.2.0",
+    "@babel/core": "^7.22.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "@babel/preset-typescript": "^7.26.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.9.6",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2"
   },
   "directories": {
     "lib": "src"
