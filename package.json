@@ -5,20 +5,17 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/kalki-ui.umd.js",
+  "module": "dist/kalki-ui.mjs",
   "types": "dist/index.d.ts",
   "style": "dist/index.css",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/kalki-ui.mjs",
+      "require": "./dist/kalki-ui.umd.js"
     },
-    "./dist/index.css": {
-      "import": "./dist/index.css",
-      "require": "./dist/index.css"
-    }
+    "./dist/style.css": "./dist/style.css"
   },
   "scripts": {
     "clean": "rm -rf dist",
@@ -63,5 +60,8 @@
     "vite": "^6.0.6",
     "vite-plugin-dts": "^4.4.0",
     "vite-plugin-lib-inject-css": "^2.2.0"
+  },
+  "directories": {
+    "lib": "src"
   }
 }
