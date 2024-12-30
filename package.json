@@ -1,22 +1,19 @@
 {
   "name": "kalki-ui",
   "version": "0.0.3",
-  "type": "module",
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/kalki-ui.umd.js",
+  "module": "dist/kalki-ui.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/kalki-ui.mjs",
+      "require": "./dist/kalki-ui.umd.js"
     },
-    "./dist/index.css": {
-      "import": "./dist/index.css",
-      "require": "./dist/index.css"
-    }
+    "./dist/style.css": "./dist/style.css"
   },
   "scripts": {
     "clean": "rm -rf dist",
@@ -59,5 +56,8 @@
     "vite": "^6.0.6",
     "vite-plugin-dts": "^4.4.0",
     "vite-plugin-lib-inject-css": "^2.2.0"
+  },
+  "directories": {
+    "lib": "src"
   }
 }

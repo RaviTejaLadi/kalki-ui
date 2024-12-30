@@ -1,46 +1,31 @@
-// vite.config.ts
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import dts from 'vite-plugin-dts';
-import { libInjectCss } from 'vite-plugin-lib-inject-css';
+import { defineConfig } from "vite";
+import path from "node:path";
+import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
+import tailwindcss from "tailwindcss";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    dts({
-      include: ['src'],
-      exclude: ['src/**/*.test.tsx', 'src/**/*.test.ts'],
-      insertTypesEntry: true
-    }),
-    libInjectCss()
-  ],
-  build: {
-    lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'kalki-ui',
-      formats: ['es'],
-      fileName: (format) => `index.${format}.js`
+  plugins: [react(), dts({ include: ["src"], insertTypesEntry: true })],
+  css: {
+    postcss: {
+      plugins: [tailwindcss],
     },
-    rollupOptions: {
-      external: ['react', 'react-dom', 'tailwindcss'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM'
-        },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'index.css';
-          return assetInfo.name ?? '[name][extname]';
-        },
-      }
-    },
-    cssCodeSplit: false,
-    sourcemap: true
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
     }
-  }
+  },
+  build: {
+    copyPublicDir: false,
+    lib: {
+      entry: path.resolve(__dirname, "./src/index.ts"),
+      name: "KALKI UI",
+      formats: ["es", "umd"],
+      fileName: "kalki-ui",
+    },
+    rollupOptions: {
+      external: ["react", "react-dom", "react/jsx-runtime", "tailwindcss"],
+    },
+  },
 });
