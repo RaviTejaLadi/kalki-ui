@@ -1,31 +1,26 @@
-import { defineConfig } from "vite";
-import path from "node:path";
-import react from "@vitejs/plugin-react";
-import dts from "vite-plugin-dts";
-import tailwindcss from "tailwindcss";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig({
-  plugins: [react(), dts({ include: ["src"], insertTypesEntry: true })],
-  css: {
-    postcss: {
-      plugins: [tailwindcss],
-    },
-  },
+  root: path.resolve(__dirname, 'src/playground'),
+  plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
+      '@': path.resolve(__dirname, './src'),
+      'kalki-ui': 'kalki-ui',
+    },
+    dedupe: ['react', 'react-dom'],
+  },
+  optimizeDeps: {
+    include: ['kalki-ui'],
   },
   build: {
-    copyPublicDir: false,
-    lib: {
-      entry: path.resolve(__dirname, "./src/index.ts"),
-      name: "KALKI UI",
-      formats: ["es", "umd"],
-      fileName: "kalki-ui",
-    },
-    rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime", "tailwindcss"],
+    outDir: path.resolve(__dirname, '../../dist'),
+    emptyOutDir: true,
+    sourcemap: true,
+    commonjsOptions: {
+      include: [/kalki-ui/, /node_modules/],
     },
   },
 });
