@@ -1,5 +1,6 @@
 import './index.css';
 
+// #region Accordion
 export {
   default as Accordion,
   AccordionHeader,
@@ -15,3 +16,17 @@ export type {
   AccordionHeaderProps,
   AccordionBodyProps,
 } from './components/Accordion';
+
+// #endregion
+
+// #region Alert
+export {
+  default as Alert,
+  AlertHeader,
+  AlertFooter,
+  alertVariants,
+} from './components/Alert';
+
+export type { AlertProps, SectionProps } from './components/Alert';
+
+// #endregion
