@@ -44,3 +44,9 @@ export {
 
 export type { AvatarProps, AvatarImageProps } from './components/Avatar';
 // #endregion
+
+// #region Badge
+export { default as Badge, BadgeIcon, badgeVariants } from './components/Badge';
+
+export type { BadgeProps, BadgeIconProps } from './components/Badge';
+// #endregion
