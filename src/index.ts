@@ -21,10 +21,7 @@ export type {
 // #region Box Export
 export { default as Box } from './components/Box';
 export type { BoxProps } from './components/Box';
-
 // #endregion Box Export
-
-// #endregion
 
 // #region Alert
 export {
@@ -35,5 +32,4 @@ export {
 } from './components/Alert';
 
 export type { AlertProps, SectionProps } from './components/Alert';
-
 // #endregion
