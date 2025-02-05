@@ -4,7 +4,9 @@ import { cn } from '@/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { CSSProperties, ReactNode } from 'react';
 import Box, { BoxProps } from '../Box';
+import Link from '../Link/Index';
 
+// #region breadcrumbVariants
 const breadcrumbVariants = cva(
   'inline-flex items-center font-semibold  transition-colors duration-200',
   {
@@ -24,6 +26,9 @@ const breadcrumbVariants = cva(
   }
 );
 
+// #endregion
+
+// #region types
 type SeparatorType = 'chevron' | 'arrow' | 'dot' | 'slash' | 'circle';
 
 interface BreadcrumbProps
@@ -43,6 +48,9 @@ interface BreadcrumbItemProps {
   style?: CSSProperties;
 }
 
+// #endregion
+
+// #region constants
 const SEPARATOR_ICONS = {
   chevron: <ChevronRight className="size-4 mx-2 text-muted-foreground" />,
   arrow: <ArrowRight className="size-4 mx-2 text-muted-foreground" />,
@@ -50,7 +58,9 @@ const SEPARATOR_ICONS = {
   slash: <Slash className="size-4 mx-2 text-muted-foreground" />,
   circle: <Circle className="size-2 mx-2 text-muted-foreground" />,
 };
+// #endregion
 
+// #region Breadcrumb
 const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
   (
     { children, separator = 'chevron', size, className, style, ...rest },
@@ -130,6 +140,9 @@ const BreadcrumbItem = forwardRef<
 
 BreadcrumbItem.displayName = 'BreadcrumbItem';
 
+// #endregion
+
+// #region exports
 export default Object.assign(
   Breadcrumb as React.ForwardRefExoticComponent<
     BreadcrumbProps & React.RefAttributes<HTMLDivElement>
@@ -139,3 +152,4 @@ export default Object.assign(
 
 export { BreadcrumbItem, breadcrumbVariants };
 export type { BreadcrumbProps, BreadcrumbItemProps, SeparatorType };
+// #endregion
