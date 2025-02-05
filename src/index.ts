@@ -33,3 +33,14 @@ export {
 
 export type { AlertProps, SectionProps } from './components/Alert';
 // #endregion
+
+// #region Avatar
+export {
+  default as Avatar,
+  AvatarFallback,
+  AvatarImage,
+  avatarVariants,
+} from './components/Avatar';
+
+export type { AvatarProps, AvatarImageProps } from './components/Avatar';
+// #endregion
