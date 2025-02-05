@@ -50,3 +50,18 @@ export { default as Badge, BadgeIcon, badgeVariants } from './components/Badge';
 
 export type { BadgeProps, BadgeIconProps } from './components/Badge';
 // #endregion
+
+// #region Banner
+export {
+  default as Banner,
+  BannerTitle,
+  BannerSubTitle,
+  bannerVariants,
+} from './components/Banner';
+
+export type {
+  BannerSize,
+  BannerProps,
+  BannerChildProps,
+} from './components/Banner';
+// #endregion
