@@ -3,6 +3,7 @@ import { ChevronRight, ArrowRight, Dot, Slash, Circle } from 'lucide-react';
 import { cn } from '@/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { CSSProperties, ReactNode } from 'react';
+import Box, { BoxProps } from '../Box';
 
 const breadcrumbVariants = cva(
   'inline-flex items-center font-semibold  transition-colors duration-200',
