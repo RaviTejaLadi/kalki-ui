@@ -153,3 +153,20 @@ export type { ContentScrollableProps } from './components/ContentScrollable';
 export { default as Div, divVariants } from './components/Div';
 export type { DivProps } from './components/Div';
 // #endregion
+
+// #region Drawer
+export {
+  default as Drawer,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerBody,
+  drawerVariants,
+} from './components/Drawer';
+
+export type {
+  DrawerProps,
+  DrawerHeaderProps,
+  DrawerTitleProps,
+  DrawerBodyProps,
+} from './components/Drawer';
+// #endregion
