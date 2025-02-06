@@ -113,3 +113,22 @@ export {
 
 export type { CardProps } from './components/Card';
 // #endregion
+
+// #region Carousel
+export {
+  default as Carousel,
+  CarouselSlides,
+  CarouselContent,
+  CarouselControls,
+  CarouselDots,
+  carouselVariants,
+} from './components/Carousel';
+
+export type {
+  CarouselProps,
+  CarouselSlidesProps,
+  CarouselContentProps,
+  CarouselControlsProps,
+  CarouselDotsProps,
+} from './components/Carousel';
+// #endregion

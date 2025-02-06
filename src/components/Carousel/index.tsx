@@ -11,7 +11,7 @@ import { cva } from 'class-variance-authority';
 import Box, { BoxProps } from '../Box';
 
 // #region carouselVariants
-export const carouselVariants = cva('flex flex-col mx-auto', {
+const carouselVariants = cva('flex flex-col mx-auto', {
   variants: {
     padding: {
       sm: 'p-2',
@@ -274,7 +274,13 @@ export default Object.assign(
     Dots: CarouselDots,
   }
 );
-export { CarouselSlides, CarouselContent, CarouselControls, CarouselDots };
+export {
+  CarouselSlides,
+  CarouselContent,
+  CarouselControls,
+  CarouselDots,
+  carouselVariants,
+};
 
 export type {
   CarouselProps,
