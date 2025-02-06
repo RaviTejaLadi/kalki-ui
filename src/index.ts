@@ -148,3 +148,8 @@ export {
 } from './components/ContentScrollable';
 export type { ContentScrollableProps } from './components/ContentScrollable';
 // #endregion
+
+// #region Div
+export { default as Div, divVariants } from './components/Div';
+export type { DivProps } from './components/Div';
+// #endregion
