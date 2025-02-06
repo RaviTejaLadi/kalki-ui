@@ -140,3 +140,11 @@ export { default as CloseButton } from './components/CloseButton';
 // #region Code
 export { default as Code, codeVariants } from './components/Code';
 // #endregion
+
+// #region ContentScrollable
+export {
+  default as ContentScrollable,
+  contentScrollableVariants,
+} from './components/ContentScrollable';
+export type { ContentScrollableProps } from './components/ContentScrollable';
+// #endregion
