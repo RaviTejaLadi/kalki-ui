@@ -154,11 +154,8 @@ const Div = forwardRef<HTMLDivElement, DivProps>(
 Div.displayName = 'Div';
 // #endregion
 
-// #region types exports
-export type { DivProps };
-// #endregion
-
 // #region exports
 export default Div;
 export { divVariants };
+export type { DivProps };
 // #endregion
