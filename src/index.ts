@@ -170,3 +170,12 @@ export type {
   DrawerBodyProps,
 } from './components/Drawer';
 // #endregion
+
+// #region Image
+export { default as Image, imageVariants } from './components/Image';
+export type {
+  ImageProps,
+  LoadingStrategy,
+  ObjectFit,
+} from './components/Image';
+// #endregion
