@@ -100,3 +100,16 @@ export type {
   ButtonTextProps,
 } from './components/Button';
 // #endregion
+
+// #region Card
+export {
+  default as Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from './components/Card';
+
+export type { CardProps } from './components/Card';
+// #endregion
