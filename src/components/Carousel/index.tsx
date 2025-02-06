@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { cn } from '@/utils';
 import { cva } from 'class-variance-authority';
+import Box, { BoxProps } from '../Box';
 
 // #region carouselVariants
 export const carouselVariants = cva('flex flex-col mx-auto', {
