@@ -136,3 +136,7 @@ export type {
 // #region CloseButton
 export { default as CloseButton } from './components/CloseButton';
 // #endregion
+
+// #region Code
+export { default as Code, codeVariants } from './components/Code';
+// #endregion
