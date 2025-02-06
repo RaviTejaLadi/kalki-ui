@@ -85,3 +85,18 @@ export type {
 export { default as Link, linkVariants } from './components/Link';
 export type { LinkProps } from './components/Link';
 // #endregion
+
+// #region Button
+export {
+  default as Button,
+  ButtonIcon,
+  ButtonText,
+  buttonVariants,
+} from './components/Button';
+
+export type {
+  ButtonProps,
+  ButtonIconProps,
+  ButtonTextProps,
+} from './components/Button';
+// #endregion
