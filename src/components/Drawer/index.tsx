@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { cn } from '@/utils';
 import { CSSProperties, ReactNode } from 'react';
 import { cva } from 'class-variance-authority';
+import CloseButton from '../CloseButton';
 
 // #region drawerVariants
 const drawerVariants = cva(
