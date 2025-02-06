@@ -132,3 +132,7 @@ export type {
   CarouselDotsProps,
 } from './components/Carousel';
 // #endregion
+
+// #region CloseButton
+export { default as CloseButton } from './components/CloseButton';
+// #endregion
