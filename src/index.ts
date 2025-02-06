@@ -1,6 +1,6 @@
 import './index.css';
 
-// #region Accordion Export
+// #region Accordion
 export {
   default as Accordion,
   AccordionHeader,
@@ -16,12 +16,13 @@ export type {
   AccordionHeaderProps,
   AccordionBodyProps,
 } from './components/Accordion';
-// #endregion Accordion Export
+// #endregion Accordion
 
-// #region Box Export
+// #region Box
 export { default as Box } from './components/Box';
+
 export type { BoxProps } from './components/Box';
-// #endregion Box Export
+// #endregion Box
 
 // #region Alert
 export {
@@ -64,4 +65,23 @@ export type {
   BannerProps,
   BannerChildProps,
 } from './components/Banner';
+// #endregion
+
+// #region BreadCrumb
+export {
+  default as Breadcrumb,
+  BreadcrumbItem,
+  breadcrumbVariants,
+} from './components/Breadcrumb';
+
+export type {
+  BreadcrumbProps,
+  BreadcrumbItemProps,
+  SeparatorType,
+} from './components/Breadcrumb';
+// #endregion
+
+// #region Link
+export { default as Link, linkVariants } from './components/Link';
+export type { LinkProps } from './components/Link';
 // #endregion

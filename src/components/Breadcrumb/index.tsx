@@ -4,7 +4,7 @@ import { cn } from '@/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { CSSProperties, ReactNode } from 'react';
 import Box, { BoxProps } from '../Box';
-import Link from '../Link/Index';
+import Link from '../Link';
 
 // #region breadcrumbVariants
 const breadcrumbVariants = cva(
