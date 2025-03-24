@@ -1,10 +1,8 @@
-import React, { forwardRef } from 'react';
-import { CSSProperties, ReactNode } from 'react';
-import { VariantProps } from 'class-variance-authority';
-import { cva } from 'class-variance-authority';
+import React, { forwardRef, CSSProperties, ReactNode } from 'react';
+import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils';
 
-//#region alertVariants
+// #region alertVariants
 const alertVariants = cva('rounded-md p-4 w-full mb-4 border', {
   variants: {
     variant: {
@@ -23,7 +21,7 @@ const alertVariants = cva('rounded-md p-4 w-full mb-4 border', {
   },
 });
 
-//#endRegion
+// #endRegion
 
 // #region types
 interface AlertProps extends VariantProps<typeof alertVariants> {
