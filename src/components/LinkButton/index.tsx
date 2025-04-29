@@ -1,12 +1,11 @@
 import React, { forwardRef } from 'react';
-import { Loader } from 'lucide-react';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
+import Link from '../Link';
 import { cn } from '@/utils';
 
-// #region buttonVariants
-const buttonVariants = cva(
-  'inline-flex justify-center items-center font-normal text-center whitespace-nowrap align-middle select-none transition-colors duration-150 ease-in-out focus:outline-none disabled:pointer-events-none disabled:opacity-50',
+// #region linkVariants
+export const linkVariants = cva(
+  'inline-flex justify-center items-center font-normal text-center whitespace-nowrap align-middle select-none transition-colors duration-150 ease-in-out focus:outline-none',
   {
     variants: {
       variant: {
@@ -48,145 +47,100 @@ const buttonVariants = cva(
         true: 'rounded-full',
         false: 'rounded',
       },
-      block: {
-        true: 'w-full',
-        false: '',
-      },
     },
     defaultVariants: {
       variant: 'primary',
       size: 'sm',
       raised: false,
       rounded: false,
-      block: false,
     },
   }
 );
-// #endregion
+// #endregion linkVariants
 
 // #region types
-interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  disabled?: boolean;
-  onClick?: () => void;
-  children?: ReactNode;
-  loader?: ReactNode;
-  isPending?: boolean;
-  isPendingText?: string;
-}
-
-interface ButtonIconProps {
-  children: ReactNode;
+interface LinkButtonProps extends VariantProps<typeof linkVariants> {
+  to?: string;
+  children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-interface ButtonTextProps {
-  children: ReactNode;
+interface LinkIconProps {
   className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
 }
 
-// #endregion
+interface LinkTextProps {
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+}
+// #endregion types
 
-// #region Button
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+// #region LinkButton Component
+const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
   (
-    {
-      disabled = false,
-      onClick = () => {},
-      variant,
-      size,
-      raised,
-      rounded,
-      block,
-      className = '',
-      style = {},
-      children,
-      loader,
-      isPending = false,
-      isPendingText = 'Loading...',
-      ...rest
-    },
+    { variant, size, to = '', children, className, raised, rounded, ...rest },
     ref
   ) => {
-    const buttonClasses = buttonVariants({
-      variant,
-      size,
-      raised,
-      rounded,
-      block,
-      className,
-    });
-
     return (
-      <button
-        className={buttonClasses}
-        style={style}
-        onClick={onClick}
-        disabled={disabled || isPending}
+      <Link
         ref={ref}
-        {...rest}
-      >
-        {isPending ? (
-          <span className="flex gap-2 items-center justify-center">
-            {loader || <Loader className="size-4 animate-spin" />}
-            <span>{isPendingText}</span>
-          </span>
-        ) : (
-          children
-        )}
-      </button>
-    );
-  }
-);
-
-Button.displayName = 'Button';
-
-const ButtonText = forwardRef<HTMLSpanElement, ButtonTextProps>(
-  ({ children, className, ...rest }, ref) => {
-    return (
-      <span
-        ref={ref}
-        className={cn('inline-flex items-center', className)}
+        to={to}
+        className={linkVariants({ variant, size, raised, rounded, className })}
         {...rest}
       >
         {children}
-      </span>
+      </Link>
     );
   }
 );
+LinkButton.displayName = 'LinkButton';
 
-ButtonText.displayName = 'ButtonText';
-
-const ButtonIcon = forwardRef<HTMLSpanElement, ButtonIconProps>(
-  ({ children, className, ...rest }, ref) => {
-    return (
-      <span
-        ref={ref}
-        className={cn('inline-flex items-center mx-1', className)}
-        {...rest}
-      >
-        {children}
-      </span>
-    );
-  }
+// LinkIcon Component
+const LinkIcon = forwardRef<HTMLDivElement, LinkIconProps>(
+  ({ children, className, style, ...rest }, ref) => (
+    <div
+      ref={ref}
+      className={cn('flex items-center mx-1', className)}
+      style={style}
+      {...rest}
+    >
+      {children}
+    </div>
+  )
 );
+LinkIcon.displayName = 'LinkIcon';
 
-ButtonIcon.displayName = 'ButtonIcon';
+// LinkText Component
+const LinkText = forwardRef<HTMLDivElement, LinkTextProps>(
+  ({ children, className, style, ...rest }, ref) => (
+    <div
+      ref={ref}
+      className={cn('flex items-center', className)}
+      style={style}
+      {...rest}
+    >
+      {children}
+    </div>
+  )
+);
+LinkText.displayName = 'LinkText';
+// #endregion LinkButton Component
 
-// #endregion
-
-// #region exports
+// #region Export Components and Types
 export default Object.assign(
-  Button as React.ForwardRefExoticComponent<
-    ButtonProps & React.RefAttributes<HTMLButtonElement>
+  LinkButton as React.ForwardRefExoticComponent<
+    LinkButtonProps & React.RefAttributes<HTMLAnchorElement>
   >,
   {
-    Icon: ButtonIcon,
-    Text: ButtonText,
+    Icon: LinkIcon,
+    Text: LinkText,
   }
 );
 
-export { ButtonIcon, ButtonText, buttonVariants };
-export type { ButtonProps, ButtonIconProps, ButtonTextProps };
-// #endregion
+export { LinkIcon, LinkText };
+export type { LinkButtonProps, LinkIconProps, LinkTextProps };
+// #endregion Export Components and Types

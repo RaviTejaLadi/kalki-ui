@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 
-// #region Image Variants
+// #region imageVariants
 const imageVariants = cva('transition-opacity duration-300 ease-in-out', {
   variants: {
     variant: {
@@ -23,7 +23,7 @@ const imageVariants = cva('transition-opacity duration-300 ease-in-out', {
     objectFit: 'cover',
   },
 });
-// #endregion
+// #endRegion
 
 // #region types
 type LoadingStrategy = 'lazy' | 'eager';
@@ -43,6 +43,7 @@ interface ImageProps
   onLoad?: () => void;
   onError?: () => void;
   className?: string;
+  imgClassName?: string;
   variant?: 'default' | 'rounded' | 'circle';
   sizes?: string;
   placeholder?: 'blur' | 'empty';
@@ -50,7 +51,7 @@ interface ImageProps
 }
 // #endregion
 
-// #region BlurPlaceholder
+// #region Image
 const BlurPlaceholder: React.FC<{
   dataURL: string;
   className?: string;
@@ -67,9 +68,7 @@ const BlurPlaceholder: React.FC<{
     }}
   />
 );
-// #endregion
 
-// #region Image
 const Image: React.FC<ImageProps> = ({
   src,
   alt,
@@ -86,6 +85,7 @@ const Image: React.FC<ImageProps> = ({
   sizes,
   placeholder = 'empty',
   blurDataURL,
+  imgClassName,
   ...rest
 }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -108,7 +108,6 @@ const Image: React.FC<ImageProps> = ({
   useEffect(() => {
     if (!imgRef.current || loading === 'eager') return;
 
-    const imgElement = imgRef.current;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -119,10 +118,10 @@ const Image: React.FC<ImageProps> = ({
       });
     });
 
-    observer.observe(imgElement);
+    observer.observe(imgRef.current);
 
     return () => {
-      observer.unobserve(imgElement);
+      if (imgRef.current) observer.unobserve(imgRef.current);
     };
   }, [src, loading]);
 
@@ -156,7 +155,8 @@ const Image: React.FC<ImageProps> = ({
         className={cn(
           imageVariants({ variant, objectFit }),
           isLoading ? 'opacity-0' : 'opacity-100',
-          error && 'hidden'
+          error && 'hidden',
+          imgClassName
         )}
         {...rest}
       />
@@ -169,10 +169,10 @@ const Image: React.FC<ImageProps> = ({
     </div>
   );
 };
-// #endregion
+// #endRegion
 
 // #region export
 export default Image;
 export { imageVariants };
-export type { ImageProps, LoadingStrategy, ObjectFit };
-// #endregion
+export type { ImageProps, ObjectFit, LoadingStrategy };
+// #endRegion
