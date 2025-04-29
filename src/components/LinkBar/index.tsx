@@ -11,9 +11,9 @@ import React, {
 } from 'react';
 import { cn } from '@/utils';
 import { cva, VariantProps } from 'class-variance-authority';
+import Link from '../Link';
 import Button from '../Button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Link from '../Link';
 
 // #region linkVariants
 const linkVariants = cva(
@@ -31,7 +31,7 @@ const linkVariants = cva(
     },
   }
 );
-// #endregion
+// #endregion linkVariants
 
 // #region linkBarVariants
 const linkBarVariants = cva('flex items-center justify-center transition-all', {
@@ -46,9 +46,8 @@ const linkBarVariants = cva('flex items-center justify-center transition-all', {
       help: 'border border-purple-200 dark:border-purple-200/10',
       light: 'border border-gray-100',
       dark: 'border border-gray-400 dark:border-gray-400/10',
-      default:
-        'bg-background dark:bg-inherit border-b border-gray-200 dark:border-gray-200/10',
-      outline: 'border border-gray-200/10 bg-white dark:bg-inherit shadow-sm',
+      default: 'bg-background border-b border-gray-200 dark:border-gray-200/10',
+      outline: 'border border-gray-200/10 bg-white shadow-sm',
     },
     size: {
       sm: 'h-10',
@@ -69,7 +68,8 @@ const linkBarVariants = cva('flex items-center justify-center transition-all', {
     rounded: 'none',
   },
 });
-// #endregion
+
+// #endregion linkBarVariants
 
 // #region types
 interface LinkBarContextValue {
@@ -116,13 +116,13 @@ interface LinkBarContentProps {
   children: ReactNode;
   className?: string;
 }
-// #endregion
+// #endregion types
 
-// #region Context
+// #region context
 const LinkBarContext = createContext<LinkBarContextValue>({});
-//
+// #endregion context
 
-// #region LinkBar
+// #region components
 const LinkBar = forwardRef<HTMLDivElement, LinkBarProps>(
   (
     {
@@ -268,7 +268,7 @@ const LinkBarLink = forwardRef<HTMLAnchorElement, LinkProps>(
   }
 );
 LinkBarLink.displayName = 'LinkBar.Link';
-// #endregion
+// #endregion components
 
 // #region exports
 export default Object.assign(
@@ -286,9 +286,8 @@ export {
   LinkBarContent,
   LinkBarLink,
   LinkBarControl,
-  linkVariants,
   linkBarVariants,
+  linkVariants,
 };
-export type { LinkBarProps, LinkProps, ControlsProps, LinkBarContentProps };
-
-// #endregion
+export type { LinkBarProps, LinkProps, ControlsProps };
+// #endregion exports
