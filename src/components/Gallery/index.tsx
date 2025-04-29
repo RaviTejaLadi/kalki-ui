@@ -19,16 +19,37 @@ const galleryVariants = cva('gap-4', {
     pattern: 'grid',
   },
 });
+
 // #endregion
 
-// #region type
+// #region types
+/**
+ * Props for the Gallery component.
+ *
+ * @extends VariantProps<typeof galleryVariants>
+ *
+ * @property {ReactNode} children - The content to be displayed within the gallery.
+ * @property {string} [className] - Optional additional class name(s) to apply to the gallery component.
+ */
 interface GalleryProps extends VariantProps<typeof galleryVariants> {
   children: ReactNode;
   className?: string;
 }
 // #endregion
 
-// #region Gallery
+// #region Gallery component
+/**
+ * `Gallery` is a React component that renders its children in different patterns.
+ * It supports two patterns: 'asymmetric' and 'carousel'.
+ *
+ * @param {GalleryProps} props - The properties for the Gallery component.
+ * @param {React.ReactNode} props.children - The child elements to be rendered inside the gallery.
+ * @param {string} props.pattern - The pattern to use for rendering the gallery. Can be 'asymmetric' or 'carousel'.
+ * @param {string} [props.className] - Additional class names to apply to the gallery container.
+ * @param {React.Ref<HTMLDivElement>} ref - The ref to be forwarded to the gallery container.
+ *
+ * @returns {JSX.Element} The rendered gallery component.
+ */
 const Gallery = forwardRef<HTMLDivElement, GalleryProps>(
   ({ children, pattern, className }, ref) => {
     const renderContent = () => {
@@ -66,6 +87,19 @@ const Gallery = forwardRef<HTMLDivElement, GalleryProps>(
 
 Gallery.displayName = 'Gallery';
 
+/**
+ * `GalleryImage` is a React component that renders an image within a div container.
+ * It uses the `forwardRef` to pass down the ref to the div element.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {string} props.src - The source URL of the image.
+ * @param {string} [props.alt='Gallery image'] - The alt text for the image.
+ * @param {string} [props.className] - Additional class names for the image.
+ * @param {string} [props.variant='rounded'] - The variant style of the image.
+ * @param {React.Ref<HTMLImageElement>} ref - The ref to be forwarded to the div element.
+ *
+ * @returns {JSX.Element} The rendered `GalleryImage` component.
+ */
 const GalleryImage = forwardRef<HTMLImageElement, ImageProps>(
   (
     { src, alt = 'Gallery image', className, variant = 'rounded', ...props },
@@ -74,7 +108,7 @@ const GalleryImage = forwardRef<HTMLImageElement, ImageProps>(
     return (
       <div ref={ref}>
         <Image
-          className={cn('w-full h-full object-cover rounded-lg', className)}
+          imgClassName={cn('w-full h-full object-cover rounded-lg', className)}
           src={src}
           alt={alt}
           variant={variant}
@@ -86,9 +120,7 @@ const GalleryImage = forwardRef<HTMLImageElement, ImageProps>(
 );
 
 GalleryImage.displayName = 'GalleryImage';
-
 // #endregion
-
 // #region export
 export default Object.assign(
   Gallery as React.ForwardRefExoticComponent<
