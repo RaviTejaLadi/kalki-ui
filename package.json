@@ -1,7 +1,9 @@
 {
   "name": "kalki-ui",
-  "version": "1.0.11",
+  "description": "Kalki-UI is a powerful React-based UI component library designed to streamline the development of modern web applications, combining flexibility, performance, and accessibility.",
+  "version": "1.0.12",
   "type": "module",
+  "license": "MIT",
   "files": [
     "dist"
   ],

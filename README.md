@@ -68,7 +68,7 @@ pnpm add kalki-ui
 ## Usage
 
 ```jsx
-import { Component } from 'kalki-ui';
+import { Button } from 'kalki-ui';
 import 'kalki-ui/dist/index.css';
 ```
 
