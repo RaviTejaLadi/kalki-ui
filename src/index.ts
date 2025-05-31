@@ -197,3 +197,12 @@ export type {
   SectionHeaderSubTitleProps,
 } from './components/SectionHeader';
 // #endregion
+
+// #region ScrollToTop
+export { default as ScrollToTop } from './components/ScrollToTop';
+export type { scrollButtonVariants } from './components/ScrollToTop';
+// #endregion
+
+// #region Ripple
+export { default as Ripple } from './components/Ripple';
+// #endregion
