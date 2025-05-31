@@ -323,3 +323,8 @@ export type {
 // #region DotSeparator
 export { default as DotSeparator } from './components/DotSeparator';
 // #endregion
+
+// #region Typography
+export { Heading, Paragraph, Text } from './components/Typography';
+export * from './components/Typography';
+// #endregion
