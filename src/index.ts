@@ -205,4 +205,5 @@ export type { scrollButtonVariants } from './components/ScrollToTop';
 
 // #region Ripple
 export { default as Ripple } from './components/Ripple';
+export type { RippleProps } from './components/Ripple';
 // #endregion
