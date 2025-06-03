@@ -69,7 +69,6 @@ interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   disabled?: boolean;
-  onClick?: () => void;
   children?: ReactNode;
   loader?: ReactNode;
   isPending?: boolean;
