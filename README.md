@@ -1,7 +1,8 @@
-# kalki-ui
+# [Kalki UI](https://kalki-ui.vercel.app/)
 
-A React UI component library built with TypeScript, Tailwind CSS, and modern build tools.
+[Kalki UI](https://kalki-ui.vercel.app/) is a modern React component library built with TypeScript and styled using Tailwind CSS. Designed for performance and developer efficiency, it offers a clean and scalable set of UI components to accelerate React application development.
 
+![kalki-ui](./public/kalki-ui.png)
 
 <div align="center">
   <img alt="last-commit" src="https://img.shields.io/github/last-commit/RaviTejaLadi/kalki-ui?style=flat&logo=git&logoColor=white&color=0080ff" />
@@ -29,7 +30,7 @@ A React UI component library built with TypeScript, Tailwind CSS, and modern bui
 
 ## Overview
 
-**Kalki-UI** is a powerful React-based UI component library designed to streamline the development of modern web applications, combining flexibility, performance, and accessibility.
+**[Kalki UI](https://kalki-ui.vercel.app/)** is a powerful React-based UI component library designed to streamline the development of modern web applications, combining flexibility, performance, and accessibility.
 
 ### Why Kalki-UI?
 
