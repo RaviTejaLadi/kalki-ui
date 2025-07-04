@@ -18,12 +18,11 @@
     "declaration": true,
     "declarationDir": "dist",
     "emitDeclarationOnly": true,
+    "importHelpers": true,
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    },
+    "paths": { "@/*": ["src/*"] },
     "types": []
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist",]
+  "exclude": ["node_modules", "dist"]
 }

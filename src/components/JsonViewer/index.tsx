@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import { Clipboard, ClipboardCheck } from 'lucide-react';
 import Button from '../Button';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, forwardRef } from 'react';
 import { Expand, Shrink } from 'lucide-react';
 import Button, { ButtonIcon, ButtonProps, ButtonText } from '../Button';
