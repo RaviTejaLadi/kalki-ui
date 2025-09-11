@@ -16,7 +16,7 @@ import { cn } from '@/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ChevronDown } from 'lucide-react';
 
-//#region accordionVariants
+// #region accordionVariants
 const accordionVariants = cva(
   'w-full border-[.5px] dark:border-gray-200/10 rounded-md overflow-hidden',
   {
@@ -35,7 +35,7 @@ const accordionVariants = cva(
   }
 );
 
-//#endRegion
+// #endRegion
 
 // #region types
 type AccordionVariant =
@@ -289,7 +289,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 }) => {
   return (
     <div
-      className={cn('border-b border-gray-200 last:border-b-0', className)}
+      className={cn('border-b border-input last:border-b-0', className)}
       style={style}
       {...rest}
     >
