@@ -328,3 +328,20 @@ export { default as DotSeparator } from './components/DotSeparator';
 export { Heading, Paragraph, Text } from './components/Typography';
 export * from './components/Typography';
 // #endregion
+
+// #region TextHighlighter
+export {
+  default as TextHighlighter,
+  TextHighlighterText,
+  textHighlighterVariants,
+} from './components/TextHighlighter';
+export type {
+  Variant,
+  Emphasis,
+  Sizing,
+  HighlightContextType,
+  TextHighlighterProps,
+  TextHighlighterTextProps,
+} from './components/TextHighlighter';
+export * from './components/TextHighlighter';
+// #endregion
