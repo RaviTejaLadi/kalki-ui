@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { forwardRef, ReactNode, useEffect } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import CloseButton from '../CloseButton';
 import { cn } from '@/utils';
@@ -86,6 +86,19 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     },
     ref
   ) => {
+    useEffect(() => {
+      if (!open || !onClose) return;
+
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          onClose();
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [open, onClose]);
+
     if (!open) return null;
 
     const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {

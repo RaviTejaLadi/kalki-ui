@@ -21,6 +21,14 @@ interface JsonViewerProps
 
 // #endregion
 
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
 // #region components
 const JsonViewer = forwardRef<HTMLDivElement, JsonViewerProps>(
   (
@@ -32,6 +40,7 @@ const JsonViewer = forwardRef<HTMLDivElement, JsonViewerProps>(
       <Clipboard className="size-3" />
     );
     const containerRef = useRef<HTMLPreElement>(null);
+    const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     useEffect(() => {
       let formattedJsonData: string;
@@ -87,11 +96,19 @@ const JsonViewer = forwardRef<HTMLDivElement, JsonViewerProps>(
           } else if (/\[object Function\]/.test(match)) {
             classString = 'text-blue-800';
           }
-          return `<span class="${classString}">${match}</span>`;
+          return `<span class="${classString}">${escapeHtml(match)}</span>`;
         }
       );
       setJsonData(formattedData || '');
     }, [data, replacer, indentation]);
+
+    useEffect(() => {
+      return () => {
+        if (copyTimeoutRef.current) {
+          clearTimeout(copyTimeoutRef.current);
+        }
+      };
+    }, []);
 
     const handleCopyToClipboard = () => {
       const container = containerRef.current;
@@ -103,7 +120,10 @@ const JsonViewer = forwardRef<HTMLDivElement, JsonViewerProps>(
             setCopyButtonText(
               <ClipboardCheck className="size-3 text-[var(--icon-color)]" />
             );
-            setTimeout(() => {
+            if (copyTimeoutRef.current) {
+              clearTimeout(copyTimeoutRef.current);
+            }
+            copyTimeoutRef.current = setTimeout(() => {
               setCopyButtonText(
                 <Clipboard className="size-3 text-[var(--icon-color)]" />
               );

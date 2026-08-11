@@ -40,13 +40,47 @@ interface HeadingProps extends VariantProps<typeof headingVariants> {
 
 // #region Heading
 const Heading = forwardRef<HTMLParagraphElement, HeadingProps>(
-  ({ children, as, className, onClick, ...props }, ref) => {
+  (
+    {
+      children,
+      as,
+      className,
+      onClick,
+      underline,
+      overline,
+      dashed,
+      italic,
+      strong,
+      strikethrough,
+      marked,
+      smaller,
+      deleted,
+      inserted,
+      ...props
+    },
+    ref
+  ) => {
     const element = as || 'h1';
     return createElement(
       element,
       {
         ref,
-        className: cn(headingVariants({ as, ...props }), className),
+        className: cn(
+          headingVariants({
+            as,
+            underline,
+            overline,
+            dashed,
+            italic,
+            strong,
+            strikethrough,
+            marked,
+            smaller,
+            deleted,
+            inserted,
+          }),
+          className
+        ),
         onClick,
         ...props,
       },

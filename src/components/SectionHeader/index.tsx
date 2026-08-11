@@ -48,7 +48,7 @@ const titleVariants: Record<Size, string> = {
 const subtitleVariants: Record<Size, string> = {
   sm: 'text-xs text-muted-foreground dark:text-gray-400',
   md: 'text-sm text-muted-foreground dark:text-gray-400',
-  lg: 'text-md text-muted-foreground dark:text-gray-400',
+  lg: 'text-base text-muted-foreground dark:text-gray-400',
 };
 
 interface SectionHeaderRootProps

@@ -55,7 +55,7 @@ const linkBarVariants = cva('flex items-center justify-center transition-all', {
       lg: 'h-14',
     },
     rounded: {
-      xs: 'rounded-xs',
+      xs: 'rounded-sm',
       sm: 'rounded-sm',
       md: 'rounded-md',
       lg: 'rounded-lg',

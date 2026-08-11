@@ -104,7 +104,7 @@ const AlertFooter: React.FC<SectionProps> = ({
 // #region exports
 export default Object.assign(
   Alert as React.ForwardRefExoticComponent<
-    AlertProps & React.RefAttributes<HTMLButtonElement>
+    AlertProps & React.RefAttributes<HTMLDivElement>
   >,
   {
     Header: AlertHeader,

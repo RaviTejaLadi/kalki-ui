@@ -28,6 +28,7 @@ export type { BoxProps } from './components/Box';
 export {
   default as Alert,
   AlertHeader,
+  AlertBody,
   AlertFooter,
   alertVariants,
 } from './components/Alert';
@@ -199,8 +200,10 @@ export type {
 // #endregion
 
 // #region ScrollToTop
-export { default as ScrollToTop } from './components/ScrollToTop';
-export type { scrollButtonVariants } from './components/ScrollToTop';
+export {
+  default as ScrollToTop,
+  scrollButtonVariants,
+} from './components/ScrollToTop';
 // #endregion
 
 // #region Ripple

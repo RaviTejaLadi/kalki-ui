@@ -100,7 +100,7 @@ Gallery.displayName = 'Gallery';
  *
  * @returns {JSX.Element} The rendered `GalleryImage` component.
  */
-const GalleryImage = forwardRef<HTMLImageElement, ImageProps>(
+const GalleryImage = forwardRef<HTMLDivElement, ImageProps>(
   (
     { src, alt = 'Gallery image', className, variant = 'rounded', ...props },
     ref

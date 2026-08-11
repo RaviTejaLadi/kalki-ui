@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { cn } from '@/utils';
 import { cva } from 'class-variance-authority';
 
@@ -60,6 +60,7 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
       disabled,
       className,
       style,
+      'aria-label': ariaLabel = 'Close',
       ...rest
     },
     ref
@@ -69,8 +70,10 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
     return (
       <button
         ref={ref}
+        type="button"
         onClick={onClick}
         disabled={disabled}
+        aria-label={ariaLabel}
         className={cn(buttonVariants({ variant, size }), className)}
         style={style}
         {...rest}

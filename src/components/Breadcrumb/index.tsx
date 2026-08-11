@@ -82,19 +82,23 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
         {...rest}
       >
         <ol className="flex items-center">
-          {React.Children.map(children, (child, index) => (
-            <li key={index} className="flex items-center">
-              {index > 0 && getSeparator()}
-              {React.cloneElement(child as React.ReactElement, {
-                className: cn(
-                  'text-sm font-medium',
-                  size === 'sm' && 'text-xs',
-                  size === 'lg' && 'text-base',
-                  (child as React.ReactElement).props.className || ''
-                ),
-              })}
-            </li>
-          ))}
+          {React.Children.map(children, (child, index) => {
+            if (!React.isValidElement(child)) return child;
+
+            return (
+              <li key={index} className="flex items-center">
+                {index > 0 && getSeparator()}
+                {React.cloneElement(child as React.ReactElement, {
+                  className: cn(
+                    'text-sm font-medium',
+                    size === 'sm' && 'text-xs',
+                    size === 'lg' && 'text-base',
+                    (child as React.ReactElement).props.className || ''
+                  ),
+                })}
+              </li>
+            );
+          })}
         </ol>
       </Box>
     );

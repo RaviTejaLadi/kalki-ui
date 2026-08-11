@@ -4,7 +4,7 @@ import { ChevronUp } from 'lucide-react';
 
 // #region scrollButtonVariants
 const scrollButtonVariants = cva(
-  'fixed z-100 rounded-md shadow-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2',
+  'fixed z-[100] rounded-md shadow-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2',
   {
     variants: {
       size: {

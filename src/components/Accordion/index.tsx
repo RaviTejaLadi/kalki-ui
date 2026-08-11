@@ -85,6 +85,7 @@ interface AccordionContextType {
   activeKeys: Set<string>;
   toggleItem: (eventKey: string) => void;
   openItem: (eventKey: string) => void;
+  closeItem: (eventKey: string) => void;
   variant: AccordionVariant;
   size: AccordionSize;
 }
@@ -115,7 +116,7 @@ export const sizesMap: Record<AccordionSize, string> = {
   sm: 'h-10',
   md: 'h-11',
   lg: 'h-12',
-  xl: 'h-13',
+  xl: 'h-[3.25rem]',
   '2xl': 'h-14',
 };
 // #endRegion
@@ -150,15 +151,24 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       setActiveKeys((prevKeys) => new Set(prevKeys).add(eventKey));
     }, []);
 
+    const closeItem = useCallback((eventKey: string) => {
+      setActiveKeys((prevKeys) => {
+        const newKeys = new Set(prevKeys);
+        newKeys.delete(eventKey);
+        return newKeys;
+      });
+    }, []);
+
     const contextValue = useMemo(
       () => ({
         activeKeys,
         toggleItem,
         openItem,
+        closeItem,
         variant,
         size,
       }),
-      [activeKeys, toggleItem, openItem, variant, size]
+      [activeKeys, toggleItem, openItem, closeItem, variant, size]
     );
 
     return (
@@ -232,14 +242,17 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   if (!context)
     throw new Error('AccordionHeader must be used within an Accordion');
 
-  const { activeKeys, toggleItem, openItem, variant, size } = context;
+  const { activeKeys, toggleItem, openItem, closeItem, variant, size } =
+    context;
   const isActive = activeKeys.has(eventKey);
 
   useEffect(() => {
-    if (open && !isActive) {
+    if (open === true && !isActive) {
       openItem(eventKey);
+    } else if (open === false && isActive) {
+      closeItem(eventKey);
     }
-  }, [open, eventKey, openItem, isActive]);
+  }, [open, eventKey, openItem, closeItem, isActive]);
 
   const backgroundColor = isActive
     ? backgroundColorMap[variant]

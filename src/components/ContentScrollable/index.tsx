@@ -1,4 +1,5 @@
 import { forwardRef, CSSProperties, ReactNode } from 'react';
+import type React from 'react';
 import { cn } from '@/utils';
 import { cva } from 'class-variance-authority';
 
@@ -16,7 +17,7 @@ const contentScrollableVariants = cva(
         help: 'bg-purple-100 text-purple-800 border border-purple-200',
         info: 'bg-blue-100 text-blue-800 border border-blue-200',
         dark: 'bg-gray-800 text-white border border-gray-800',
-        light: 'bg-white-100 text-foreground border border-gray-100',
+        light: 'bg-white text-foreground border border-gray-100',
       },
     },
     defaultVariants: {

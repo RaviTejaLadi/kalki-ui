@@ -37,7 +37,7 @@ export const linkVariants = cva(
         lg: 'text-lg h-10 py-2 px-4',
         xl: 'text-xl h-11 py-3 px-6',
         '2xl': 'text-2xl h-12 py-3 px-6',
-        '3xl': 'text-3xl h-13 py-4 px-7',
+        '3xl': 'text-3xl h-[3.25rem] py-4 px-7',
       },
       raised: {
         true: 'shadow-md dark:shadow-gray-900',

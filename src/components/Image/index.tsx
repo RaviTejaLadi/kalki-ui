@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import { cn } from '@/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 
@@ -69,106 +69,133 @@ const BlurPlaceholder: React.FC<{
   />
 );
 
-const Image: React.FC<ImageProps> = ({
-  src,
-  alt,
-  width,
-  height,
-  quality = 75,
-  priority = false,
-  loading: propLoading,
-  objectFit = 'cover',
-  onLoad,
-  onError,
-  className,
-  variant = 'default',
-  sizes,
-  placeholder = 'empty',
-  blurDataURL,
-  imgClassName,
-  ...rest
-}) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
+const getOptimizedSrc = (src: string, quality: number) => {
+  // Only append quality params for absolute HTTP(S) URLs.
+  // data:, blob:, and relative paths must remain untouched.
+  if (!/^https?:\/\//i.test(src)) {
+    return src;
+  }
 
-  const loading = priority ? 'eager' : propLoading || 'lazy';
-
-  const handleLoad = () => {
-    setIsLoading(false);
-    onLoad?.();
-  };
-
-  const handleError = () => {
-    setIsLoading(false);
-    setError(true);
-    onError?.();
-  };
-
-  useEffect(() => {
-    if (!imgRef.current || loading === 'eager') return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const img = entry.target as HTMLImageElement;
-          img.src = src;
-          observer.unobserve(img);
-        }
-      });
-    });
-
-    observer.observe(imgRef.current);
-
-    return () => {
-      if (imgRef.current) observer.unobserve(imgRef.current);
-    };
-  }, [src, loading]);
-
-  const optimizedSrc = src.includes('?')
-    ? `${src}&q=${quality}`
-    : `${src}?q=${quality}`;
-
-  return (
-    <div
-      className={cn(
-        'relative',
-        width && `w-[${width}px]`,
-        height && `h-[${height}px]`,
-        className
-      )}
-    >
-      {placeholder === 'blur' && isLoading && blurDataURL && (
-        <BlurPlaceholder dataURL={blurDataURL} />
-      )}
-
-      <img
-        ref={imgRef}
-        src={loading === 'eager' ? optimizedSrc : undefined}
-        alt={alt}
-        width={width}
-        height={height}
-        onLoad={handleLoad}
-        onError={handleError}
-        loading={loading}
-        sizes={sizes}
-        className={cn(
-          imageVariants({ variant, objectFit }),
-          isLoading ? 'opacity-0' : 'opacity-100',
-          error && 'hidden',
-          imgClassName
-        )}
-        {...rest}
-      />
-
-      {error && (
-        <div className="flex items-center justify-center w-full h-full text-base p-5 rounded border bg-gray-100 text-gray-500">
-          Failed to load image
-        </div>
-      )}
-    </div>
-  );
+  return src.includes('?') ? `${src}&q=${quality}` : `${src}?q=${quality}`;
 };
+
+const Image = forwardRef<HTMLImageElement, ImageProps>(
+  (
+    {
+      src,
+      alt,
+      width,
+      height,
+      quality = 75,
+      priority = false,
+      loading: propLoading,
+      objectFit = 'cover',
+      onLoad,
+      onError,
+      className,
+      variant = 'default',
+      sizes,
+      placeholder = 'empty',
+      blurDataURL,
+      imgClassName,
+      style,
+      ...rest
+    },
+    ref
+  ) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const imgRef = useRef<HTMLImageElement | null>(null);
+
+    const loading = priority ? 'eager' : propLoading || 'lazy';
+    const optimizedSrc = getOptimizedSrc(src, quality);
+
+    const setRefs = (node: HTMLImageElement | null) => {
+      imgRef.current = node;
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    };
+
+    const handleLoad = () => {
+      setIsLoading(false);
+      onLoad?.();
+    };
+
+    const handleError = () => {
+      setIsLoading(false);
+      setError(true);
+      onError?.();
+    };
+
+    useEffect(() => {
+      if (loading === 'eager') return;
+
+      const img = imgRef.current;
+      if (!img) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLImageElement;
+            target.src = optimizedSrc;
+            observer.unobserve(target);
+          }
+        });
+      });
+
+      observer.observe(img);
+
+      return () => {
+        observer.disconnect();
+      };
+    }, [optimizedSrc, loading]);
+
+    return (
+      <div
+        className={cn('relative', className)}
+        style={{
+          ...(width ? { width } : {}),
+          ...(height ? { height } : {}),
+        }}
+      >
+        {placeholder === 'blur' && isLoading && blurDataURL && (
+          <BlurPlaceholder dataURL={blurDataURL} />
+        )}
+
+        <img
+          ref={setRefs}
+          src={loading === 'eager' ? optimizedSrc : undefined}
+          alt={alt}
+          width={width}
+          height={height}
+          loading={loading}
+          sizes={sizes}
+          style={style}
+          className={cn(
+            imageVariants({ variant, objectFit }),
+            isLoading ? 'opacity-0' : 'opacity-100',
+            error && 'hidden',
+            imgClassName
+          )}
+          {...rest}
+          onLoad={handleLoad}
+          onError={handleError}
+        />
+
+        {error && (
+          <div className="flex items-center justify-center w-full h-full text-base p-5 rounded border bg-gray-100 text-gray-500">
+            Failed to load image
+          </div>
+        )}
+      </div>
+    );
+  }
+);
+
+Image.displayName = 'Image';
 // #endRegion
 
 // #region export

@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useContext,
   createContext,
+  useCallback,
 } from 'react';
 import { cn } from '@/utils';
 import { cva } from 'class-variance-authority';
@@ -106,15 +107,19 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     const [currentIndex, setCurrentIndex] = useState(0);
     const [slides, setSlides] = useState<ReactNode[]>([]);
 
-    const goToPrevious = () => {
-      setCurrentIndex(
-        (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
-      );
-    };
+    const goToPrevious = useCallback(() => {
+      setCurrentIndex((prevIndex) => {
+        if (!slides.length) return prevIndex;
+        return (prevIndex - 1 + slides.length) % slides.length;
+      });
+    }, [slides.length]);
 
-    const goToNext = () => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    };
+    const goToNext = useCallback(() => {
+      setCurrentIndex((prevIndex) => {
+        if (!slides.length) return prevIndex;
+        return (prevIndex + 1) % slides.length;
+      });
+    }, [slides.length]);
 
     const containerStyle: React.CSSProperties = {
       width: width || sizeMap[size].width,
@@ -136,7 +141,6 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       <CarouselContext.Provider value={contextValue}>
         <Box
           ref={ref}
-          padding={padding}
           className={cn(
             carouselVariants({ padding: padding as 'sm' | 'md' | 'lg' | 'xl' }),
             className
@@ -188,9 +192,9 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
 
   return (
     <div className={cn('flex justify-between mt-4', className)} style={style}>
-      {React.Children.map(children, (child) => {
-        const isPrevious =
-          React.isValidElement(child) && child.props?.onClick === goToPrevious;
+      {React.Children.map(children, (child, index) => {
+        if (!React.isValidElement(child)) return child;
+        const isPrevious = index === 0;
         return React.cloneElement(child as React.ReactElement, {
           onClick: isPrevious ? goToPrevious : goToNext,
           'aria-label': isPrevious ? 'Previous slide' : 'Next slide',
@@ -214,12 +218,18 @@ const CarouselDots: React.FC<CarouselDotsProps> = ({
     <div
       className={cn('flex justify-center mt-4', className)}
       style={style}
+      role="tablist"
+      aria-label="Carousel pagination"
       {...rest}
     >
       {slides.map((_, index) => (
-        <span
+        <button
           key={index}
-          className={`w-2.5 h-2.5 rounded-full bg-gray-400 mx-1 hover:bg-gray-600 cursor-pointer ${
+          type="button"
+          role="tab"
+          aria-selected={index === currentIndex}
+          aria-label={`Go to slide ${index + 1}`}
+          className={`w-2.5 h-2.5 rounded-full bg-gray-400 mx-1 hover:bg-gray-600 cursor-pointer border-0 p-0 ${
             index === currentIndex ? 'bg-blue-500' : ''
           }`}
           onClick={() => setCurrentIndex(index)}

@@ -102,7 +102,7 @@ const Banner = forwardRef<HTMLDivElement, BannerProps>(
 
     return (
       <div
-        className={cn(bannerClasses, className, variant)}
+        className={cn(bannerClasses, className)}
         style={bannerStyle}
         ref={ref}
         {...rest}

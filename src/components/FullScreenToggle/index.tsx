@@ -31,9 +31,6 @@ const FullScreenToggle = forwardRef<HTMLButtonElement, ButtonProps>(
       document.addEventListener('fullscreenchange', onFullScreenChange);
       return () => {
         document.removeEventListener('fullscreenchange', onFullScreenChange);
-        if (document.fullscreenElement) {
-          document.exitFullscreen?.();
-        }
       };
     }, []);
 

@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-react';
 
 // #region listGroupVariants
 const listGroupVariants = cva(
-  'flex flex-col rounded-md shadow-xs overflow-hidden bg-white border',
+  'flex flex-col rounded-md shadow-sm overflow-hidden bg-white border',
   {
     variants: {
       size: {
@@ -149,6 +149,14 @@ const ListGroupItem = forwardRef<HTMLLIElement, ListGroupItemProps>(
   ) => {
     const { variant, showArrows, showDividers } = useListGroup();
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>) => {
+      if (disabled || !onClick) return;
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        onClick();
+      }
+    };
+
     return (
       <li
         ref={ref}
@@ -163,6 +171,7 @@ const ListGroupItem = forwardRef<HTMLLIElement, ListGroupItemProps>(
           className
         )}
         onClick={!disabled ? onClick : undefined}
+        onKeyDown={handleKeyDown}
         tabIndex={!disabled ? 0 : -1}
         role="button"
         {...props}
@@ -200,7 +209,7 @@ ListGroupItem.displayName = 'ListGroupItem';
 // #region exports
 export default Object.assign(
   ListGroups as React.ForwardRefExoticComponent<
-    ListGroupProps & React.RefAttributes<HTMLOListElement>
+    ListGroupProps & React.RefAttributes<HTMLUListElement>
   >,
   {
     Item: ListGroupItem,

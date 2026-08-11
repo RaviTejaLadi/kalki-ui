@@ -43,13 +43,47 @@ interface ParagraphProps extends VariantProps<typeof paragraphVariants> {
 
 // #region Paragraph
 const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
-  ({ children, size, className, onClick, ...props }, ref) => {
+  (
+    {
+      children,
+      size,
+      className,
+      onClick,
+      underline,
+      overline,
+      dashed,
+      italic,
+      strong,
+      strikethrough,
+      marked,
+      smaller,
+      deleted,
+      inserted,
+      ...props
+    },
+    ref
+  ) => {
     const element = 'p';
     return createElement(
       element,
       {
         ref,
-        className: cn(paragraphVariants({ size, ...props }), className),
+        className: cn(
+          paragraphVariants({
+            size,
+            underline,
+            overline,
+            dashed,
+            italic,
+            strong,
+            strikethrough,
+            marked,
+            smaller,
+            deleted,
+            inserted,
+          }),
+          className
+        ),
         onClick,
         ...props,
       },

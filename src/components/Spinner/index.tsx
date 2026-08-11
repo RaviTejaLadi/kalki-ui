@@ -61,6 +61,8 @@ const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
       <div
         ref={ref}
         className={cn(spinnerVariants({ variant, size }), className)}
+        role="status"
+        aria-label="Loading"
         {...rest}
       >
         <svg

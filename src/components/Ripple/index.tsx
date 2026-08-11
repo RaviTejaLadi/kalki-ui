@@ -4,6 +4,7 @@ import React, {
   forwardRef,
   useRef,
   useEffect,
+  useCallback,
 } from 'react';
 import { cn } from '@/utils';
 
@@ -56,9 +57,11 @@ const Ripple = forwardRef<HTMLDivElement, RippleProps>(
       }
     };
 
-    useDebouncedRippleCleanUp(rippleArray.length, duration, () => {
+    const clearRipples = useCallback(() => {
       setRippleArray([]);
-    });
+    }, []);
+
+    useDebouncedRippleCleanUp(rippleArray.length, duration, clearRipples);
 
     // Find the parent element to attach the click listener
     useEffect(() => {

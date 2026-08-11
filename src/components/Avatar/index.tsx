@@ -25,9 +25,11 @@ const avatarVariants = cva('inline-flex items-center justify-center', {
 // #endregion
 
 // #region types
+type AvatarImageStatus = 'idle' | 'loading' | 'loaded' | 'error';
+
 interface AvatarContextType extends VariantProps<typeof avatarVariants> {
-  hasError?: boolean;
-  onError?: () => void;
+  status: AvatarImageStatus;
+  setStatus: (status: AvatarImageStatus) => void;
 }
 
 interface AvatarProps extends VariantProps<typeof avatarVariants> {
@@ -47,7 +49,10 @@ interface AvatarFallbackProps {
 // #endregion
 
 // #region AvatarContext
-const AvatarContext = createContext<AvatarContextType>({});
+const AvatarContext = createContext<AvatarContextType>({
+  status: 'idle',
+  setStatus: () => undefined,
+});
 
 // #endregion
 
@@ -55,15 +60,15 @@ const AvatarContext = createContext<AvatarContextType>({});
 
 const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
   ({ children, className, size, shape, ...props }, ref) => {
-    const [hasError, setHasError] = useState(false);
+    const [status, setStatus] = useState<AvatarImageStatus>('idle');
 
     return (
       <AvatarContext.Provider
         value={{
           size,
           shape,
-          hasError,
-          onError: () => setHasError(true),
+          status,
+          setStatus,
         }}
       >
         <div
@@ -82,9 +87,11 @@ Avatar.displayName = 'Avatar';
 
 const AvatarFallback = React.forwardRef<HTMLDivElement, AvatarFallbackProps>(
   ({ children, className, ...props }, ref) => {
-    const { size, shape, hasError } = useContext(AvatarContext);
+    const { size, shape, status } = useContext(AvatarContext);
 
-    if (!hasError) return null;
+    // Show fallback when there is no image child, or after an image error.
+    // Keep hidden while an image is loading/loaded to preserve previous layout.
+    if (status === 'loading' || status === 'loaded') return null;
 
     return (
       <div
@@ -105,10 +112,15 @@ const AvatarFallback = React.forwardRef<HTMLDivElement, AvatarFallbackProps>(
 AvatarFallback.displayName = 'AvatarFallback';
 
 const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
-  ({ className, src, alt = 'avatar', ...props }, ref) => {
-    const { size, shape, hasError, onError } = useContext(AvatarContext);
+  ({ className, src, alt = 'avatar', onLoad, onError, ...props }, ref) => {
+    const { size, shape, status, setStatus } = useContext(AvatarContext);
 
-    if (hasError) return null;
+    React.useLayoutEffect(() => {
+      setStatus('loading');
+      return () => setStatus('idle');
+    }, [setStatus, src]);
+
+    if (status === 'error') return null;
 
     return (
       <img
@@ -120,8 +132,15 @@ const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
           'object-cover',
           className
         )}
-        onError={onError}
         {...props}
+        onLoad={(event) => {
+          setStatus('loaded');
+          onLoad?.(event);
+        }}
+        onError={(event) => {
+          setStatus('error');
+          onError?.(event);
+        }}
       />
     );
   }
