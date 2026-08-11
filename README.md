@@ -153,9 +153,13 @@ pnpm add kalki-ui
 
 ## Usage
 
+Import only the components you need (recommended). Each component is a separate entry so unused code stays out of your bundle:
+
 ```jsx
-import { Button, Alert, Card } from 'kalki-ui';
-import 'kalki-ui/dist/index.css';
+import { Button } from 'kalki-ui/button';
+import { Alert } from 'kalki-ui/alert';
+import { Card } from 'kalki-ui/card';
+import 'kalki-ui/styles.css';
 
 function App() {
   return (
@@ -167,6 +171,19 @@ function App() {
   );
 }
 ```
+
+You can still import from the root package if you prefer:
+
+```jsx
+import { Button, Alert, Card } from 'kalki-ui';
+import 'kalki-ui/styles.css';
+```
+
+### Available deep imports
+
+Use `kalki-ui/<name>` for any component, for example:
+
+`accordion`, `alert`, `avatar`, `badge`, `banner`, `box`, `breadcrumb`, `button`, `card`, `carousel`, `close-button`, `code`, `content-scrollable`, `div`, `dot-separator`, `drawer`, `empty`, `error-page`, `figure`, `full-screen-toggle`, `gallery`, `heading`, `highlighter`, `image`, `json-viewer`, `link`, `link-bar`, `link-button`, `list-groups`, `modal`, `ordered-list`, `paragraph`, `ripple`, `scroll-to-top`, `section-header`, `separator`, `skeleton`, `spinner`, `splitter`, `stack`, `table`, `table-list`, `tabs`, `tag`, `text`, `text-carousel`, `text-highlighter`, `toggle`, `typography`, `unordered-list`
 
 ## Development
 
@@ -180,7 +197,8 @@ function App() {
 | Script | Description |
 | --- | --- |
 | `dev` | Start Vite development server |
-| `build` | Clean and build the library with Rollup |
+| `build` | Generate entries, clean, and build the library with Vite |
+| `generate:entries` | Generate per-component entry files and package exports |
 | `clean` | Remove build artifacts |
 | `lint` | Run ESLint checks |
 | `lint:fix` | Fix ESLint issues |
@@ -192,11 +210,9 @@ function App() {
 - React
 - TypeScript
 - Tailwind CSS
-- Rollup
 - Vite
 - ESLint
 - Prettier
-- Babel
 
 ## License
 

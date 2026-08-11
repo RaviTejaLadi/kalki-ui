@@ -16,6 +16,9 @@ dist-ssr
 build
 website/build
 
+# Generated per-component entry re-exports
+src/entries
+
 # Coverage output
 coverage
 

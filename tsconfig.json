@@ -15,14 +15,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "declaration": true,
-    "declarationDir": "dist",
-    "emitDeclarationOnly": true,
-    "importHelpers": true,
+    "declarationMap": true,
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] },
-    "types": []
+    "paths": { "@/*": ["src/*"] }
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "src/entries"]
 }

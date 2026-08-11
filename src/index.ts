@@ -1,5 +1,3 @@
-import './index.css';
-
 // #region Accordion
 export {
   default as Accordion,
