@@ -182,8 +182,7 @@ interface TextHighlighterProps {
 /**
  * Props for an individually highlighted text span.
  */
-interface TextHighlighterTextProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+interface TextHighlighterTextProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Text to highlight */
   children: React.ReactNode;
   /** Highlight visual style (falls back to context default) */

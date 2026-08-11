@@ -74,7 +74,8 @@ export const boxVariants = cva('block', {
 
 // #region types
 interface BoxProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof boxVariants> {
   /** Element width (CSS value) */
   width?: string;

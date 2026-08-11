@@ -54,7 +54,8 @@ type ObjectFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
  * @property {string} [blurDataURL] - Data URL used when `placeholder="blur"`
  */
 interface ImageProps
-  extends React.ImgHTMLAttributes<HTMLImageElement>,
+  extends
+    React.ImgHTMLAttributes<HTMLImageElement>,
     VariantProps<typeof imageVariants> {
   /** Image source URL */
   src: string;

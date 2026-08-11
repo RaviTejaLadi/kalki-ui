@@ -142,10 +142,9 @@ const Banner = forwardRef<HTMLDivElement, BannerProps>(
       >
         <div className="flex-grow">
           {React.Children.map(children, (child) =>
-            React.isValidElement(child) &&
+            React.isValidElement<{ size?: BannerSize }>(child) &&
             (child.type === BannerTitle || child.type === BannerSubTitle)
               ? React.cloneElement(child, {
-                  ...child.props,
                   size: size || 'md',
                 })
               : child

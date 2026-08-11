@@ -51,8 +51,10 @@ const subtitleVariants: Record<Size, string> = {
   lg: 'text-base text-muted-foreground dark:text-gray-400',
 };
 
-interface SectionHeaderRootProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size'> {
+interface SectionHeaderRootProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'size'
+> {
   /** Visual style of the header container */
   variant?: VariantProps<typeof sectionHeaderVariants>['variant'];
   /** Size that cascades to title and subtitle @default 'md' */

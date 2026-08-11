@@ -36,7 +36,8 @@ const toggleVariants = cva(
  * Props for a pressable Toggle button.
  */
 export interface ToggleProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof toggleVariants> {
   /** Controlled pressed state */
   pressed?: boolean;
@@ -210,12 +211,18 @@ export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
           {...props}
         >
           {React.Children.map(children, (child) => {
-            if (React.isValidElement(child)) {
+            if (
+              React.isValidElement<{
+                variant?: typeof variant;
+                size?: typeof size;
+                disabled?: boolean;
+              }>(child)
+            ) {
               return React.cloneElement(child, {
                 variant: child.props.variant || variant,
                 size: child.props.size || size,
                 disabled: child.props.disabled || disabled,
-              } as any);
+              });
             }
             return child;
           })}

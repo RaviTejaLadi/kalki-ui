@@ -291,9 +291,18 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
   return (
     <div className={cn('flex justify-between mt-4', className)} style={style}>
       {React.Children.map(children, (child, index) => {
-        if (!React.isValidElement(child)) return child;
+        if (
+          !React.isValidElement<{
+            onClick?: () => void;
+            'aria-label'?: string;
+            role?: string;
+            tabIndex?: number;
+          }>(child)
+        ) {
+          return child;
+        }
         const isPrevious = index === 0;
-        return React.cloneElement(child as React.ReactElement, {
+        return React.cloneElement(child, {
           onClick: isPrevious ? goToPrevious : goToNext,
           'aria-label': isPrevious ? 'Previous slide' : 'Next slide',
           role: 'button',

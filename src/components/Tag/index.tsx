@@ -38,7 +38,8 @@ const tagVariants = cva(
  * Props for the Tag root chip.
  */
 interface TagProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof tagVariants> {
   /** Tag content (Icon, Text, Close) */
   children: React.ReactNode;
@@ -67,8 +68,7 @@ interface TagTextProps extends React.HTMLAttributes<HTMLSpanElement> {
 /**
  * Props for the Tag dismiss button.
  */
-interface TagCloseButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface TagCloseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Called when the close button is clicked */
   onClick: () => void;
   /** Additional CSS classes */

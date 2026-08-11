@@ -47,8 +47,10 @@ const linkVariants = cva('no-underline transition-colors duration-300', {
  * @property {HTMLAttributeReferrerPolicy} [referrerPolicy] - Referrer policy for the request
  * @property {string} [type] - Hint for the MIME type of the linked resource
  */
-interface LinkProps
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'target'> {
+interface LinkProps extends Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  'target'
+> {
   /** Destination URL or path */
   to: string;
   /** Link label/content */

@@ -66,7 +66,8 @@ const buttonVariants = cva(
 
 // #region types
 interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   /** Whether the button is disabled */
   disabled?: boolean;

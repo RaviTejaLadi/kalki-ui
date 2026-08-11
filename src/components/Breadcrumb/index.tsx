@@ -32,8 +32,7 @@ const breadcrumbVariants = cva(
 type SeparatorType = 'chevron' | 'arrow' | 'dot' | 'slash' | 'circle';
 
 interface BreadcrumbProps
-  extends VariantProps<typeof breadcrumbVariants>,
-    BoxProps {
+  extends VariantProps<typeof breadcrumbVariants>, BoxProps {
   /** Breadcrumb item children */
   children: ReactNode;
   /** Separator icon type or custom node between items */
@@ -115,17 +114,18 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
       >
         <ol className="flex items-center">
           {React.Children.map(children, (child, index) => {
-            if (!React.isValidElement(child)) return child;
+            if (!React.isValidElement<{ className?: string }>(child))
+              return child;
 
             return (
               <li key={index} className="flex items-center">
                 {index > 0 && getSeparator()}
-                {React.cloneElement(child as React.ReactElement, {
+                {React.cloneElement(child, {
                   className: cn(
                     'text-sm font-medium',
                     size === 'sm' && 'text-xs',
                     size === 'lg' && 'text-base',
-                    (child as React.ReactElement).props.className || ''
+                    child.props.className || ''
                   ),
                 })}
               </li>

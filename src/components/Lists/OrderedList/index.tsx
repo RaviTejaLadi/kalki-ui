@@ -20,8 +20,10 @@ interface OrderedListItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
 /**
  * Props for the OrderedList root.
  */
-interface OrderedListProps
-  extends Omit<React.OlHTMLAttributes<HTMLOListElement>, 'type'> {
+interface OrderedListProps extends Omit<
+  React.OlHTMLAttributes<HTMLOListElement>,
+  'type'
+> {
   /** List items (`OrderedList.Item`) */
   children: ReactNode;
   /** Additional CSS classes */

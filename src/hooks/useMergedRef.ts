@@ -21,9 +21,7 @@ import React, { MutableRefObject, RefCallback } from 'react';
  * ```
  */
 type Ref<T> =
-  | ((instance: T | null) => void)
-  | MutableRefObject<T | null>
-  | null;
+  ((instance: T | null) => void) | MutableRefObject<T | null> | null;
 
 /**
  * A custom hook that merges multiple React refs into a single ref callback.
@@ -32,8 +30,7 @@ type Ref<T> =
  *
  * @template T - The type of the referenced value (e.g., HTMLDivElement)
  * @param {...Ref<T>[]} refs - Array of refs to merge
- * @returns {RefCallback<T> | null} A callback ref that updates all provided refs,
- *                                 or null if all input refs are null
+ * @returns {RefCallback<T>} A callback ref that updates all provided refs
  *
  * @example
  * ```tsx
@@ -64,24 +61,19 @@ type Ref<T> =
  * @see {@link https://react.dev/learn/referencing-values-with-refs React Refs Documentation}
  */
 
-export const useMergedRef = <T>(...refs: Ref<T>[]): RefCallback<T> | null => {
-  return React.useMemo(() => {
-    // Return null if all refs are null
-    if (refs.every((ref) => ref == null)) {
-      return null;
-    }
+export const useMergedRef = <T>(...refs: Ref<T>[]): RefCallback<T> => {
+  // Keep the latest refs without recreating the callback identity every render.
+  const refsRef = React.useRef(refs);
+  // eslint-disable-next-line react-hooks/refs -- intentional "latest refs" sync pattern
+  refsRef.current = refs;
 
-    // Return a callback that updates all refs
-    return (value: T | null) => {
-      refs.forEach((ref) => {
-        if (typeof ref === 'function') {
-          // Handle function refs
-          ref(value);
-        } else if (ref != null) {
-          // Handle object refs
-          (ref as MutableRefObject<T | null>).current = value;
-        }
-      });
-    };
-  }, [...refs]); // Only recreate callback if refs array changes
+  return React.useCallback((value: T | null) => {
+    refsRef.current.forEach((ref) => {
+      if (typeof ref === 'function') {
+        ref(value);
+      } else if (ref != null) {
+        (ref as MutableRefObject<T | null>).current = value;
+      }
+    });
+  }, []);
 };

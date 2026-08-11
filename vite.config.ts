@@ -77,7 +77,7 @@ export default defineConfig({
     cssCodeSplit: false,
     sourcemap: true,
     emptyOutDir: true,
-    minify: 'esbuild',
+    minify: true,
     target: 'es2020',
   },
 });

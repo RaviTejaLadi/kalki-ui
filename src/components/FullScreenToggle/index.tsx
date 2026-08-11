@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, forwardRef } from 'react';
 import { Expand, Shrink } from 'lucide-react';
 import Button, { ButtonIcon, ButtonProps, ButtonText } from '../Button';
@@ -27,17 +26,32 @@ const FullScreenToggle = forwardRef<HTMLButtonElement, ButtonProps>(
     const [isFullScreen, setFullScreen] = useState<boolean>(false);
 
     const toggleFullScreen = () => {
-      const doc = document.documentElement;
+      const doc = document.documentElement as HTMLElement & {
+        mozRequestFullScreen?: () => void;
+        webkitRequestFullscreen?: () => void;
+      };
+      const docAny = document as Document & {
+        mozCancelFullScreen?: () => void;
+        webkitExitFullscreen?: () => void;
+      };
 
       if (!document.fullscreenElement) {
-        doc.requestFullscreen?.() ||
-          (doc as any).mozRequestFullScreen?.() ||
-          (doc as any).webkitRequestFullscreen?.();
+        if (doc.requestFullscreen) {
+          void doc.requestFullscreen();
+        } else if (doc.mozRequestFullScreen) {
+          doc.mozRequestFullScreen();
+        } else if (doc.webkitRequestFullscreen) {
+          doc.webkitRequestFullscreen();
+        }
         setFullScreen(true);
       } else {
-        document.exitFullscreen?.() ||
-          (document as any).mozCancelFullScreen?.() ||
-          (document as any).webkitExitFullscreen?.();
+        if (document.exitFullscreen) {
+          void document.exitFullscreen();
+        } else if (docAny.mozCancelFullScreen) {
+          docAny.mozCancelFullScreen();
+        } else if (docAny.webkitExitFullscreen) {
+          docAny.webkitExitFullscreen();
+        }
         setFullScreen(false);
       }
     };

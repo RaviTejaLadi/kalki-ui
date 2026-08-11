@@ -1,6 +1,5 @@
 import React, {
   useState,
-  useEffect,
   ReactNode,
   CSSProperties,
   useCallback,
@@ -203,7 +202,7 @@ export const Tabs: React.FC<TabsProps> = ({
   const isTabElement = (
     child: React.ReactNode
   ): child is React.ReactElement<TabProps> => {
-    return React.isValidElement(child) && 'value' in child.props;
+    return React.isValidElement<TabProps>(child) && 'value' in child.props;
   };
 
   const getInitialActiveTab = () => {
@@ -216,17 +215,14 @@ export const Tabs: React.FC<TabsProps> = ({
     );
   };
 
-  const [activeTab, setActiveTab] = useState(getInitialActiveTab);
+  const [uncontrolledActiveTab, setUncontrolledActiveTab] =
+    useState(getInitialActiveTab);
+  const activeTab = active !== undefined ? active : uncontrolledActiveTab;
   const tabsRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (active !== undefined) {
-      setActiveTab(active);
-    }
-  }, [active]);
 
   const handleTabClick = useCallback(
     (value: string) => {
-      setActiveTab(value);
+      setUncontrolledActiveTab(value);
       if (onTabChange) {
         onTabChange(value);
       }

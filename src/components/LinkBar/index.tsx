@@ -75,7 +75,7 @@ const linkBarVariants = cva('flex items-center justify-center transition-all', {
 interface LinkBarContextValue {
   activeUrl?: string;
   onUrlChange?: (url: string) => void;
-  scrollRef?: RefObject<HTMLDivElement>;
+  scrollRef?: RefObject<HTMLDivElement | null>;
 }
 
 /**
@@ -89,8 +89,7 @@ interface LinkBarContextValue {
  * @property {(url: string) => void} [onUrlChange] - Callback fired when a link is selected
  */
 interface LinkBarProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof linkBarVariants> {
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof linkBarVariants> {
   /** Currently active link URL used for active styling */
   activeUrl?: string;
   /** Callback fired when a link is selected */
@@ -108,8 +107,10 @@ interface LinkBarProps
  * @property {'start' | 'end'} [iconPosition='start'] - Icon placement relative to the label
  * @property {'_blank' | '_self' | '_parent' | '_top'} [target] - Link target browsing context
  */
-interface LinkProps
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'ref'> {
+interface LinkProps extends Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  'ref'
+> {
   /** Destination path or URL */
   to: string;
   /** Optional icon rendered beside the label */

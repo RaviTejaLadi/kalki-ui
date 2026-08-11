@@ -119,7 +119,8 @@ const defaultColors: string[] = [
  * @property {'inherit' | 'compact' | 'comfortable' | 'relaxed'} [sizing='inherit'] - Spacing/sizing around highlights
  */
 interface HighlighterProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
+  extends
+    React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof highlightedTextVariants> {
   /** Source text in which matches are highlighted */
   children: string;

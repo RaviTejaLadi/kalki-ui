@@ -38,8 +38,7 @@ const buttonVariants = cva(
 // #endregion
 
 // #region types
-interface CloseButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CloseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual style of the close button @default 'light' */
   variant?: 'light' | 'dark';
   /** Size of the button and icon @default 'sm' */

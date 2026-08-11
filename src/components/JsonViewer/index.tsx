@@ -7,9 +7,7 @@ import Div from '../Div';
 
 // #region types
 type JsonReplacer =
-  | ((key: string, value: any) => any)
-  | (number | string)[]
-  | null;
+  ((key: string, value: any) => any) | (number | string)[] | null;
 
 /**
  * Props for the JsonViewer component.
@@ -22,8 +20,10 @@ type JsonReplacer =
  * @property {JsonReplacer} [replacer=null] - Optional `JSON.stringify` replacer function or property whitelist
  * @property {string} [className] - Additional CSS classes for the outer container
  */
-interface JsonViewerProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
+interface JsonViewerProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'title'
+> {
   /** Number of spaces used for pretty-printing */
   indentation?: number;
   /** Optional `JSON.stringify` replacer function or property whitelist */

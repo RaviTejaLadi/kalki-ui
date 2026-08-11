@@ -56,7 +56,8 @@ const scrollButtonVariants = cva(
  * Props for the ScrollToTop floating action button.
  */
 interface ScrollToTopProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof scrollButtonVariants> {
   /** Scroll offset (px) before the button becomes visible @default 400 */
   threshold?: number;
