@@ -2,6 +2,25 @@ import { cn } from '@/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import React from 'react';
 
+/**
+ * Empty-state container that centers placeholder content in a dashed bordered layout.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Empty>
+ *   <EmptyHeader>
+ *     <EmptyTitle>No results</EmptyTitle>
+ *     <EmptyDescription>Try adjusting your filters.</EmptyDescription>
+ *   </EmptyHeader>
+ * </Empty>
+ * ```
+ *
+ * @param {React.ComponentProps<'div'>} props - The component props
+ * @param {string} [props.className] - Additional CSS classes for the empty container
+ *
+ * @returns {JSX.Element} A centered empty-state layout container
+ */
 function Empty({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
@@ -15,6 +34,22 @@ function Empty({ className, ...props }: React.ComponentProps<'div'>) {
   );
 }
 
+/**
+ * Header section for an empty state, typically wrapping media, title, and description.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <EmptyHeader>
+ *   <EmptyTitle>Nothing here yet</EmptyTitle>
+ * </EmptyHeader>
+ * ```
+ *
+ * @param {React.ComponentProps<'div'>} props - The component props
+ * @param {string} [props.className] - Additional CSS classes for the header
+ *
+ * @returns {JSX.Element} A centered empty-state header container
+ */
 function EmptyHeader({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
@@ -43,6 +78,23 @@ const emptyMediaVariants = cva(
   }
 );
 
+/**
+ * Media/icon area for an empty state, with optional muted icon styling.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <EmptyMedia variant="icon">
+ *   <SearchIcon />
+ * </EmptyMedia>
+ * ```
+ *
+ * @param {React.ComponentProps<'div'> & VariantProps<typeof emptyMediaVariants>} props - The component props
+ * @param {'default' | 'icon'} [props.variant='default'] - Visual style for the media container
+ * @param {string} [props.className] - Additional CSS classes for the media container
+ *
+ * @returns {JSX.Element} A media/icon wrapper for empty states
+ */
 function EmptyMedia({
   className,
   variant = 'default',
@@ -58,6 +110,20 @@ function EmptyMedia({
   );
 }
 
+/**
+ * Title text for an empty state.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <EmptyTitle>No projects found</EmptyTitle>
+ * ```
+ *
+ * @param {React.ComponentProps<'div'>} props - The component props
+ * @param {string} [props.className] - Additional CSS classes for the title
+ *
+ * @returns {JSX.Element} An empty-state title element
+ */
 function EmptyTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
@@ -68,6 +134,22 @@ function EmptyTitle({ className, ...props }: React.ComponentProps<'div'>) {
   );
 }
 
+/**
+ * Supporting description text for an empty state.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <EmptyDescription>
+ *   Create a new project to get started.
+ * </EmptyDescription>
+ * ```
+ *
+ * @param {React.ComponentProps<'p'>} props - The component props
+ * @param {string} [props.className] - Additional CSS classes for the description
+ *
+ * @returns {JSX.Element} An empty-state description element
+ */
 function EmptyDescription({ className, ...props }: React.ComponentProps<'p'>) {
   return (
     <div
@@ -81,6 +163,22 @@ function EmptyDescription({ className, ...props }: React.ComponentProps<'p'>) {
   );
 }
 
+/**
+ * Action/content area below the empty-state header for buttons or extra controls.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <EmptyContent>
+ *   <Button>Create item</Button>
+ * </EmptyContent>
+ * ```
+ *
+ * @param {React.ComponentProps<'div'>} props - The component props
+ * @param {string} [props.className] - Additional CSS classes for the content area
+ *
+ * @returns {JSX.Element} An empty-state content/actions container
+ */
 function EmptyContent({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div

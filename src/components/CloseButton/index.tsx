@@ -40,17 +40,44 @@ const buttonVariants = cva(
 // #region types
 interface CloseButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Visual style of the close button @default 'light' */
   variant?: 'light' | 'dark';
+  /** Size of the button and icon @default 'sm' */
   size?: 'sm' | 'md' | 'lg';
+  /** Click handler invoked when the button is pressed */
   onClick?: () => void;
+  /** Whether the button is disabled */
   disabled?: boolean;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: React.CSSProperties;
 }
 
 // #endregion
 
 // #region CloseButton
+/**
+ * A compact button that renders an X icon for dismissing UI surfaces.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <CloseButton variant="light" size="md" onClick={handleClose} />
+ * ```
+ *
+ * @param {CloseButtonProps} props - The component props
+ * @param {'light' | 'dark'} [props.variant='light'] - Visual style of the close button
+ * @param {'sm' | 'md' | 'lg'} [props.size='sm'] - Size of the button and icon
+ * @param {() => void} [props.onClick] - Click handler invoked when the button is pressed
+ * @param {boolean} [props.disabled] - Whether the button is disabled
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {string} [props.aria-label='Close'] - Accessible label for the button
+ * @param {React.Ref<HTMLButtonElement>} ref - Forwarded ref to the button element
+ *
+ * @returns {JSX.Element} A button containing a close (X) icon
+ */
 const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
   (
     {

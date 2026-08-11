@@ -29,41 +29,90 @@ const drawerVariants = cva(
 
 // #region types
 interface DrawerProps {
+  /** Edge from which the drawer slides in @default 'right' */
   position?: 'top' | 'right' | 'bottom' | 'left';
+  /** Drawer compound children (Header, Title, Body) */
   children: ReactNode;
+  /** Whether the drawer is visible */
   isOpen: boolean;
+  /** Called when the overlay is clicked or Escape is pressed */
   onClose?: () => void;
+  /** Width used for left/right drawers @default '300px' */
   width?: string;
+  /** Height used for top/bottom drawers @default '300px' */
   height?: string;
+  /** Custom overlay background color */
   overLayColor?: string;
+  /** Additional CSS classes for the panel */
   className?: string;
+  /** Additional inline styles for the panel */
   style?: CSSProperties;
 }
 
 interface DrawerHeaderProps {
+  /** Header content (typically a title) */
   children: ReactNode;
+  /** Whether to show a close button */
   closeButton?: boolean;
+  /** Click handler for the close button */
   onClose?: () => void;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: CSSProperties;
+  /** Size of the optional close button @default 'sm' */
   closeBtnSize?: 'sm' | 'md' | 'lg';
 }
 
 interface DrawerTitleProps {
+  /** Title content */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: CSSProperties;
 }
 
 interface DrawerBodyProps {
+  /** Main drawer content */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: CSSProperties;
 }
 
 // #endregion
 
 // #region Drawer Component
+/**
+ * A slide-in panel with overlay, Escape-to-close, and compound Header/Title/Body parts.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Drawer isOpen={open} onClose={() => setOpen(false)} position="right" width="360px">
+ *   <Drawer.Header closeButton onClose={() => setOpen(false)}>
+ *     <Drawer.Title>Settings</Drawer.Title>
+ *   </Drawer.Header>
+ *   <Drawer.Body>Drawer content</Drawer.Body>
+ * </Drawer>
+ * ```
+ *
+ * @param {DrawerProps} props - The component props
+ * @param {'top' | 'right' | 'bottom' | 'left'} [props.position='right'] - Edge from which the drawer slides in
+ * @param {React.ReactNode} props.children - Drawer compound children
+ * @param {boolean} props.isOpen - Whether the drawer is visible
+ * @param {() => void} [props.onClose] - Called when the overlay is clicked or Escape is pressed
+ * @param {string} [props.width='300px'] - Width used for left/right drawers
+ * @param {string} [props.height='300px'] - Height used for top/bottom drawers
+ * @param {string} [props.overLayColor=''] - Custom overlay background color
+ * @param {string} [props.className] - Additional CSS classes for the panel
+ * @param {React.CSSProperties} [props.style] - Additional inline styles for the panel
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the outer wrapper
+ *
+ * @returns {JSX.Element} An overlay and sliding drawer panel
+ */
 const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   (
     {
@@ -121,6 +170,23 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
 Drawer.displayName = 'Drawer';
 
+/**
+ * Semibold title text for use inside a Drawer header.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Drawer.Title>Account details</Drawer.Title>
+ * ```
+ *
+ * @param {DrawerTitleProps} props - The component props
+ * @param {React.ReactNode} props.children - Title content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the title element
+ *
+ * @returns {JSX.Element} A styled title container
+ */
 const DrawerTitle = forwardRef<HTMLDivElement, DrawerTitleProps>(
   ({ children, className, style, ...rest }, ref) => {
     return (
@@ -138,6 +204,28 @@ const DrawerTitle = forwardRef<HTMLDivElement, DrawerTitleProps>(
 
 DrawerTitle.displayName = 'DrawerTitle';
 
+/**
+ * Header row for a Drawer, optionally including a close button.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Drawer.Header closeButton onClose={handleClose} closeBtnSize="sm">
+ *   <Drawer.Title>Filters</Drawer.Title>
+ * </Drawer.Header>
+ * ```
+ *
+ * @param {DrawerHeaderProps} props - The component props
+ * @param {React.ReactNode} props.children - Header content
+ * @param {boolean} [props.closeButton] - Whether to show a close button
+ * @param {() => void} [props.onClose] - Click handler for the close button
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {'sm' | 'md' | 'lg'} [props.closeBtnSize='sm'] - Size of the optional close button
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the header element
+ *
+ * @returns {JSX.Element} A header row with optional close control
+ */
 const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
   (
     {
@@ -167,6 +255,25 @@ const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
 
 DrawerHeader.displayName = 'DrawerHeader';
 
+/**
+ * Main content area of a Drawer panel.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Drawer.Body>
+ *   <p>Configure your preferences here.</p>
+ * </Drawer.Body>
+ * ```
+ *
+ * @param {DrawerBodyProps} props - The component props
+ * @param {React.ReactNode} props.children - Main drawer content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the body element
+ *
+ * @returns {JSX.Element} A padded body container for drawer content
+ */
 const DrawerBody = forwardRef<HTMLDivElement, DrawerBodyProps>(
   ({ children, className, style, ...rest }, ref) => {
     return (

@@ -25,20 +25,47 @@ const alertVariants = cva('rounded-md p-4 w-full mb-4 border', {
 
 // #region types
 interface AlertProps extends VariantProps<typeof alertVariants> {
+  /** Alert content, typically Header/Body/Footer sections */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
 interface SectionProps {
+  /** Section content */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
 // #endRegion
 
 // #region components
+/**
+ * A contextual alert banner for displaying status or feedback messages.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Alert variant="success">
+ *   <Alert.Header>Success</Alert.Header>
+ *   <Alert.Body>Your changes have been saved.</Alert.Body>
+ * </Alert>
+ * ```
+ *
+ * @param {AlertProps} props - The component props
+ * @param {React.ReactNode} props.children - Alert content
+ * @param {'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'help' | 'light'} [props.variant='primary'] - Visual style variant
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the root element
+ *
+ * @returns {JSX.Element} A styled alert container
+ */
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   ({ variant, children, className, style, ...rest }, ref) => {
     return (
@@ -56,6 +83,22 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
 Alert.displayName = 'Alert';
 
+/**
+ * The title section of an Alert.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Alert.Header>Warning</Alert.Header>
+ * ```
+ *
+ * @param {SectionProps} props - The component props
+ * @param {React.ReactNode} props.children - Header content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ *
+ * @returns {JSX.Element} A semibold alert header
+ */
 const AlertHeader: React.FC<SectionProps> = ({
   children,
   className,
@@ -73,6 +116,22 @@ const AlertHeader: React.FC<SectionProps> = ({
   );
 };
 
+/**
+ * The main message body of an Alert.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Alert.Body>Please verify your email address.</Alert.Body>
+ * ```
+ *
+ * @param {SectionProps} props - The component props
+ * @param {React.ReactNode} props.children - Body content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ *
+ * @returns {JSX.Element} An alert body section
+ */
 const AlertBody: React.FC<SectionProps> = ({
   children,
   className,
@@ -86,6 +145,22 @@ const AlertBody: React.FC<SectionProps> = ({
   );
 };
 
+/**
+ * The footer section of an Alert for actions or secondary text.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Alert.Footer>Last updated 2 minutes ago</Alert.Footer>
+ * ```
+ *
+ * @param {SectionProps} props - The component props
+ * @param {React.ReactNode} props.children - Footer content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ *
+ * @returns {JSX.Element} An alert footer section
+ */
 const AlertFooter: React.FC<SectionProps> = ({
   children,
   className,

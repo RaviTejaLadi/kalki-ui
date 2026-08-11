@@ -45,15 +45,40 @@ const badgeVariants = cva(
 interface BadgeProps
   extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
+  /** Badge label or content */
   children: React.ReactNode;
 }
 
 interface BadgeIconProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Additional CSS classes */
   className?: string;
 }
 // #endregion
 
 // #region Badge
+/**
+ * A compact label used to highlight status, categories, or counts.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Badge variant="success" size="sm" pill>
+ *   <Badge.Icon>✓</Badge.Icon>
+ *   Active
+ * </Badge>
+ * ```
+ *
+ * @param {BadgeProps} props - The component props
+ * @param {React.ReactNode} props.children - Badge label or content
+ * @param {'sm' | 'md' | 'lg'} [props.size='sm'] - Badge size
+ * @param {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'help' | 'light' | 'dark' | 'outline'} [props.variant='primary'] - Visual style variant
+ * @param {boolean} [props.pill=false] - Whether to render with fully rounded corners
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the root element
+ *
+ * @returns {JSX.Element} A styled badge element
+ */
 const Badge = forwardRef<HTMLDivElement, BadgeProps>(
   ({ size, variant, pill, className, style, children, ...rest }, ref) => {
     return (
@@ -71,6 +96,21 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>(
 
 Badge.displayName = 'Badge';
 
+/**
+ * An optional icon wrapper for use inside a Badge.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Badge.Icon aria-hidden>✓</Badge.Icon>
+ * ```
+ *
+ * @param {BadgeIconProps} props - The component props
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLSpanElement>} ref - Forwarded ref to the icon element
+ *
+ * @returns {JSX.Element} A span wrapper for badge icons
+ */
 const BadgeIcon = forwardRef<HTMLSpanElement, BadgeIconProps>(
   ({ className, ...rest }, ref) => (
     <span ref={ref} className={cn(className)} {...rest} />

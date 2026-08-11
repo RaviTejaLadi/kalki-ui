@@ -34,29 +34,70 @@ const tagVariants = cva(
 // #endregion
 
 // #region type
+/**
+ * Props for the Tag root chip.
+ */
 interface TagProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof tagVariants> {
+  /** Tag content (Icon, Text, Close) */
   children: React.ReactNode;
 }
 
+/**
+ * Props for the Tag leading icon slot.
+ */
 interface TagIconProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Icon element */
   children: React.ReactNode;
+  /** Additional CSS classes */
   className?: string;
 }
 
+/**
+ * Props for the Tag text label.
+ */
 interface TagTextProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Label content */
   children: React.ReactNode;
+  /** Additional CSS classes */
   className?: string;
 }
 
+/**
+ * Props for the Tag dismiss button.
+ */
 interface TagCloseButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Called when the close button is clicked */
   onClick: () => void;
+  /** Additional CSS classes */
   className?: string;
 }
 // #endregion
 
+/**
+ * A clipped tag/chip with optional icon, text, and close action.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Tag variant="primary" size="sm">
+ *   <Tag.Icon><HashIcon /></Tag.Icon>
+ *   <Tag.Text>Design</Tag.Text>
+ *   <Tag.Close onClick={() => {}} />
+ * </Tag>
+ * ```
+ *
+ * @param {TagProps} props - The component props
+ * @param {'primary'|'secondary'|'success'|'warning'|'danger'|'info'|'light'|'dark'} [props.variant='primary'] - Color variant
+ * @param {'xs'|'sm'|'md'|'lg'} [props.size='sm'] - Tag size
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.ReactNode} props.children - Tag compound children
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the tag
+ *
+ * @returns {JSX.Element} A styled tag chip
+ */
 // #region Tag
 const Tag = forwardRef<HTMLDivElement, TagProps>(
   ({ children, variant, size, className, ...rest }, ref) => {
@@ -83,12 +124,42 @@ const Tag = forwardRef<HTMLDivElement, TagProps>(
 
 Tag.displayName = 'Tag';
 
+/**
+ * Leading icon slot for a Tag.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Tag.Icon><StarIcon /></Tag.Icon>
+ * ```
+ *
+ * @param {TagIconProps} props - The component props
+ * @param {React.ReactNode} props.children - Icon content
+ * @param {string} [props.className] - Additional CSS classes
+ *
+ * @returns {JSX.Element} An inline icon wrapper
+ */
 const TagIcon: React.FC<TagIconProps> = ({ children, className, ...rest }) => (
   <span className={cn('inline-flex items-center mr-1', className)} {...rest}>
     {children}
   </span>
 );
 
+/**
+ * Dismiss button for a Tag.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Tag.Close onClick={() => removeTag(id)} />
+ * ```
+ *
+ * @param {TagCloseButtonProps} props - The component props
+ * @param {() => void} props.onClick - Close click handler
+ * @param {string} [props.className] - Additional CSS classes
+ *
+ * @returns {JSX.Element} An accessible remove button
+ */
 const TagClose: React.FC<TagCloseButtonProps> = ({
   onClick,
   className,
@@ -109,6 +180,21 @@ const TagClose: React.FC<TagCloseButtonProps> = ({
   </button>
 );
 
+/**
+ * Text label slot for a Tag.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Tag.Text>Featured</Tag.Text>
+ * ```
+ *
+ * @param {TagTextProps} props - The component props
+ * @param {React.ReactNode} props.children - Label content
+ * @param {string} [props.className] - Additional CSS classes
+ *
+ * @returns {JSX.Element} A text span inside the tag
+ */
 const TagText: React.FC<TagTextProps> = ({ children, className, ...rest }) => (
   <span className={cn('text-center z-10', className)} {...rest}>
     {children}

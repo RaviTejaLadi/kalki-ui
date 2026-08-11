@@ -28,21 +28,28 @@ const avatarVariants = cva('inline-flex items-center justify-center', {
 type AvatarImageStatus = 'idle' | 'loading' | 'loaded' | 'error';
 
 interface AvatarContextType extends VariantProps<typeof avatarVariants> {
+  /** Current image load status */
   status: AvatarImageStatus;
+  /** Updates the image load status */
   setStatus: (status: AvatarImageStatus) => void;
 }
 
 interface AvatarProps extends VariantProps<typeof avatarVariants> {
+  /** Additional CSS classes */
   className?: string;
+  /** Avatar image and/or fallback children */
   children: React.ReactNode;
 }
 
 interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  /** Additional CSS classes */
   className?: string;
 }
 
 interface AvatarFallbackProps {
+  /** Additional CSS classes */
   className?: string;
+  /** Fallback content shown when the image is unavailable */
   children: React.ReactNode;
 }
 
@@ -58,6 +65,27 @@ const AvatarContext = createContext<AvatarContextType>({
 
 // #region Avatar
 
+/**
+ * A user avatar container that coordinates image loading and fallback display.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Avatar size="md" shape="circle">
+ *   <Avatar.Image src="/avatar.png" alt="Jane" />
+ *   <Avatar.Fallback>JD</Avatar.Fallback>
+ * </Avatar>
+ * ```
+ *
+ * @param {AvatarProps} props - The component props
+ * @param {React.ReactNode} props.children - Avatar image and/or fallback children
+ * @param {'sm' | 'md' | 'lg' | 'xl'} [props.size='md'] - Avatar size
+ * @param {'circle' | 'square'} [props.shape='circle'] - Avatar shape
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the root element
+ *
+ * @returns {JSX.Element} An avatar container with shared size/shape context
+ */
 const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
   ({ children, className, size, shape, ...props }, ref) => {
     const [status, setStatus] = useState<AvatarImageStatus>('idle');
@@ -85,6 +113,22 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
 
 Avatar.displayName = 'Avatar';
 
+/**
+ * Fallback content shown when the avatar image is missing or fails to load.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Avatar.Fallback>JD</Avatar.Fallback>
+ * ```
+ *
+ * @param {AvatarFallbackProps} props - The component props
+ * @param {React.ReactNode} props.children - Fallback content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the fallback element
+ *
+ * @returns {JSX.Element | null} Fallback content, or null while an image is loading/loaded
+ */
 const AvatarFallback = React.forwardRef<HTMLDivElement, AvatarFallbackProps>(
   ({ children, className, ...props }, ref) => {
     const { size, shape, status } = useContext(AvatarContext);
@@ -111,6 +155,23 @@ const AvatarFallback = React.forwardRef<HTMLDivElement, AvatarFallbackProps>(
 
 AvatarFallback.displayName = 'AvatarFallback';
 
+/**
+ * The avatar image that reports load status to the parent Avatar.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Avatar.Image src="/avatar.png" alt="Jane Doe" />
+ * ```
+ *
+ * @param {AvatarImageProps} props - The component props
+ * @param {string} [props.src] - Image source URL
+ * @param {string} [props.alt='avatar'] - Accessible alternative text
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLImageElement>} ref - Forwarded ref to the image element
+ *
+ * @returns {JSX.Element | null} The avatar image, or null after a load error
+ */
 const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
   ({ className, src, alt = 'avatar', onLoad, onError, ...props }, ref) => {
     const { size, shape, status, setStatus } = useContext(AvatarContext);

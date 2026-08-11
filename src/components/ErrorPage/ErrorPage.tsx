@@ -86,13 +86,47 @@ const errorContent = {
   },
 };
 
+/**
+ * Props for the ErrorPage component.
+ *
+ * @interface ErrorPageProps
+ * @property {'401' | '403' | '404' | '500' | '503'} [variant='404'] - HTTP-style error variant that controls copy and styling
+ * @property {() => void} [onGoBack] - Callback for the "Go Back" action (defaults to `window.history.back`)
+ * @property {() => void} [onBackToHome] - Callback for the "Back to Home" action (defaults to navigating to `/`)
+ * @property {() => void} [onLearnMore] - Callback for the "Learn more" action (used by the 503 variant)
+ */
 export interface ErrorPageProps {
+  /** HTTP-style error variant that controls copy and styling */
   variant?: '401' | '403' | '404' | '500' | '503';
+  /** Callback for the "Go Back" action */
   onGoBack?: () => void;
+  /** Callback for the "Back to Home" action */
   onBackToHome?: () => void;
+  /** Callback for the "Learn more" action (503 variant) */
   onLearnMore?: () => void;
 }
 
+/**
+ * Full-page error screen with status-specific messaging and navigation actions.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ErrorPage
+ *   variant="404"
+ *   onGoBack={() => history.back()}
+ *   onBackToHome={() => (window.location.href = '/')}
+ * />
+ * ```
+ *
+ * @param {ErrorPageProps} props - The component props
+ * @param {'401' | '403' | '404' | '500' | '503'} [props.variant='404'] - Error variant to display
+ * @param {() => void} [props.onGoBack] - Handler for the go-back button
+ * @param {() => void} [props.onBackToHome] - Handler for the back-to-home button
+ * @param {() => void} [props.onLearnMore] - Handler for the learn-more button (503)
+ *
+ * @returns {JSX.Element} A full-screen error page with title, description, and action buttons
+ */
 export const ErrorPage: React.FC<ErrorPageProps> = ({
   variant = '404',
   onGoBack = () => window.history.back(),

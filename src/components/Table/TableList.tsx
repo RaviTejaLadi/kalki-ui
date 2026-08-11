@@ -4,10 +4,15 @@ import Code from '../Code';
 import { cn } from '@/utils';
 
 interface TableListProps {
+  /** Column header labels */
   columns: string[];
+  /** 2D array of row cell values */
   rows: Array<Array<React.ReactNode>>;
+  /** Enable Code formatting for selected columns @default false */
   code?: boolean;
+  /** Column index(es) that receive Code formatting @default [] */
   CodeColumn?: number | number[];
+  /** Visual variant for Code cells @default 'primary' */
   codeVariant?:
     | 'primary'
     | 'secondary'
@@ -18,39 +23,46 @@ interface TableListProps {
     | 'help'
     | 'light'
     | 'dark';
+  /** Underline Code text @default false */
   codeUnderline?: boolean;
+  /** Code text size @default 'sm' */
   codeSize?: 'sm' | 'md' | 'lg';
+  /** Inline styles for Code cells */
   codeStyle?: CSSProperties;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles for the table */
   style?: CSSProperties;
 }
 
 /**
- * A customizable table component that can display data in rows and columns with optional code formatting.
+ * A data table built from column/row arrays with optional Code formatting per column.
  *
  * @component
- *
- * @param {Object} props - The component props
- * @param {string[]} props.columns - Array of column headers
- * @param {Array<Array<React.ReactNode>>} props.rows - 2D array of row data
- * @param {boolean} [props.code=false] - Enable code formatting for specified columns
- * @param {number|number[]} [props.CodeColumn=[]] - Column index(es) to apply code formatting
- * @param {'primary'|'secondary'|'success'|'danger'|'warning'|'info'} [props.codeVariant='primary'] - Visual variant for code formatting
- * @param {'xs'|'sm'|'md'|'lg'} [props.codeSize='sm'] - Size variant for code formatting
- * @param {boolean} [props.codeUnderline=false] - Enable underline for code formatted text
- * @param {React.CSSProperties} [props.codeStyle={}] - Custom styles for code formatted text
- * @param {string} [props.className=''] - Additional CSS class names
- * @param {React.CSSProperties} [props.style] - Custom styles for the table
- *
  * @example
  * ```tsx
  * <TableList
  *   columns={['Name', 'Value']}
  *   rows={[['foo', 'bar'], ['baz', 'qux']]}
- *   code={true}
+ *   code
  *   CodeColumn={1}
  * />
  * ```
+ *
+ * @param {TableListProps} props - The component props
+ * @param {string[]} props.columns - Array of column headers
+ * @param {Array<Array<React.ReactNode>>} props.rows - 2D array of row data
+ * @param {boolean} [props.code=false] - Enable code formatting for specified columns
+ * @param {number|number[]} [props.CodeColumn=[]] - Column index(es) to apply code formatting
+ * @param {'primary'|'secondary'|'success'|'danger'|'warning'|'info'|'help'|'light'|'dark'} [props.codeVariant='primary'] - Visual variant for code formatting
+ * @param {'sm'|'md'|'lg'} [props.codeSize='sm'] - Size variant for code formatting
+ * @param {boolean} [props.codeUnderline=false] - Enable underline for code formatted text
+ * @param {React.CSSProperties} [props.codeStyle={}] - Custom styles for code formatted text
+ * @param {string} [props.className=''] - Additional CSS class names
+ * @param {React.CSSProperties} [props.style] - Custom styles for the table
+ * @param {React.Ref<HTMLTableElement>} ref - Forwarded ref to the table
+ *
+ * @returns {JSX.Element} A Table populated from columns and rows
  */
 const TableList = forwardRef<HTMLTableElement, TableListProps>(
   (

@@ -31,13 +31,49 @@ const headingVariants = cva('font-heading text-foreground scroll-m-20', {
 // #endregion
 
 // #region type
+/**
+ * Props for the Heading typography component.
+ */
 interface HeadingProps extends VariantProps<typeof headingVariants> {
+  /** Heading content */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Click handler */
   onClick?: () => void;
 }
 // #endregion
 
+/**
+ * A semantic heading element (`h1`–`h6`) with optional text decoration variants.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Heading as="h2" underline>
+ *   Section title
+ * </Heading>
+ * ```
+ *
+ * @param {HeadingProps} props - The component props
+ * @param {'h1'|'h2'|'h3'|'h4'|'h5'|'h6'} [props.as='h1'] - Heading level / element
+ * @param {boolean} [props.underline] - Underline text
+ * @param {boolean} [props.overline] - Overline text
+ * @param {boolean} [props.dashed] - Line-through style
+ * @param {boolean} [props.italic] - Italic text
+ * @param {boolean} [props.strong] - Bold weight
+ * @param {boolean} [props.strikethrough] - Strikethrough text
+ * @param {boolean} [props.marked] - Highlighted background
+ * @param {boolean} [props.smaller] - Smaller text size
+ * @param {boolean} [props.deleted] - Deleted (line-through) style
+ * @param {boolean} [props.inserted] - Inserted (underline) style
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {() => void} [props.onClick] - Click handler
+ * @param {React.ReactNode} props.children - Heading content
+ * @param {React.Ref<HTMLParagraphElement>} ref - Forwarded ref to the heading element
+ *
+ * @returns {JSX.Element} A styled heading element
+ */
 // #region Heading
 const Heading = forwardRef<HTMLParagraphElement, HeadingProps>(
   (

@@ -34,17 +34,26 @@ type SeparatorType = 'chevron' | 'arrow' | 'dot' | 'slash' | 'circle';
 interface BreadcrumbProps
   extends VariantProps<typeof breadcrumbVariants>,
     BoxProps {
+  /** Breadcrumb item children */
   children: ReactNode;
+  /** Separator icon type or custom node between items */
   separator?: ReactNode | SeparatorType;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
 interface BreadcrumbItemProps {
+  /** Destination path when the item is a link */
   to?: string;
+  /** Whether this item represents the current page */
   active?: boolean;
+  /** Item label content */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
@@ -61,6 +70,29 @@ const SEPARATOR_ICONS = {
 // #endregion
 
 // #region Breadcrumb
+/**
+ * A navigation trail showing the user's location within a hierarchy.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Breadcrumb separator="chevron" size="md">
+ *   <Breadcrumb.Item to="/">Home</Breadcrumb.Item>
+ *   <Breadcrumb.Item to="/docs">Docs</Breadcrumb.Item>
+ *   <Breadcrumb.Item active>API</Breadcrumb.Item>
+ * </Breadcrumb>
+ * ```
+ *
+ * @param {BreadcrumbProps} props - The component props
+ * @param {React.ReactNode} props.children - Breadcrumb item children
+ * @param {React.ReactNode | SeparatorType} [props.separator='chevron'] - Separator between items
+ * @param {'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'} [props.size='md'] - Text size
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the root element
+ *
+ * @returns {JSX.Element} A breadcrumb navigation list
+ */
 const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
   (
     { children, separator = 'chevron', size, className, style, ...rest },
@@ -107,6 +139,26 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
 
 Breadcrumb.displayName = 'Breadcrumb';
 
+/**
+ * A single crumb in a Breadcrumb trail, rendered as a link or current page.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Breadcrumb.Item to="/settings">Settings</Breadcrumb.Item>
+ * <Breadcrumb.Item active>Profile</Breadcrumb.Item>
+ * ```
+ *
+ * @param {BreadcrumbItemProps} props - The component props
+ * @param {string} [props.to] - Destination path when the item is a link
+ * @param {boolean} [props.active] - Whether this item is the current page
+ * @param {React.ReactNode} props.children - Item label content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {React.Ref<HTMLSpanElement | HTMLAnchorElement>} ref - Forwarded ref to the item element
+ *
+ * @returns {JSX.Element} A breadcrumb link or current-page span
+ */
 const BreadcrumbItem = forwardRef<
   HTMLSpanElement | HTMLAnchorElement,
   BreadcrumbItemProps

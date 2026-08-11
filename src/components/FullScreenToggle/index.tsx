@@ -3,6 +3,25 @@ import { useState, useEffect, forwardRef } from 'react';
 import { Expand, Shrink } from 'lucide-react';
 import Button, { ButtonIcon, ButtonProps, ButtonText } from '../Button';
 
+/**
+ * Button that toggles the browser's fullscreen mode and swaps expand/shrink icons.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <FullScreenToggle variant="light" size="xs">
+ *   Fullscreen
+ * </FullScreenToggle>
+ * ```
+ *
+ * @param {ButtonProps} props - The component props (inherits from Button)
+ * @param {ButtonProps['variant']} [props.variant='light'] - Visual style of the button
+ * @param {ButtonProps['size']} [props.size='xs'] - Size of the button
+ * @param {React.ReactNode} [props.children] - Optional label rendered beside the icon
+ * @param {React.Ref<HTMLButtonElement>} ref - Forwarded ref to the underlying button
+ *
+ * @returns {JSX.Element} A button that enters or exits document fullscreen
+ */
 const FullScreenToggle = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'light', size = 'xs', children, ...rest }, ref) => {
     const [isFullScreen, setFullScreen] = useState<boolean>(false);

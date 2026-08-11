@@ -78,25 +78,66 @@ interface LinkBarContextValue {
   scrollRef?: RefObject<HTMLDivElement>;
 }
 
+/**
+ * Props for the LinkBar root component.
+ *
+ * @interface LinkBarProps
+ * @extends {HTMLAttributes<HTMLDivElement>}
+ * @extends {VariantProps<typeof linkBarVariants>}
+ *
+ * @property {string} [activeUrl] - Currently active link URL used for active styling
+ * @property {(url: string) => void} [onUrlChange] - Callback fired when a link is selected
+ */
 interface LinkBarProps
   extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof linkBarVariants> {
+  /** Currently active link URL used for active styling */
   activeUrl?: string;
+  /** Callback fired when a link is selected */
   onUrlChange?: (url: string) => void;
 }
 
+/**
+ * Props for the LinkBar.Link item.
+ *
+ * @interface LinkProps
+ * @extends {Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'ref'>}
+ *
+ * @property {string} to - Destination path or URL
+ * @property {ReactNode} [icon] - Optional icon rendered beside the label
+ * @property {'start' | 'end'} [iconPosition='start'] - Icon placement relative to the label
+ * @property {'_blank' | '_self' | '_parent' | '_top'} [target] - Link target browsing context
+ */
 interface LinkProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'ref'> {
+  /** Destination path or URL */
   to: string;
+  /** Optional icon rendered beside the label */
   icon?: ReactNode;
+  /** Icon placement relative to the label */
   iconPosition?: 'start' | 'end';
+  /** Link target browsing context */
   target?: '_blank' | '_self' | '_parent' | '_top';
 }
 
+/**
+ * Props for the LinkBar.Control scroll buttons.
+ *
+ * @interface ControlsProps
+ *
+ * @property {'left' | 'right'} position - Side of the bar where the control is placed
+ * @property {'xs' | 'sm' | 'md' | 'lg'} [size='sm'] - Button size
+ * @property {'xs' | 'sm' | 'md' | 'lg' | 'none'} [rounded] - Button border radius
+ * @property {'ghost' | 'outline' | 'link' | 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'help' | 'light' | 'dark'} [variant='ghost'] - Button visual variant
+ */
 interface ControlsProps {
+  /** Side of the bar where the control is placed */
   position: 'left' | 'right';
+  /** Button size */
   size?: 'xs' | 'sm' | 'md' | 'lg';
+  /** Button border radius */
   rounded?: 'xs' | 'sm' | 'md' | 'lg' | 'none';
+  /** Button visual variant */
   variant?:
     | 'ghost'
     | 'outline'
@@ -112,8 +153,18 @@ interface ControlsProps {
     | 'dark';
 }
 
+/**
+ * Props for the LinkBar.Content scrollable region.
+ *
+ * @interface LinkBarContentProps
+ *
+ * @property {ReactNode} children - Link items rendered inside the scrollable area
+ * @property {string} [className] - Additional CSS classes for the content container
+ */
 interface LinkBarContentProps {
+  /** Link items rendered inside the scrollable area */
   children: ReactNode;
+  /** Additional CSS classes for the content container */
   className?: string;
 }
 // #endregion types
@@ -123,6 +174,34 @@ const LinkBarContext = createContext<LinkBarContextValue>({});
 // #endregion context
 
 // #region components
+/**
+ * Horizontal navigation bar for links with optional scroll controls and active state.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <LinkBar activeUrl="/home" onUrlChange={setUrl} variant="default" size="sm">
+ *   <LinkBar.Control position="left" />
+ *   <LinkBar.Content>
+ *     <LinkBar.Link to="/home">Home</LinkBar.Link>
+ *     <LinkBar.Link to="/docs">Docs</LinkBar.Link>
+ *   </LinkBar.Content>
+ *   <LinkBar.Control position="right" />
+ * </LinkBar>
+ * ```
+ *
+ * @param {LinkBarProps} props - The component props
+ * @param {React.ReactNode} props.children - Compound LinkBar parts (Content, Link, Control)
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {LinkBarProps['variant']} [props.variant='default'] - Visual style of the bar
+ * @param {LinkBarProps['size']} [props.size='sm'] - Height size of the bar
+ * @param {LinkBarProps['rounded']} [props.rounded='none'] - Border radius of the bar
+ * @param {string} [props.activeUrl] - Active link URL
+ * @param {(url: string) => void} [props.onUrlChange] - Active URL change handler
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the root container
+ *
+ * @returns {JSX.Element} A styled link bar root with context provider
+ */
 const LinkBar = forwardRef<HTMLDivElement, LinkBarProps>(
   (
     {
@@ -155,6 +234,24 @@ const LinkBar = forwardRef<HTMLDivElement, LinkBarProps>(
 
 LinkBar.displayName = 'LinkBar';
 
+/**
+ * Scrollable content region that hosts LinkBar links.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <LinkBar.Content>
+ *   <LinkBar.Link to="/a">A</LinkBar.Link>
+ *   <LinkBar.Link to="/b">B</LinkBar.Link>
+ * </LinkBar.Content>
+ * ```
+ *
+ * @param {LinkBarContentProps} props - The component props
+ * @param {React.ReactNode} props.children - Links rendered in the scroll area
+ * @param {string} [props.className] - Additional CSS classes
+ *
+ * @returns {JSX.Element} A horizontally scrollable content container
+ */
 const LinkBarContent = ({
   children,
   className,
@@ -177,6 +274,23 @@ const LinkBarContent = ({
   );
 };
 
+/**
+ * Scroll control button for shifting the LinkBar content left or right.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <LinkBar.Control position="left" size="sm" variant="ghost" />
+ * ```
+ *
+ * @param {ControlsProps} props - The component props
+ * @param {'left' | 'right'} props.position - Control side and scroll direction
+ * @param {'xs' | 'sm' | 'md' | 'lg'} [props.size='sm'] - Button size
+ * @param {'ghost' | 'outline' | 'link' | 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'help' | 'light' | 'dark'} [props.variant='ghost'] - Button variant
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the control wrapper
+ *
+ * @returns {JSX.Element} A chevron button that scrolls the link content
+ */
 const LinkBarControl = forwardRef<HTMLDivElement, ControlsProps>(
   ({ position, size = 'sm', variant = 'ghost' }, ref) => {
     const { scrollRef } = useContext(LinkBarContext);
@@ -218,6 +332,29 @@ const LinkBarControl = forwardRef<HTMLDivElement, ControlsProps>(
 );
 LinkBarControl.displayName = 'LinkBarControl';
 
+/**
+ * Navigational link item for use inside a LinkBar.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <LinkBar.Link to="/settings" icon={<SettingsIcon />}>
+ *   Settings
+ * </LinkBar.Link>
+ * ```
+ *
+ * @param {LinkProps} props - The component props
+ * @param {string} props.to - Destination path or URL
+ * @param {React.ReactNode} [props.children] - Link label
+ * @param {React.ReactNode} [props.icon] - Optional leading/trailing icon
+ * @param {'start' | 'end'} [props.iconPosition='start'] - Icon placement
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {MouseEventHandler<HTMLAnchorElement>} [props.onClick] - Click handler
+ * @param {'_blank' | '_self' | '_parent' | '_top'} [props.target] - Link target
+ * @param {React.Ref<HTMLAnchorElement>} ref - Forwarded ref to the anchor
+ *
+ * @returns {JSX.Element} An active-aware LinkBar navigation item
+ */
 const LinkBarLink = forwardRef<HTMLAnchorElement, LinkProps>(
   (
     {

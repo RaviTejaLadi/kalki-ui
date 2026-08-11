@@ -2,32 +2,85 @@ import { cn } from '@/utils';
 import React, { CSSProperties, forwardRef, ReactNode } from 'react';
 
 // #region types
+/**
+ * Props for the Table root element.
+ */
 interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
+  /** Table sections and rows */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
+/**
+ * Props for Table.Head, Table.Body, and Table.Footer sections.
+ */
 interface TableSectionProps extends React.HTMLAttributes<HTMLElement> {
+  /** Section content (rows) */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
+/**
+ * Props for a table row.
+ */
 interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
+  /** Cells within the row */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
+/**
+ * Props for a table cell (`td` or `th`).
+ */
 interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+  /** Cell content */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
+  /** Render as `th` when true @default false */
   isHeader?: boolean;
 }
 // #endregion
 
+/**
+ * A bordered, horizontally scrollable HTML table with compound Head/Body/Row/Cell parts.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Table>
+ *   <Table.Head>
+ *     <Table.Row>
+ *       <Table.Cell isHeader>Name</Table.Cell>
+ *     </Table.Row>
+ *   </Table.Head>
+ *   <Table.Body>
+ *     <Table.Row>
+ *       <Table.Cell>Ada</Table.Cell>
+ *     </Table.Row>
+ *   </Table.Body>
+ * </Table>
+ * ```
+ *
+ * @param {TableProps} props - The component props
+ * @param {React.ReactNode} props.children - Table compound children
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.Ref<HTMLTableElement>} ref - Forwarded ref to the `table` element
+ *
+ * @returns {JSX.Element} A scrollable table wrapper
+ */
 // #region Table
 const Table = forwardRef<HTMLTableElement, TableProps>(
   ({ children, className, style, ...rest }, ref) => {
@@ -51,6 +104,24 @@ const Table = forwardRef<HTMLTableElement, TableProps>(
 
 Table.displayName = 'Table';
 
+/**
+ * Header section (`thead`) for a Table.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Table.Head>
+ *   <Table.Row><Table.Cell isHeader>Col</Table.Cell></Table.Row>
+ * </Table.Head>
+ * ```
+ *
+ * @param {TableSectionProps} props - The component props
+ * @param {React.ReactNode} props.children - Header rows
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} A styled `thead` element
+ */
 const TableHead: React.FC<TableSectionProps> = ({
   children,
   className,
@@ -71,6 +142,24 @@ const TableHead: React.FC<TableSectionProps> = ({
   );
 };
 
+/**
+ * Body section (`tbody`) for a Table.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Table.Body>
+ *   <Table.Row><Table.Cell>Value</Table.Cell></Table.Row>
+ * </Table.Body>
+ * ```
+ *
+ * @param {TableSectionProps} props - The component props
+ * @param {React.ReactNode} props.children - Body rows
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} A styled `tbody` element
+ */
 const TableBody: React.FC<TableSectionProps> = ({
   children,
   className,
@@ -91,6 +180,24 @@ const TableBody: React.FC<TableSectionProps> = ({
   );
 };
 
+/**
+ * A table cell that renders as `th` or `td` based on `isHeader`.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Table.Cell isHeader>Name</Table.Cell>
+ * <Table.Cell>Ada Lovelace</Table.Cell>
+ * ```
+ *
+ * @param {TableCellProps} props - The component props
+ * @param {React.ReactNode} props.children - Cell content
+ * @param {boolean} [props.isHeader=false] - Render as header cell when true
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} A `th` or `td` element
+ */
 const TableCell: React.FC<TableCellProps> = ({
   children,
   className,
@@ -116,6 +223,24 @@ const TableCell: React.FC<TableCellProps> = ({
   );
 };
 
+/**
+ * Footer section (`tfoot`) for a Table.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Table.Footer>
+ *   <Table.Row><Table.Cell>Total</Table.Cell></Table.Row>
+ * </Table.Footer>
+ * ```
+ *
+ * @param {TableSectionProps} props - The component props
+ * @param {React.ReactNode} props.children - Footer rows
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} A styled `tfoot` element
+ */
 const TableFooter: React.FC<TableSectionProps> = ({
   children,
   className,
@@ -136,6 +261,25 @@ const TableFooter: React.FC<TableSectionProps> = ({
   );
 };
 
+/**
+ * A hoverable table row (`tr`).
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Table.Row>
+ *   <Table.Cell>Cell A</Table.Cell>
+ *   <Table.Cell>Cell B</Table.Cell>
+ * </Table.Row>
+ * ```
+ *
+ * @param {TableRowProps} props - The component props
+ * @param {React.ReactNode} props.children - Cells within the row
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} A styled `tr` element
+ */
 const TableRow: React.FC<TableRowProps> = ({
   children,
   className,

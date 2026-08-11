@@ -9,36 +9,47 @@ import Image, { ImageProps } from '../Image';
  * @interface FigureProps
  * @extends {React.HTMLAttributes<HTMLElement>}
  *
- * @property {ReactNode} children - The content to be displayed within the figure.
- * @property {string} [width] - The width of the figure.
- * @property {string} [height] - The height of the figure.
- * @property {string} [margin] - The margin around the figure.
- * @property {string} [className] - Additional CSS class names to apply to the figure.
- * @property {CSSProperties} [style] - Inline styles to apply to the figure.
+ * @property {ReactNode} children - Content rendered inside the figure (image, caption, etc.)
+ * @property {string} [width] - Width of the figure
+ * @property {string} [height] - Height of the figure
+ * @property {string} [margin='5px'] - Margin around the figure
+ * @property {string} [className] - Additional CSS class names
+ * @property {CSSProperties} [style] - Inline styles applied to the figure
  */
 interface FigureProps extends React.HTMLAttributes<HTMLElement> {
+  /** Content rendered inside the figure */
   children: ReactNode;
+  /** Width of the figure */
   width?: string;
+  /** Height of the figure */
   height?: string;
+  /** Margin around the figure */
   margin?: string;
+  /** Additional CSS class names */
   className?: string;
+  /** Inline styles applied to the figure */
   style?: CSSProperties;
 }
 
 /**
  * Props for the FigureImage component.
  *
- * @extends React.ImgHTMLAttributes<HTMLImageElement>
+ * @interface FigureImageProps
+ * @extends {ImageProps}
  *
- * @property {string} src - The source URL of the image.
- * @property {string} alt - The alternative text for the image.
- * @property {string} [className] - Optional CSS class name for the image.
- * @property {CSSProperties} [style] - Optional inline styles for the image.
+ * @property {string} src - Source URL of the image
+ * @property {string} alt - Alternative text for the image
+ * @property {string} [className] - Optional CSS class name for the image
+ * @property {CSSProperties} [style] - Optional inline styles for the image
  */
 interface FigureImageProps extends ImageProps {
+  /** Source URL of the image */
   src: string;
+  /** Alternative text for the image */
   alt: string;
+  /** Optional CSS class name for the image */
   className?: string;
+  /** Optional inline styles for the image */
   style?: CSSProperties;
 }
 
@@ -48,32 +59,43 @@ interface FigureImageProps extends ImageProps {
  * @interface FigureCaptionProps
  * @extends {React.HTMLAttributes<HTMLElement>}
  *
- * @property {ReactNode} children - The content of the caption.
- * @property {string} [className] - Optional CSS class name to apply to the caption.
- * @property {CSSProperties} [style] - Optional inline styles to apply to the caption.
+ * @property {ReactNode} children - Caption content
+ * @property {string} [className] - Optional CSS class name for the caption
+ * @property {CSSProperties} [style] - Optional inline styles for the caption
  */
 interface FigureCaptionProps extends React.HTMLAttributes<HTMLElement> {
+  /** Caption content */
   children: ReactNode;
+  /** Optional CSS class name for the caption */
   className?: string;
+  /** Optional inline styles for the caption */
   style?: CSSProperties;
 }
 // #endregion types
 
 // #region components
 /**
- * A React functional component that renders a `<figure>` element with customizable styles and properties.
+ * Semantic figure container for media and an optional caption.
  *
  * @component
- * @param {React.ReactNode} children - The content to be displayed inside the `<figure>` element.
- * @param {string | number} width - The width of the `<figure>` element.
- * @param {string | number} height - The height of the `<figure>` element.
- * @param {string} [margin='5px'] - The margin around the `<figure>` element. Defaults to '5px'.
- * @param {string} [className] - Additional class names to apply to the `<figure>` element.
- * @param {React.CSSProperties} [style] - Additional inline styles to apply to the `<figure>` element.
- * @param {React.Ref<HTMLElement>} ref - A ref to be forwarded to the `<figure>` element.
- * @param {object} rest - Any other props to be passed to the `<figure>` element.
+ * @example
+ * ```tsx
+ * <Figure width="320px">
+ *   <Figure.Image src="/photo.jpg" alt="Mountain lake" />
+ *   <Figure.Caption>Sunrise over the lake</Figure.Caption>
+ * </Figure>
+ * ```
  *
- * @returns {JSX.Element} The rendered `<figure>` element.
+ * @param {FigureProps} props - The component props
+ * @param {React.ReactNode} props.children - Content inside the figure
+ * @param {string} [props.width] - Width of the figure
+ * @param {string} [props.height] - Height of the figure
+ * @param {string} [props.margin='5px'] - Margin around the figure
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.Ref<HTMLElement>} ref - Forwarded ref to the `<figure>` element
+ *
+ * @returns {JSX.Element} A styled `<figure>` element
  */
 const Figure = forwardRef<HTMLElement, FigureProps>(
   (
@@ -96,18 +118,22 @@ const Figure = forwardRef<HTMLElement, FigureProps>(
 Figure.displayName = 'Figure';
 
 /**
- * A functional component that renders an image with customizable properties.
+ * Image subcomponent for use inside a Figure.
  *
  * @component
- * @param {Object} props - The properties passed to the component.
- * @param {string} props.src - The source URL of the image.
- * @param {string} props.alt - The alt text for the image.
- * @param {string} [props.className] - Additional CSS classes to apply to the image.
- * @param {React.CSSProperties} [props.style] - Inline styles to apply to the image.
- * @param {React.Ref<HTMLImageElement>} ref - The ref to be attached to the image element.
- * @param {Object} rest - Any additional properties to be passed to the image element.
+ * @example
+ * ```tsx
+ * <Figure.Image src="/hero.jpg" alt="Product hero" />
+ * ```
  *
- * @returns {JSX.Element} The rendered image element.
+ * @param {FigureImageProps} props - The component props
+ * @param {string} props.src - Source URL of the image
+ * @param {string} props.alt - Alternative text for the image
+ * @param {string} [props.className] - Additional CSS classes for the image
+ * @param {React.CSSProperties} [props.style] - Inline styles for the image
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the wrapping div
+ *
+ * @returns {JSX.Element} An image wrapped for figure layouts
  */
 const FigureImage = forwardRef<HTMLDivElement, FigureImageProps>(
   ({ src, alt, className, style, ...rest }, ref) => {
@@ -128,16 +154,21 @@ const FigureImage = forwardRef<HTMLDivElement, FigureImageProps>(
 FigureImage.displayName = 'FigureImage';
 
 /**
- * A React forwardRef component that renders a `<figcaption>` element with
- * additional styling and class names.
+ * Caption subcomponent that renders a `<figcaption>` for a Figure.
  *
  * @component
- * @param {React.ReactNode} children - The content to be displayed inside the `<figcaption>`.
- * @param {string} [className] - Additional class names to apply to the `<figcaption>`.
- * @param {React.CSSProperties} [style] - Inline styles to apply to the `<figcaption>`.
- * @param {React.Ref<HTMLElement>} ref - A ref to be forwarded to the `<figcaption>` element.
- * @param {object} rest - Any other props to be passed to the `<figcaption>` element.
- * @returns {JSX.Element} The rendered `<figcaption>` element.
+ * @example
+ * ```tsx
+ * <Figure.Caption>Photo by Alex Rivera</Figure.Caption>
+ * ```
+ *
+ * @param {FigureCaptionProps} props - The component props
+ * @param {React.ReactNode} props.children - Caption content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {React.Ref<HTMLElement>} ref - Forwarded ref to the `<figcaption>` element
+ *
+ * @returns {JSX.Element} A styled `<figcaption>` element
  */
 const FigureCaption = forwardRef<HTMLElement, FigureCaptionProps>(
   ({ children, className, style, ...rest }, ref) => {

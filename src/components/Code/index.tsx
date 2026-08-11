@@ -39,17 +39,45 @@ const codeVariants = cva(
 
 // #region types
 interface CodeProps extends VariantProps<typeof codeVariants> {
+  /** Inline code content to display */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: React.CSSProperties;
+  /** Whether to underline the code text @default false */
   underline?: boolean;
+  /** Custom padding applied via inline style */
   padding?: string;
+  /** Custom margin applied via inline style */
   margin?: string;
 }
 
 // #endregion
 
 // #region Code
+/**
+ * An inline code snippet with variant styling for emphasis and status colors.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Code variant="primary" size="sm">npm install @kalki-ui/core</Code>
+ * ```
+ *
+ * @param {CodeProps} props - The component props
+ * @param {React.ReactNode} props.children - Inline code content to display
+ * @param {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'help' | 'light' | 'dark'} [props.variant='primary'] - Visual style variant
+ * @param {'sm' | 'md' | 'lg'} [props.size='sm'] - Text and padding size
+ * @param {boolean} [props.underline=false] - Whether to underline the code text
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {string} [props.padding] - Custom padding applied via inline style
+ * @param {string} [props.margin] - Custom margin applied via inline style
+ * @param {React.Ref<HTMLElement>} ref - Forwarded ref to the code element
+ *
+ * @returns {JSX.Element} A styled inline `<code>` element
+ */
 const Code = forwardRef<HTMLElement, CodeProps>(
   (
     {

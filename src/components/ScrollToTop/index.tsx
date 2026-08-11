@@ -52,14 +52,37 @@ const scrollButtonVariants = cva(
 // #endregion
 
 // #region types
+/**
+ * Props for the ScrollToTop floating action button.
+ */
 interface ScrollToTopProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof scrollButtonVariants> {
+  /** Scroll offset (px) before the button becomes visible @default 400 */
   threshold?: number;
+  /** Use smooth scrolling when true @default true */
   smooth?: boolean;
 }
 // #endregion
 
+/**
+ * A floating button that appears after scrolling past a threshold and returns to the top.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ScrollToTop threshold={300} position="right" variant="primary" />
+ * ```
+ *
+ * @param {ScrollToTopProps} props - The component props
+ * @param {number} [props.threshold=400] - Pixels scrolled before the button appears
+ * @param {boolean} [props.smooth=true] - Whether to animate the scroll
+ * @param {'xs'|'sm'|'md'|'lg'|'xl'} [props.size='sm'] - Button size
+ * @param {'right'|'left'|'center'} [props.position='right'] - Fixed screen position
+ * @param {string} [props.variant='primary'] - Visual style variant
+ *
+ * @returns {JSX.Element} A fixed-position scroll-to-top button
+ */
 // #region ScrollToTop
 const ScrollToTop: React.FC<ScrollToTopProps> = ({
   threshold = 400,

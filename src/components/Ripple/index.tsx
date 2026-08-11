@@ -8,8 +8,13 @@ import React, {
 } from 'react';
 import { cn } from '@/utils';
 
+/**
+ * Props for the Ripple material-style click effect.
+ */
 interface RippleProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Animation duration in milliseconds @default 850 */
   duration?: number;
+  /** Ripple fill color @default 'rgba(255, 255, 255, 0.7)' */
   color?: string;
 }
 
@@ -33,6 +38,29 @@ const useDebouncedRippleCleanUp = (
   }, [rippleCount, duration, cleanUpFunction]);
 };
 
+/**
+ * A material-style ripple overlay that reacts to clicks on its parent element.
+ *
+ * Place inside a relatively positioned parent; ripples originate from click points.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <button className="relative overflow-hidden">
+ *   Click me
+ *   <Ripple color="rgba(255,255,255,0.5)" duration={600} />
+ * </button>
+ * ```
+ *
+ * @param {RippleProps} props - The component props
+ * @param {number} [props.duration=850] - Ripple animation duration in ms
+ * @param {string} [props.color='rgba(255, 255, 255, 0.7)'] - Ripple fill color
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the ripple container
+ *
+ * @returns {JSX.Element} An absolute overlay that renders animated ripple spans
+ */
 const Ripple = forwardRef<HTMLDivElement, RippleProps>(
   (
     {

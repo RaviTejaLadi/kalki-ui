@@ -163,20 +163,36 @@ interface HighlightContextType {
   defaultSizing: Sizing;
 }
 
+/**
+ * Props for the TextHighlighter context provider.
+ */
 interface TextHighlighterProps {
+  /** Content containing TextHighlighter.Text spans */
   children: React.ReactNode;
+  /** Palette used when child colors are not specified @default defaultColors */
   colorsList?: string[];
+  /** Default highlight style @default 'solid' */
   defaultVariant?: Variant;
+  /** Default font weight @default 'medium' */
   defaultEmphasis?: Emphasis;
+  /** Default spacing density @default 'inherit' */
   defaultSizing?: Sizing;
 }
 
+/**
+ * Props for an individually highlighted text span.
+ */
 interface TextHighlighterTextProps
   extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Text to highlight */
   children: React.ReactNode;
+  /** Highlight visual style (falls back to context default) */
   variant?: Variant;
+  /** Font weight (falls back to context default) */
   emphasis?: Emphasis;
+  /** Spacing density (falls back to context default) */
   sizing?: Sizing;
+  /** Explicit highlight color */
   color?: string;
 }
 
@@ -190,6 +206,26 @@ export const HighlightContext = createContext<HighlightContextType>({
 
 // #endregion
 
+/**
+ * Provides default highlight styling context for nested TextHighlighter.Text spans.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <TextHighlighter defaultVariant="pill" defaultEmphasis="semibold">
+ *   Hello <TextHighlighter.Text color="#90CAF9">world</TextHighlighter.Text>
+ * </TextHighlighter>
+ * ```
+ *
+ * @param {TextHighlighterProps} props - The component props
+ * @param {React.ReactNode} props.children - Content with highlight spans
+ * @param {string[]} [props.colorsList] - Color palette for highlights
+ * @param {Variant} [props.defaultVariant='solid'] - Default span variant
+ * @param {Emphasis} [props.defaultEmphasis='medium'] - Default font weight
+ * @param {Sizing} [props.defaultSizing='inherit'] - Default spacing
+ *
+ * @returns {JSX.Element} A context provider wrapping muted text content
+ */
 // #region TextHighlighter
 const TextHighlighter: React.FC<TextHighlighterProps> = ({
   children,
@@ -215,6 +251,28 @@ const TextHighlighter: React.FC<TextHighlighterProps> = ({
   );
 };
 
+/**
+ * A highlighted inline span that inherits defaults from TextHighlighter context.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <TextHighlighter.Text variant="outlined" color="#4DB6AC">
+ *   important
+ * </TextHighlighter.Text>
+ * ```
+ *
+ * @param {TextHighlighterTextProps} props - The component props
+ * @param {React.ReactNode} props.children - Text to highlight
+ * @param {Variant} [props.variant] - Highlight style override
+ * @param {Emphasis} [props.emphasis] - Font weight override
+ * @param {Sizing} [props.sizing] - Spacing override
+ * @param {string} [props.color] - Explicit highlight color
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLSpanElement>} ref - Forwarded ref to the span
+ *
+ * @returns {JSX.Element} A styled highlight span
+ */
 const TextHighlighterText = forwardRef<
   HTMLSpanElement,
   TextHighlighterTextProps

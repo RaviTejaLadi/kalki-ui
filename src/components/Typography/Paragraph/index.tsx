@@ -34,13 +34,49 @@ const paragraphVariants = cva('leading-7 text-muted-foreground', {
 // #endregion
 
 // #region type
+/**
+ * Props for the Paragraph typography component.
+ */
 interface ParagraphProps extends VariantProps<typeof paragraphVariants> {
+  /** Paragraph content */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Click handler */
   onClick?: () => void;
 }
 // #endregion
 
+/**
+ * A styled paragraph with size and text-decoration variants.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Paragraph size="lg" italic>
+ *   Supporting copy for the section.
+ * </Paragraph>
+ * ```
+ *
+ * @param {ParagraphProps} props - The component props
+ * @param {'default'|'xs'|'sm'|'md'|'lg'|'xl'|'2xl'|'3xl'} [props.size='default'] - Text size
+ * @param {boolean} [props.underline] - Underline text
+ * @param {boolean} [props.overline] - Overline text
+ * @param {boolean} [props.dashed] - Line-through style
+ * @param {boolean} [props.italic] - Italic text
+ * @param {boolean} [props.strong] - Bold weight
+ * @param {boolean} [props.strikethrough] - Strikethrough text
+ * @param {boolean} [props.marked] - Highlighted background
+ * @param {boolean} [props.smaller] - Smaller text size
+ * @param {boolean} [props.deleted] - Deleted (line-through) style
+ * @param {boolean} [props.inserted] - Inserted (underline) style
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {() => void} [props.onClick] - Click handler
+ * @param {React.ReactNode} props.children - Paragraph content
+ * @param {React.Ref<HTMLParagraphElement>} ref - Forwarded ref to the `p` element
+ *
+ * @returns {JSX.Element} A styled paragraph
+ */
 // #region Paragraph
 const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
   (

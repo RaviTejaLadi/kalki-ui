@@ -47,26 +47,47 @@ type VariantType =
   | 'dark';
 
 interface ListGroupContextType {
+  /** Visual style variant shared with list items */
   variant: VariantType;
+  /** Whether items show a trailing chevron */
   showArrows?: boolean;
+  /** Whether items render bottom dividers */
   showDividers?: boolean;
 }
 
+/**
+ * Props for the ListGroups root container.
+ */
 interface ListGroupProps extends VariantProps<typeof listGroupVariants> {
+  /** Explicit width applied to the list element */
   width?: string;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles merged with width */
   style?: React.CSSProperties;
+  /** Whether items show bottom borders @default true */
   showDividers?: boolean;
+  /** Whether items show a trailing chevron @default false */
   showArrows?: boolean;
+  /** List group items (`ListGroup.Item`) */
   children?: React.ReactNode;
 }
 
+/**
+ * Props for an individual ListGroup item.
+ */
 interface ListGroupItemProps {
+  /** Optional leading icon */
   icon?: React.ReactNode;
+  /** Primary label text */
   label: string;
+  /** Secondary description under the label */
   description?: string;
+  /** Disables interaction and dims the item */
   disabled?: boolean;
+  /** Click handler for the item */
   onClick?: () => void;
+  /** Additional CSS classes */
   className?: string;
 }
 
@@ -108,6 +129,31 @@ const useListGroup = () => {
 
 // #endregion
 
+/**
+ * A bordered list container for interactive group items with shared variant styling.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ListGroups variant="primary" showArrows>
+ *   <ListGroups.Item label="Profile" description="View settings" onClick={() => {}} />
+ *   <ListGroups.Item label="Billing" disabled />
+ * </ListGroups>
+ * ```
+ *
+ * @param {ListGroupProps} props - The component props
+ * @param {'sm'|'md'|'lg'|'xl'|'xxl'} [props.size='sm'] - Text size of the list
+ * @param {VariantType} [props.variant='primary'] - Border and item color theme
+ * @param {string} [props.width] - Explicit width of the list
+ * @param {boolean} [props.showDividers=true] - Show dividers between items
+ * @param {boolean} [props.showArrows=false] - Show trailing chevrons on items
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.ReactNode} [props.children] - ListGroup.Item children
+ * @param {React.Ref<HTMLUListElement>} ref - Forwarded ref to the `ul` element
+ *
+ * @returns {JSX.Element} A styled unordered list with context for items
+ */
 // #region ListGroups
 const ListGroups = forwardRef<HTMLUListElement, ListGroupProps>(
   (
@@ -142,6 +188,31 @@ const ListGroups = forwardRef<HTMLUListElement, ListGroupProps>(
   }
 );
 
+/**
+ * An interactive item within a ListGroups container.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ListGroups.Item
+ *   icon={<UserIcon />}
+ *   label="Account"
+ *   description="Manage profile"
+ *   onClick={() => {}}
+ * />
+ * ```
+ *
+ * @param {ListGroupItemProps} props - The component props
+ * @param {React.ReactNode} [props.icon] - Optional leading icon
+ * @param {string} props.label - Primary label text
+ * @param {string} [props.description] - Secondary description text
+ * @param {boolean} [props.disabled] - Disables the item when true
+ * @param {() => void} [props.onClick] - Click / keyboard activation handler
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLLIElement>} ref - Forwarded ref to the `li` element
+ *
+ * @returns {JSX.Element} A keyboard-accessible list item button
+ */
 const ListGroupItem = forwardRef<HTMLLIElement, ListGroupItemProps>(
   (
     { icon, label, description, disabled, onClick, className, ...props },

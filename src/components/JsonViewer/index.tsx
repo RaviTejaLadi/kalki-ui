@@ -11,11 +11,26 @@ type JsonReplacer =
   | (number | string)[]
   | null;
 
+/**
+ * Props for the JsonViewer component.
+ *
+ * @interface JsonViewerProps
+ * @extends {Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>}
+ *
+ * @property {object | any[]} data - JSON-serializable object or array to display
+ * @property {number} [indentation=4] - Number of spaces used for pretty-printing
+ * @property {JsonReplacer} [replacer=null] - Optional `JSON.stringify` replacer function or property whitelist
+ * @property {string} [className] - Additional CSS classes for the outer container
+ */
 interface JsonViewerProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
+  /** Number of spaces used for pretty-printing */
   indentation?: number;
+  /** Optional `JSON.stringify` replacer function or property whitelist */
   replacer?: JsonReplacer;
+  /** JSON-serializable object or array to display */
   data: object | any[];
+  /** Additional CSS classes for the outer container */
   className?: string;
 }
 
@@ -30,6 +45,28 @@ const escapeHtml = (value: string) =>
     .replace(/'/g, '&#39;');
 
 // #region components
+/**
+ * Pretty-prints and syntax-highlights JSON with a copy-to-clipboard control.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <JsonViewer
+ *   data={{ name: 'Kalki', version: 1 }}
+ *   indentation={2}
+ * />
+ * ```
+ *
+ * @param {JsonViewerProps} props - The component props
+ * @param {object | any[]} props.data - Data to stringify and display
+ * @param {number} [props.indentation=4] - Pretty-print indentation spaces
+ * @param {JsonReplacer} [props.replacer=null] - Optional stringify replacer
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles for the container
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the outer container
+ *
+ * @returns {JSX.Element} A scrollable highlighted JSON viewer with copy button
+ */
 const JsonViewer = forwardRef<HTMLDivElement, JsonViewerProps>(
   (
     { indentation = 4, replacer = null, data, className, style, ...rest },

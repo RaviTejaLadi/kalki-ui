@@ -59,27 +59,94 @@ export const linkVariants = cva(
 // #endregion linkVariants
 
 // #region types
+/**
+ * Props for the LinkButton component.
+ *
+ * @interface LinkButtonProps
+ * @extends {VariantProps<typeof linkVariants>}
+ *
+ * @property {string} [to=''] - Destination URL or path
+ * @property {React.ReactNode} children - Button content (text, icons, etc.)
+ * @property {string} [className] - Additional CSS classes
+ * @property {React.CSSProperties} [style] - Inline styles
+ * @property {LinkButtonProps['variant']} [variant='primary'] - Visual style variant
+ * @property {LinkButtonProps['size']} [size='sm'] - Size of the button
+ * @property {boolean} [raised=false] - Whether to apply elevated shadow styling
+ * @property {boolean} [rounded=false] - Whether to use fully rounded (pill) corners
+ */
 interface LinkButtonProps extends VariantProps<typeof linkVariants> {
+  /** Destination URL or path */
   to?: string;
+  /** Button content (text, icons, etc.) */
   children: React.ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: React.CSSProperties;
 }
 
+/**
+ * Props for the LinkButton.Icon subcomponent.
+ *
+ * @interface LinkIconProps
+ *
+ * @property {string} [className] - Additional CSS classes for the icon wrapper
+ * @property {React.CSSProperties} [style] - Inline styles for the icon wrapper
+ * @property {React.ReactNode} [children] - Icon element(s) to render
+ */
 interface LinkIconProps {
+  /** Additional CSS classes for the icon wrapper */
   className?: string;
+  /** Inline styles for the icon wrapper */
   style?: React.CSSProperties;
+  /** Icon element(s) to render */
   children?: React.ReactNode;
 }
 
+/**
+ * Props for the LinkButton.Text subcomponent.
+ *
+ * @interface LinkTextProps
+ *
+ * @property {string} [className] - Additional CSS classes for the text wrapper
+ * @property {React.CSSProperties} [style] - Inline styles for the text wrapper
+ * @property {React.ReactNode} [children] - Text content to render
+ */
 interface LinkTextProps {
+  /** Additional CSS classes for the text wrapper */
   className?: string;
+  /** Inline styles for the text wrapper */
   style?: React.CSSProperties;
+  /** Text content to render */
   children?: React.ReactNode;
 }
 // #endregion types
 
 // #region LinkButton Component
+/**
+ * Button-styled link for navigation actions with size and color variants.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <LinkButton to="/signup" variant="primary" size="md">
+ *   <LinkButton.Icon><PlusIcon /></LinkButton.Icon>
+ *   <LinkButton.Text>Sign up</LinkButton.Text>
+ * </LinkButton>
+ * ```
+ *
+ * @param {LinkButtonProps} props - The component props
+ * @param {LinkButtonProps['variant']} [props.variant='primary'] - Visual style variant
+ * @param {LinkButtonProps['size']} [props.size='sm'] - Button size
+ * @param {string} [props.to=''] - Destination URL or path
+ * @param {React.ReactNode} props.children - Button content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {boolean} [props.raised=false] - Elevated shadow styling
+ * @param {boolean} [props.rounded=false] - Fully rounded corners
+ * @param {React.Ref<HTMLAnchorElement>} ref - Forwarded ref to the underlying Link/anchor
+ *
+ * @returns {JSX.Element} A button-styled navigation link
+ */
 const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
   (
     { variant, size, to = '', children, className, raised, rounded, ...rest },
@@ -99,7 +166,25 @@ const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
 );
 LinkButton.displayName = 'LinkButton';
 
-// LinkIcon Component
+/**
+ * Icon wrapper for use inside a LinkButton.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <LinkButton.Icon>
+ *   <ArrowRightIcon />
+ * </LinkButton.Icon>
+ * ```
+ *
+ * @param {LinkIconProps} props - The component props
+ * @param {React.ReactNode} [props.children] - Icon content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the icon wrapper
+ *
+ * @returns {JSX.Element} An icon container for LinkButton layouts
+ */
 const LinkIcon = forwardRef<HTMLDivElement, LinkIconProps>(
   ({ children, className, style, ...rest }, ref) => (
     <div
@@ -114,7 +199,23 @@ const LinkIcon = forwardRef<HTMLDivElement, LinkIconProps>(
 );
 LinkIcon.displayName = 'LinkIcon';
 
-// LinkText Component
+/**
+ * Text wrapper for use inside a LinkButton.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <LinkButton.Text>Continue</LinkButton.Text>
+ * ```
+ *
+ * @param {LinkTextProps} props - The component props
+ * @param {React.ReactNode} [props.children] - Text content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the text wrapper
+ *
+ * @returns {JSX.Element} A text container for LinkButton layouts
+ */
 const LinkText = forwardRef<HTMLDivElement, LinkTextProps>(
   ({ children, className, style, ...rest }, ref) => (
     <div

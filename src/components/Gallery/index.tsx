@@ -26,29 +26,41 @@ const galleryVariants = cva('gap-4', {
 /**
  * Props for the Gallery component.
  *
- * @extends VariantProps<typeof galleryVariants>
+ * @interface GalleryProps
+ * @extends {VariantProps<typeof galleryVariants>}
  *
- * @property {ReactNode} children - The content to be displayed within the gallery.
- * @property {string} [className] - Optional additional class name(s) to apply to the gallery component.
+ * @property {ReactNode} children - Gallery items to render
+ * @property {string} [className] - Additional CSS classes for the gallery container
+ * @property {'grid' | 'masonry' | 'carousel' | 'asymmetric' | 'compact'} [pattern='grid'] - Layout pattern for arranging items
  */
 interface GalleryProps extends VariantProps<typeof galleryVariants> {
+  /** Gallery items to render */
   children: ReactNode;
+  /** Additional CSS classes for the gallery container */
   className?: string;
 }
 // #endregion
 
 // #region Gallery component
 /**
- * `Gallery` is a React component that renders its children in different patterns.
- * It supports two patterns: 'asymmetric' and 'carousel'.
+ * Responsive image/content gallery with multiple layout patterns.
  *
- * @param {GalleryProps} props - The properties for the Gallery component.
- * @param {React.ReactNode} props.children - The child elements to be rendered inside the gallery.
- * @param {string} props.pattern - The pattern to use for rendering the gallery. Can be 'asymmetric' or 'carousel'.
- * @param {string} [props.className] - Additional class names to apply to the gallery container.
- * @param {React.Ref<HTMLDivElement>} ref - The ref to be forwarded to the gallery container.
+ * @component
+ * @example
+ * ```tsx
+ * <Gallery pattern="grid">
+ *   <Gallery.Image src="/a.jpg" alt="A" />
+ *   <Gallery.Image src="/b.jpg" alt="B" />
+ * </Gallery>
+ * ```
  *
- * @returns {JSX.Element} The rendered gallery component.
+ * @param {GalleryProps} props - The component props
+ * @param {React.ReactNode} props.children - Child elements rendered in the gallery
+ * @param {'grid' | 'masonry' | 'carousel' | 'asymmetric' | 'compact'} [props.pattern='grid'] - Layout pattern
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the gallery container
+ *
+ * @returns {JSX.Element} A patterned gallery container
  */
 const Gallery = forwardRef<HTMLDivElement, GalleryProps>(
   ({ children, pattern, className }, ref) => {
@@ -88,17 +100,22 @@ const Gallery = forwardRef<HTMLDivElement, GalleryProps>(
 Gallery.displayName = 'Gallery';
 
 /**
- * `GalleryImage` is a React component that renders an image within a div container.
- * It uses the `forwardRef` to pass down the ref to the div element.
+ * Image item optimized for use inside a Gallery.
  *
- * @param {Object} props - The properties passed to the component.
- * @param {string} props.src - The source URL of the image.
- * @param {string} [props.alt='Gallery image'] - The alt text for the image.
- * @param {string} [props.className] - Additional class names for the image.
- * @param {string} [props.variant='rounded'] - The variant style of the image.
- * @param {React.Ref<HTMLImageElement>} ref - The ref to be forwarded to the div element.
+ * @component
+ * @example
+ * ```tsx
+ * <Gallery.Image src="/photo.jpg" alt="Gallery photo" variant="rounded" />
+ * ```
  *
- * @returns {JSX.Element} The rendered `GalleryImage` component.
+ * @param {ImageProps} props - The component props (inherits from Image)
+ * @param {string} props.src - Source URL of the image
+ * @param {string} [props.alt='Gallery image'] - Alternative text for the image
+ * @param {string} [props.className] - Additional CSS classes for the image
+ * @param {'default' | 'rounded' | 'circle'} [props.variant='rounded'] - Image shape variant
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the wrapping div
+ *
+ * @returns {JSX.Element} A gallery image wrapped in a container
  */
 const GalleryImage = forwardRef<HTMLDivElement, ImageProps>(
   (

@@ -25,17 +25,50 @@ const separatorVariants = cva('relative', {
 // #endregion
 
 // #region types
+/**
+ * Props for the Separator divider.
+ */
 interface SeparatorProps extends VariantProps<typeof separatorVariants> {
+  /** Optional label rendered over the separator line */
   children?: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Border color @default 'border' */
   color?: string;
+  /** CSS margin around the separator */
   margin?: string;
+  /** Border thickness @default '1px' */
   thickness?: string;
+  /** Additional inline styles */
   style?: CSSProperties;
 }
 
 // #endregion
 
+/**
+ * A horizontal or vertical divider that can optionally display centered label text.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Separator orientation="horizontal" position="center">
+ *   Or continue with
+ * </Separator>
+ * ```
+ *
+ * @param {SeparatorProps} props - The component props
+ * @param {'horizontal'|'vertical'} [props.orientation='horizontal'] - Divider axis
+ * @param {'center'|'start'|'end'} [props.position='center'] - Label alignment
+ * @param {string} [props.thickness='1px'] - Border thickness
+ * @param {string} [props.color='border'] - Border color
+ * @param {string} [props.margin] - Outer margin
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.ReactNode} [props.children] - Optional label content
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the separator
+ *
+ * @returns {JSX.Element} A styled divider line
+ */
 // #region Separator
 const Separator = forwardRef<HTMLDivElement, SeparatorProps>(
   (

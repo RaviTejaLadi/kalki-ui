@@ -30,9 +30,13 @@ const contentScrollableVariants = cva(
 
 // #region types
 interface ContentScrollableProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Explicit height of the scrollable container */
   height?: string;
+  /** Explicit width of the scrollable container */
   width?: string;
+  /** Content rendered inside the scrollable area */
   children: ReactNode;
+  /** Visual style variant @default 'light' */
   variant?:
     | 'primary'
     | 'secondary'
@@ -43,13 +47,37 @@ interface ContentScrollableProps extends React.HTMLAttributes<HTMLDivElement> {
     | 'info'
     | 'dark'
     | 'light';
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: CSSProperties;
 }
 
 // #endregion
 
 // #region ContentScrollable
+/**
+ * A styled container that scrolls overflowing content smoothly.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ContentScrollable height="240px" variant="light">
+ *   <p>Long content that scrolls within a fixed height.</p>
+ * </ContentScrollable>
+ * ```
+ *
+ * @param {ContentScrollableProps} props - The component props
+ * @param {string} [props.height] - Explicit height of the scrollable container
+ * @param {string} [props.width] - Explicit width of the scrollable container
+ * @param {React.ReactNode} props.children - Content rendered inside the scrollable area
+ * @param {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'help' | 'info' | 'dark' | 'light'} [props.variant='light'] - Visual style variant
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the scrollable container
+ *
+ * @returns {JSX.Element} A scrollable div with optional dimensions and variant styling
+ */
 const ContentScrollable = forwardRef<HTMLDivElement, ContentScrollableProps>(
   ({ height, width, children, variant, className, style, ...rest }, ref) => {
     const containerStyles: CSSProperties = {

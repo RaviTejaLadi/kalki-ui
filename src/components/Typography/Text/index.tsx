@@ -32,26 +32,79 @@ const textVariants = cva('block', {
 // #endregion
 
 // #region types
+/**
+ * Props for the Text typography component.
+ */
 interface TextProps extends VariantProps<typeof textVariants> {
+  /** Text content */
   children: React.ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Explicit text color override */
   color?: string;
+  /** Explicit font size override */
   fontSize?: string;
+  /** Explicit font weight override */
   fontWeight?: string;
+  /** Additional inline styles */
   style?: CSSProperties;
+  /** Underline text */
   underline?: boolean;
+  /** Overline text */
   overline?: boolean;
+  /** Line-through (dashed) style */
   dashed?: boolean;
+  /** Italic text */
   italic?: boolean;
+  /** Bold weight */
   strong?: boolean;
+  /** Strikethrough text */
   strikethrough?: boolean;
+  /** Highlighted background */
   marked?: boolean;
+  /** Smaller relative font size */
   smaller?: boolean;
+  /** Deleted (line-through) style */
   deleted?: boolean;
+  /** Inserted (underline) style */
   inserted?: boolean;
 }
 // #endregion
 
+/**
+ * Inline/block text with color, size, and decoration variants.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Text variant="primary" size="sm" strong>
+ *   Status: Active
+ * </Text>
+ * ```
+ *
+ * @param {TextProps} props - The component props
+ * @param {'default'|'primary'|'secondary'|'success'|'info'|'warning'|'danger'|'help'} [props.variant='default'] - Color variant
+ * @param {'xs'|'sm'|'md'|'lg'|'xl'|'2xl'} [props.size='md'] - Text size
+ * @param {string} [props.color] - Explicit color override
+ * @param {string} [props.fontSize] - Explicit font size override
+ * @param {string} [props.fontWeight] - Explicit font weight override
+ * @param {boolean} [props.underline] - Underline text
+ * @param {boolean} [props.overline] - Overline text
+ * @param {boolean} [props.dashed] - Line-through style
+ * @param {boolean} [props.italic] - Italic text
+ * @param {boolean} [props.strong] - Bold weight
+ * @param {boolean} [props.strikethrough] - Strikethrough text
+ * @param {boolean} [props.marked] - Yellow highlight background
+ * @param {boolean} [props.smaller] - Smaller relative size
+ * @param {boolean} [props.deleted] - Deleted style
+ * @param {boolean} [props.inserted] - Inserted style
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.ReactNode} props.children - Text content
+ * @param {React.Ref<HTMLParagraphElement>} ref - Forwarded ref to the `p` element
+ *
+ * @returns {JSX.Element} A styled text paragraph
+ */
 // #region Text
 const Text = forwardRef<HTMLParagraphElement, TextProps>(
   (

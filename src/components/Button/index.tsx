@@ -68,26 +68,64 @@ const buttonVariants = cva(
 interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  /** Whether the button is disabled */
   disabled?: boolean;
+  /** Button label or compound Icon/Text children */
   children?: ReactNode;
+  /** Custom loader shown while pending */
   loader?: ReactNode;
+  /** Whether the button is in a loading/pending state */
   isPending?: boolean;
+  /** Text shown beside the loader while pending */
   isPendingText?: string;
 }
 
 interface ButtonIconProps {
+  /** Icon content */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
 }
 
 interface ButtonTextProps {
+  /** Text content */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
 }
 
 // #endregion
 
 // #region Button
+/**
+ * A clickable button with variants, sizes, and an optional pending state.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Button variant="primary" size="md" onClick={handleSave}>
+ *   <Button.Icon>💾</Button.Icon>
+ *   <Button.Text>Save</Button.Text>
+ * </Button>
+ * ```
+ *
+ * @param {ButtonProps} props - The component props
+ * @param {boolean} [props.disabled=false] - Whether the button is disabled
+ * @param {React.ReactNode} [props.children] - Button label or compound children
+ * @param {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'help' | 'light' | 'dark' | 'outline' | 'ghost' | 'link'} [props.variant='primary'] - Visual style variant
+ * @param {'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'} [props.size='sm'] - Button size
+ * @param {boolean} [props.raised=false] - Whether to apply a raised shadow
+ * @param {boolean} [props.rounded=false] - Whether to use fully rounded corners
+ * @param {boolean} [props.block=false] - Whether the button spans full width
+ * @param {React.ReactNode} [props.loader] - Custom loader shown while pending
+ * @param {boolean} [props.isPending=false] - Whether the button is in a loading state
+ * @param {string} [props.isPendingText='Loading...'] - Text shown while pending
+ * @param {string} [props.className=''] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {React.Ref<HTMLButtonElement>} ref - Forwarded ref to the button element
+ *
+ * @returns {JSX.Element} A styled button element
+ */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -143,6 +181,22 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button';
 
+/**
+ * Text content wrapper for use inside a Button.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Button.Text>Continue</Button.Text>
+ * ```
+ *
+ * @param {ButtonTextProps} props - The component props
+ * @param {React.ReactNode} props.children - Text content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLSpanElement>} ref - Forwarded ref to the text element
+ *
+ * @returns {JSX.Element} An inline text wrapper
+ */
 const ButtonText = forwardRef<HTMLSpanElement, ButtonTextProps>(
   ({ children, className, ...rest }, ref) => {
     return (
@@ -159,6 +213,22 @@ const ButtonText = forwardRef<HTMLSpanElement, ButtonTextProps>(
 
 ButtonText.displayName = 'ButtonText';
 
+/**
+ * Icon wrapper for use inside a Button.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Button.Icon><Plus /></Button.Icon>
+ * ```
+ *
+ * @param {ButtonIconProps} props - The component props
+ * @param {React.ReactNode} props.children - Icon content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLSpanElement>} ref - Forwarded ref to the icon element
+ *
+ * @returns {JSX.Element} An inline icon wrapper
+ */
 const ButtonIcon = forwardRef<HTMLSpanElement, ButtonIconProps>(
   ({ children, className, ...rest }, ref) => {
     return (

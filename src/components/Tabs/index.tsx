@@ -105,20 +105,37 @@ const tabButtonStyles = cva(
 // #endregion
 
 // #region types
+/**
+ * Props for an individual Tab panel declaration.
+ */
 interface TabProps {
+  /** Label shown on the tab button */
   label: string;
+  /** Unique value identifying the tab */
   value: string;
+  /** Panel content when the tab is active */
   children: ReactNode;
+  /** Optional icon before the label */
   leftIcon?: ReactNode;
+  /** Optional icon after the label */
   rightIcon?: ReactNode;
+  /** Disables selection of this tab */
   disabled?: boolean;
+  /** Additional CSS classes for the panel */
   className?: string;
 }
 
+/**
+ * Props for the Tabs container.
+ */
 interface TabsProps extends BoxProps {
+  /** Tab children declaring panels */
   children: React.ReactNode;
+  /** Controlled active tab value */
   active?: string;
+  /** Called when the active tab changes */
   onTabChange?: (value: string) => void;
+  /** Visual style of tab buttons @default 'primary' */
   variant?:
     | 'primary'
     | 'secondary'
@@ -129,16 +146,47 @@ interface TabsProps extends BoxProps {
     | 'info'
     | 'dark'
     | 'light';
+  /** Tab button size @default 'sm' */
   size?: 'sm' | 'md' | 'lg';
+  /** Inline styles for the tablist header */
   headerStyles?: CSSProperties;
+  /** Inline styles for the panel body */
   bodyStyles?: CSSProperties;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles for the root Box */
   style?: CSSProperties;
+  /** Optional title attribute */
   title?: string;
 }
 
 // #endregion
 
+/**
+ * A horizontal tabbed interface with keyboard arrow navigation.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Tabs active="one" onTabChange={setActive} variant="primary">
+ *   <Tab label="Overview" value="one">Overview content</Tab>
+ *   <Tab label="Details" value="two">Details content</Tab>
+ * </Tabs>
+ * ```
+ *
+ * @param {TabsProps} props - The component props
+ * @param {React.ReactNode} props.children - `Tab` children
+ * @param {string} [props.active] - Controlled active tab value
+ * @param {(value: string) => void} [props.onTabChange] - Active tab change handler
+ * @param {string} [props.variant='primary'] - Tab button color variant
+ * @param {'sm'|'md'|'lg'} [props.size='sm'] - Tab button size
+ * @param {React.CSSProperties} [props.headerStyles] - Styles for the tablist
+ * @param {React.CSSProperties} [props.bodyStyles] - Styles for the panel area
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} A tablist and corresponding tab panels
+ */
 // #region Tabs
 export const Tabs: React.FC<TabsProps> = ({
   children,
@@ -302,6 +350,28 @@ export const Tabs: React.FC<TabsProps> = ({
   );
 };
 
+/**
+ * Declares a single tab panel; rendered by the parent `Tabs` component.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Tab label="Settings" value="settings" leftIcon={<GearIcon />}>
+ *   Settings content
+ * </Tab>
+ * ```
+ *
+ * @param {TabProps} props - The component props
+ * @param {string} props.label - Label on the tab button
+ * @param {string} props.value - Unique tab identifier
+ * @param {React.ReactNode} props.children - Panel content
+ * @param {React.ReactNode} [props.leftIcon] - Leading icon
+ * @param {React.ReactNode} [props.rightIcon] - Trailing icon
+ * @param {boolean} [props.disabled] - Disables the tab when true
+ * @param {string} [props.className] - Additional CSS classes for the panel
+ *
+ * @returns {JSX.Element} A panel wrapper (structure consumed by Tabs)
+ */
 export const Tab: React.FC<TabProps> = ({ children, className, ...props }) => (
   <div className={cn('p-2 animate-fade-in w-full', className)} {...props}>
     {children}

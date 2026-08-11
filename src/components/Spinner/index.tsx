@@ -30,9 +30,13 @@ const spinnerVariants = cva('inline-block animate-spin', {
 // #endregion
 
 // #region types
+/**
+ * Props for the Spinner loading indicator.
+ */
 interface SpinnerProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof spinnerVariants> {
+  /** Additional CSS classes */
   className?: string;
 }
 // #endregion
@@ -47,8 +51,8 @@ interface SpinnerProps
  * ```
  *
  * @param {SpinnerProps} props - The props for the Spinner component
- * @param {SpinnerVariant} [props.variant] - The visual style variant of the spinner
- * @param {SpinnerSize} [props.size] - The size of the spinner
+ * @param {'primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark'} [props.variant='primary'] - The visual style variant of the spinner
+ * @param {'sm'|'md'|'lg'|'xl'} [props.size='sm'] - The size of the spinner
  * @param {string} [props.className] - Additional CSS classes to apply to the spinner
  * @param {React.Ref<HTMLDivElement>} ref - The ref to attach to the spinner element
  *

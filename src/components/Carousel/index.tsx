@@ -37,51 +37,79 @@ const sizeMap = {
 
 // #region types
 interface CarouselProps extends BoxProps {
+  /** Preset dimensions for the carousel @default 'sm' */
   size?: 'sm' | 'md' | 'lg' | 'xl';
+  /** Custom width that overrides the size preset */
   width?: string;
+  /** Custom height that overrides the size preset */
   height?: string;
+  /** Border radius applied to the container @default '5px' */
   borderRadius?: string;
+  /** Padding variant key (`sm` | `md` | `lg` | `xl`) @default 'md' */
   padding?: string;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: React.CSSProperties;
+  /** Carousel compound children (Slides, Content, Controls, Dots) */
   children: ReactNode;
 }
 
 interface CarouselContextType {
+  /** Index of the active slide */
   currentIndex: number;
+  /** Sets the active slide index */
   setCurrentIndex: (index: number) => void;
+  /** Registered slide nodes */
   slides: ReactNode[];
+  /** Updates the registered slides */
   setSlides: (slides: ReactNode[]) => void;
+  /** Navigates to the previous slide */
   goToPrevious: () => void;
+  /** Navigates to the next slide */
   goToNext: () => void;
 }
 
 interface CarouselSlidesProps {
+  /** Slide elements to register and display */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: React.CSSProperties;
 }
 
 interface CarouselContentProps {
+  /** Content nodes indexed by the current slide */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: React.CSSProperties;
 }
 
 interface CarouselControlsProps {
+  /** Control elements (typically previous/next buttons) */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: React.CSSProperties;
 }
 
 interface CarouselDotsProps {
+  /** Additional CSS classes */
   className?: string;
+  /** Additional inline styles */
   style?: React.CSSProperties;
 }
 
 // #endregion
 
 // #region CarouselContext
+/**
+ * React context that shares carousel slide state and navigation helpers with compound parts.
+ */
 export const CarouselContext = createContext<CarouselContextType | undefined>(
   undefined
 );
@@ -89,6 +117,38 @@ export const CarouselContext = createContext<CarouselContextType | undefined>(
 // #endregion
 
 // #region Carousel
+/**
+ * A compound carousel container that manages slide state and navigation.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Carousel size="md">
+ *   <Carousel.Slides>
+ *     <img src="/slide-1.jpg" alt="Slide 1" />
+ *     <img src="/slide-2.jpg" alt="Slide 2" />
+ *   </Carousel.Slides>
+ *   <Carousel.Controls>
+ *     <button type="button">Prev</button>
+ *     <button type="button">Next</button>
+ *   </Carousel.Controls>
+ *   <Carousel.Dots />
+ * </Carousel>
+ * ```
+ *
+ * @param {CarouselProps} props - The component props
+ * @param {'sm' | 'md' | 'lg' | 'xl'} [props.size='sm'] - Preset dimensions for the carousel
+ * @param {string} [props.width] - Custom width that overrides the size preset
+ * @param {string} [props.height] - Custom height that overrides the size preset
+ * @param {string} [props.borderRadius='5px'] - Border radius applied to the container
+ * @param {string} [props.padding='md'] - Padding variant key (`sm` | `md` | `lg` | `xl`)
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {React.ReactNode} props.children - Carousel compound children
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the carousel container
+ *
+ * @returns {JSX.Element} A carousel provider wrapping a sized Box container
+ */
 const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
   (
     {
@@ -157,6 +217,25 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
 
 Carousel.displayName = 'Carousel';
 
+/**
+ * Renders the content node that matches the current carousel index.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Carousel.Content>
+ *   <p>Caption for slide 1</p>
+ *   <p>Caption for slide 2</p>
+ * </Carousel.Content>
+ * ```
+ *
+ * @param {CarouselContentProps} props - The component props
+ * @param {React.ReactNode} props.children - Content nodes indexed by the current slide
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} The active content node for the current slide
+ */
 const CarouselContent: React.FC<CarouselContentProps> = ({
   children,
   className,
@@ -170,6 +249,25 @@ const CarouselContent: React.FC<CarouselContentProps> = ({
   );
 };
 
+/**
+ * Wires previous/next navigation onto its children and supports arrow-key control.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Carousel.Controls>
+ *   <button type="button">Prev</button>
+ *   <button type="button">Next</button>
+ * </Carousel.Controls>
+ * ```
+ *
+ * @param {CarouselControlsProps} props - The component props
+ * @param {React.ReactNode} props.children - Control elements (first = previous, second = next)
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} A control bar with navigation handlers applied to children
+ */
 const CarouselControls: React.FC<CarouselControlsProps> = ({
   children,
   className,
@@ -206,6 +304,21 @@ const CarouselControls: React.FC<CarouselControlsProps> = ({
   );
 };
 
+/**
+ * Renders pagination dots for jumping directly to a slide.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Carousel.Dots className="mt-2" />
+ * ```
+ *
+ * @param {CarouselDotsProps} props - The component props
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} A tablist of dot buttons for carousel pagination
+ */
 const CarouselDots: React.FC<CarouselDotsProps> = ({
   className,
   style,
@@ -239,6 +352,25 @@ const CarouselDots: React.FC<CarouselDotsProps> = ({
   );
 };
 
+/**
+ * Registers and animates the carousel slides as a horizontal track.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Carousel.Slides>
+ *   <div>Slide 1</div>
+ *   <div>Slide 2</div>
+ * </Carousel.Slides>
+ * ```
+ *
+ * @param {CarouselSlidesProps} props - The component props
+ * @param {React.ReactNode} props.children - Slide elements to register and display
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ *
+ * @returns {JSX.Element} A sliding track containing each carousel slide
+ */
 const CarouselSlides: React.FC<CarouselSlidesProps> = ({
   children,
   className,

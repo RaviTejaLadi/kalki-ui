@@ -32,13 +32,39 @@ const toggleVariants = cva(
   }
 );
 
+/**
+ * Props for a pressable Toggle button.
+ */
 export interface ToggleProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof toggleVariants> {
+  /** Controlled pressed state */
   pressed?: boolean;
+  /** Called when pressed state changes */
   onPressedChange?: (pressed: boolean) => void;
 }
 
+/**
+ * A pressable toggle button that can be controlled or uncontrolled.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Toggle pressed={isBold} onPressedChange={setIsBold} variant="outline">
+ *   Bold
+ * </Toggle>
+ * ```
+ *
+ * @param {ToggleProps} props - The component props
+ * @param {boolean} [props.pressed] - Controlled pressed state
+ * @param {(pressed: boolean) => void} [props.onPressedChange] - Pressed change handler
+ * @param {'default'|'outline'} [props.variant='default'] - Visual style
+ * @param {'sm'|'md'|'lg'} [props.size='md'] - Button size
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLButtonElement>} ref - Forwarded ref to the button
+ *
+ * @returns {JSX.Element} A toggle button with `aria-pressed`
+ */
 export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
   ({ className, variant, size, pressed, onPressedChange, ...props }, ref) => {
     const [internalPressed, setInternalPressed] = React.useState(false);
@@ -82,16 +108,52 @@ const ToggleGroupContext = createContext<ToggleGroupContextValue | undefined>(
   undefined
 );
 
+/**
+ * Props for a group of related ToggleGroupItem buttons.
+ */
 export interface ToggleGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Selection mode @default 'multiple' */
   type?: 'single' | 'multiple';
+  /** Controlled selected values */
   value?: string[];
+  /** Uncontrolled initial values @default [] */
   defaultValue?: string[];
+  /** Called when selection changes */
   onValueChange?: (value: string[]) => void;
+  /** Disables all items when true */
   disabled?: boolean;
+  /** Default variant applied to items */
   variant?: VariantProps<typeof toggleVariants>['variant'];
+  /** Default size applied to items */
   size?: VariantProps<typeof toggleVariants>['size'];
 }
 
+/**
+ * Groups ToggleGroupItem children with shared single/multiple selection state.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ToggleGroup type="single" defaultValue={['left']} onValueChange={setAlign}>
+ *   <ToggleGroupItem value="left">Left</ToggleGroupItem>
+ *   <ToggleGroupItem value="center">Center</ToggleGroupItem>
+ * </ToggleGroup>
+ * ```
+ *
+ * @param {ToggleGroupProps} props - The component props
+ * @param {'single'|'multiple'} [props.type='multiple'] - Selection mode
+ * @param {string[]} [props.value] - Controlled selected values
+ * @param {string[]} [props.defaultValue=[]] - Uncontrolled initial values
+ * @param {(value: string[]) => void} [props.onValueChange] - Selection change handler
+ * @param {boolean} [props.disabled] - Disables the group when true
+ * @param {'default'|'outline'} [props.variant='default'] - Default item variant
+ * @param {'sm'|'md'|'lg'} [props.size='md'] - Default item size
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.ReactNode} props.children - ToggleGroupItem children
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the group
+ *
+ * @returns {JSX.Element} A toggle button group
+ */
 export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
   (
     {
@@ -168,10 +230,29 @@ ToggleGroup.displayName = 'ToggleGroup';
 // Toggle Group Item Component
 // --------------------------
 
+/**
+ * Props for an item inside a ToggleGroup.
+ */
 export interface ToggleGroupItemProps extends ToggleProps {
+  /** Unique value contributed to the group selection */
   value: string;
 }
 
+/**
+ * A Toggle bound to ToggleGroup selection state via its `value`.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ToggleGroupItem value="bold" aria-label="Bold">B</ToggleGroupItem>
+ * ```
+ *
+ * @param {ToggleGroupItemProps} props - The component props
+ * @param {string} props.value - Selection value for this item
+ * @param {React.Ref<HTMLButtonElement>} ref - Forwarded ref to the toggle
+ *
+ * @returns {JSX.Element} A Toggle synchronized with the parent group
+ */
 export const ToggleGroupItem = React.forwardRef<
   HTMLButtonElement,
   ToggleGroupItemProps

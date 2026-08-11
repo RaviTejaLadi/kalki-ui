@@ -105,26 +105,33 @@ const defaultColors: string[] = [
 /**
  * Props for the Highlighter component.
  *
- * @extends React.HTMLAttributes<HTMLSpanElement>
- * @extends VariantProps<typeof highlightedTextVariants>
+ * @interface HighlighterProps
+ * @extends {React.HTMLAttributes<HTMLSpanElement>}
+ * @extends {VariantProps<typeof highlightedTextVariants>}
  *
- * @property {string} children - The text content to be highlighted.
- * @property {string[]} [highlightText] - An array of strings to be highlighted within the children text.
- * @property {string[]} [colorsList] - An array of colors to be used for highlighting.
- * @property {string} [className] - Additional class names to apply to the highlighter component.
- * @property {string} [textClassName] - Additional class names to apply to the text within the highlighter component.
- * @property {'solid' | 'outlined' | 'underline' | 'pill' | 'gradient' | 'glass' | 'shadow' | 'floating' | 'minimal' | 'tag'} [variant] - The visual style variant of the highlighter.
- * @property {'normal' | 'medium' | 'semibold' | 'bold'} [emphasis] - The emphasis level of the highlighted text.
- * @property {'inherit' | 'compact' | 'comfortable' | 'relaxed'} [sizing] - The sizing of the highlighter component.
+ * @property {string} children - Source text in which matches are highlighted
+ * @property {string[]} [highlightText=[]] - Words/phrases to highlight within the children text
+ * @property {string[]} [colorsList=[]] - Custom colors used before falling back to defaults
+ * @property {string} [className=''] - Additional classes for the outer container
+ * @property {string} [textClassName=''] - Additional classes for non-highlighted text spans
+ * @property {'solid' | 'outlined' | 'underline' | 'pill' | 'gradient' | 'glass' | 'shadow' | 'floating' | 'minimal' | 'tag'} [variant='solid'] - Visual style of highlights
+ * @property {'normal' | 'medium' | 'semibold' | 'bold'} [emphasis='medium'] - Font weight for highlighted text
+ * @property {'inherit' | 'compact' | 'comfortable' | 'relaxed'} [sizing='inherit'] - Spacing/sizing around highlights
  */
 interface HighlighterProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof highlightedTextVariants> {
+  /** Source text in which matches are highlighted */
   children: string;
+  /** Words/phrases to highlight within the children text */
   highlightText?: string[];
+  /** Custom colors used before falling back to defaults */
   colorsList?: string[];
+  /** Additional classes for the outer container */
   className?: string;
+  /** Additional classes for non-highlighted text spans */
   textClassName?: string;
+  /** Visual style of highlights */
   variant?:
     | 'solid'
     | 'outlined'
@@ -136,29 +143,42 @@ interface HighlighterProps
     | 'floating'
     | 'minimal'
     | 'tag';
+  /** Font weight for highlighted text */
   emphasis?: 'normal' | 'medium' | 'semibold' | 'bold';
+  /** Spacing/sizing around highlights */
   sizing?: 'inherit' | 'compact' | 'comfortable' | 'relaxed';
 }
 // #endregion
 
 // #region Highlighter component
 /**
- * Highlighter component that highlights specified text within its children.
+ * Highlights matching words or phrases inside a string with themed styles and colors.
  *
- * @param {Object} props - The properties object.
- * @param {React.ReactNode} props.children - The content to be highlighted.
- * @param {string[]} [props.highlightText=[]] - Array of text strings to be highlighted.
- * @param {string[]} [props.colorsList=[]] - List of colors to use for highlighting.
- * @param {string} [props.className=''] - Additional class names for the container span.
- * @param {string} [props.textClassName=''] - Additional class names for the text spans.
- * @param {'solid' | 'outlined' | 'underline' | 'minimal' | 'gradient' | 'glass'} [props.variant='solid'] - The variant of highlighting style.
- * @param {'low' | 'medium' | 'high'} [props.emphasis='medium'] - The emphasis level of the highlighting.
- * @param {'inherit' | 'small' | 'medium' | 'large'} [props.sizing='inherit'] - The sizing of the highlighted text.
- * @param {React.CSSProperties} [props.style] - Additional inline styles for the container span.
- * @param {React.Ref<HTMLSpanElement>} ref - The ref to be forwarded to the container span.
- * @param {Object} rest - Additional properties to be spread onto the container span.
+ * @component
+ * @example
+ * ```tsx
+ * <Highlighter
+ *   highlightText={['React', 'TypeScript']}
+ *   variant="pill"
+ *   emphasis="semibold"
+ * >
+ *   Build UIs with React and TypeScript.
+ * </Highlighter>
+ * ```
  *
- * @returns {JSX.Element} The Highlighter component.
+ * @param {HighlighterProps} props - The component props
+ * @param {string} props.children - Text content to search and highlight
+ * @param {string[]} [props.highlightText=[]] - Terms to highlight
+ * @param {string[]} [props.colorsList=[]] - Custom highlight colors
+ * @param {string} [props.className=''] - Additional classes for the container
+ * @param {string} [props.textClassName=''] - Additional classes for plain text spans
+ * @param {'solid' | 'outlined' | 'underline' | 'pill' | 'gradient' | 'glass' | 'shadow' | 'floating' | 'minimal' | 'tag'} [props.variant='solid'] - Highlight style variant
+ * @param {'normal' | 'medium' | 'semibold' | 'bold'} [props.emphasis='medium'] - Font weight for highlights
+ * @param {'inherit' | 'compact' | 'comfortable' | 'relaxed'} [props.sizing='inherit'] - Highlight spacing
+ * @param {React.CSSProperties} [props.style] - Inline styles for the container
+ * @param {React.Ref<HTMLSpanElement>} ref - Forwarded ref to the container span
+ *
+ * @returns {JSX.Element} Inline text with highlighted matches
  */
 const Highlighter = forwardRef<HTMLSpanElement, HighlighterProps>(
   (

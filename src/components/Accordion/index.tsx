@@ -52,41 +52,65 @@ type AccordionVariant =
 type AccordionSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 interface AccordionProps extends VariantProps<typeof accordionVariants> {
+  /** Accordion item children */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
+  /** Visual style variant for active headers */
   variant?: AccordionVariant;
+  /** Text and header size */
   size?: AccordionSize;
 }
 
 interface AccordionItemProps {
+  /** Header and body content for this item */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
 interface AccordionHeaderProps {
+  /** Header label content */
   children: ReactNode;
+  /** Unique key used to open/close this item */
   eventKey: string;
+  /** Controlled open state; syncs with accordion context when set */
   open?: boolean;
+  /** Custom expand/collapse icon; defaults to a chevron */
   icon?: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
 interface AccordionBodyProps {
+  /** Collapsible panel content */
   children: ReactNode;
+  /** Unique key matching the related header */
   eventKey: string;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles */
   style?: CSSProperties;
 }
 
 interface AccordionContextType {
+  /** Set of currently open item keys */
   activeKeys: Set<string>;
+  /** Toggle an item open or closed */
   toggleItem: (eventKey: string) => void;
+  /** Open an item by key */
   openItem: (eventKey: string) => void;
+  /** Close an item by key */
   closeItem: (eventKey: string) => void;
+  /** Active header color variant */
   variant: AccordionVariant;
+  /** Accordion size */
   size: AccordionSize;
 }
 // #endRegion
@@ -128,6 +152,30 @@ export const AccordionContext = createContext<AccordionContextType | null>(
 // #endRegion
 
 // #region components
+/**
+ * A collapsible accordion container that manages open/closed item state.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Accordion variant="primary" size="md">
+ *   <Accordion.Item>
+ *     <Accordion.Header eventKey="1">Section 1</Accordion.Header>
+ *     <Accordion.Body eventKey="1">Content for section 1</Accordion.Body>
+ *   </Accordion.Item>
+ * </Accordion>
+ * ```
+ *
+ * @param {AccordionProps} props - The component props
+ * @param {React.ReactNode} props.children - Accordion item children
+ * @param {AccordionVariant} [props.variant='primary'] - Visual style variant for active headers
+ * @param {AccordionSize} [props.size='sm'] - Text and header size
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the root element
+ *
+ * @returns {JSX.Element} An accordion container with context for child items
+ */
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     { children, variant = 'primary', size = 'sm', className, style, ...rest },
@@ -188,6 +236,23 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
 Accordion.displayName = 'Accordion';
 
+/**
+ * The collapsible content panel of an accordion item.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Accordion.Body eventKey="1">Panel content</Accordion.Body>
+ * ```
+ *
+ * @param {AccordionBodyProps} props - The component props
+ * @param {React.ReactNode} props.children - Collapsible panel content
+ * @param {string} props.eventKey - Unique key matching the related header
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ *
+ * @returns {JSX.Element} An animated collapsible content panel
+ */
 const AccordionBody: React.FC<AccordionBodyProps> = ({
   children,
   eventKey,
@@ -229,6 +294,25 @@ const AccordionBody: React.FC<AccordionBodyProps> = ({
   );
 };
 
+/**
+ * The clickable header that toggles an accordion item open or closed.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Accordion.Header eventKey="1">Section title</Accordion.Header>
+ * ```
+ *
+ * @param {AccordionHeaderProps} props - The component props
+ * @param {React.ReactNode} props.children - Header label content
+ * @param {string} props.eventKey - Unique key used to open/close this item
+ * @param {boolean} [props.open] - Controlled open state
+ * @param {React.ReactNode} [props.icon] - Custom expand/collapse icon
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ *
+ * @returns {JSX.Element} A keyboard-accessible accordion header button
+ */
 const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   children,
   eventKey,
@@ -294,6 +378,25 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   );
 };
 
+/**
+ * A single accordion section wrapping a header and body.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Accordion.Item>
+ *   <Accordion.Header eventKey="1">Title</Accordion.Header>
+ *   <Accordion.Body eventKey="1">Content</Accordion.Body>
+ * </Accordion.Item>
+ * ```
+ *
+ * @param {AccordionItemProps} props - The component props
+ * @param {React.ReactNode} props.children - Header and body content
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Inline styles
+ *
+ * @returns {JSX.Element} A bordered accordion item container
+ */
 const AccordionItem: React.FC<AccordionItemProps> = ({
   children,
   className,

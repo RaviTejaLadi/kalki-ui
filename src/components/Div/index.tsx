@@ -49,16 +49,10 @@ const divVariants = cva(
 // #endregion
 
 // #region types
-/**
- * Props for the Div component.
- *
- * @extends {React.HTMLProps<HTMLDivElement>}
- *
- * @property {'solid' | 'dashed' | 'dotted' | 'none'} [borderStyle] - The style of the border.
- * @property {'gray' | 'blue' | 'green' | 'yellow' | 'purple' | 'none'} [backgroundColor] - The background color of the div.
- */
 interface DivProps extends React.HTMLProps<HTMLDivElement> {
+  /** Border style @default 'none' */
   borderStyle?: 'solid' | 'dashed' | 'dotted' | 'none';
+  /** Background color @default 'none' */
   backgroundColor?: 'gray' | 'blue' | 'green' | 'yellow' | 'purple' | 'none';
 }
 
@@ -66,19 +60,25 @@ interface DivProps extends React.HTMLProps<HTMLDivElement> {
 
 // #region Div
 /**
- * A functional component that renders a `div` element with customizable styles and class names.
+ * A styled div wrapper with optional border and background variants.
  *
  * @component
- * @param {object} props - The properties object.
- * @param {React.ReactNode} props.children - The content to be rendered inside the `div`.
- * @param {string} [props.className] - Additional class names to apply to the `div`.
- * @param {React.CSSProperties} [props.style] - Inline styles to apply to the `div`.
- * @param {string} [props.borderStyle] - The border style to apply to the `div`.
- * @param {string} [props.backgroundColor] - The background color to apply to the `div`.
- * @param {React.Ref<HTMLDivElement>} ref - The ref to be forwarded to the `div` element.
- * @param {object} rest - Any additional props to be spread onto the `div` element.
+ * @example
+ * ```tsx
+ * <Div borderStyle="dashed" backgroundColor="blue" className="p-4">
+ *   Content
+ * </Div>
+ * ```
  *
- * @returns {JSX.Element} The rendered `div` element.
+ * @param {DivProps} props - The component props
+ * @param {React.ReactNode} [props.children] - The content to render inside the div
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.CSSProperties} [props.style] - Additional inline styles
+ * @param {'solid' | 'dashed' | 'dotted' | 'none'} [props.borderStyle='none'] - The border style to apply
+ * @param {'gray' | 'blue' | 'green' | 'yellow' | 'purple' | 'none'} [props.backgroundColor='none'] - The background color to apply
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the div element
+ *
+ * @returns {JSX.Element} A styled div element
  */
 const Div = forwardRef<HTMLDivElement, DivProps>(
   (

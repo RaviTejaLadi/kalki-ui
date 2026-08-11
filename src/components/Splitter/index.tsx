@@ -11,19 +11,35 @@ import { useMergedRef } from '@/hooks/useMergedRef';
 import { cn } from '@/utils';
 import { GripHorizontal, GripVertical } from 'lucide-react';
 
+/**
+ * Props for the resizable Splitter container.
+ */
 interface SplitterProps {
+  /** Split axis @default 'horizontal' */
   orientation?: 'horizontal' | 'vertical';
+  /** CSS height of the splitter @default '100%' */
   height?: string;
+  /** Pane children (`Splitter.Pane`) */
   children: React.ReactNode;
+  /** Show grip icons on resize handles @default true */
   withHandle?: boolean;
+  /** Additional CSS classes */
   className?: string;
 }
 
+/**
+ * Props for an individual Splitter pane.
+ */
 interface SplitterPaneProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Pane content */
   children: React.ReactNode;
+  /** Starting size as `%` or `px` */
   initialSize?: string;
+  /** Minimum size as `%` or `px` */
   minSize?: string;
+  /** Maximum size as `%` or `px` */
   maxSize?: string;
+  /** Additional CSS classes */
   className?: string;
 }
 
@@ -185,6 +201,28 @@ const ResizeHandle = React.memo(
   )
 );
 
+/**
+ * A resizable multi-pane layout with drag and keyboard-accessible handles.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Splitter orientation="horizontal" height="400px">
+ *   <Splitter.Pane initialSize="30%" minSize="20%">Sidebar</Splitter.Pane>
+ *   <Splitter.Pane initialSize="70%">Content</Splitter.Pane>
+ * </Splitter>
+ * ```
+ *
+ * @param {SplitterProps} props - The component props
+ * @param {'horizontal'|'vertical'} [props.orientation='horizontal'] - Split axis
+ * @param {string} [props.height='100%'] - Container height
+ * @param {boolean} [props.withHandle=true] - Show grip icons on handles
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.ReactNode} props.children - Splitter.Pane children
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the container
+ *
+ * @returns {JSX.Element} A resizable pane layout
+ */
 const Splitter = forwardRef<HTMLDivElement, SplitterProps>(
   (
     {
@@ -287,6 +325,27 @@ const Splitter = forwardRef<HTMLDivElement, SplitterProps>(
   }
 );
 
+/**
+ * A content pane inside a Splitter with optional size constraints.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <Splitter.Pane initialSize="40%" minSize="15%" maxSize="80%">
+ *   Panel content
+ * </Splitter.Pane>
+ * ```
+ *
+ * @param {SplitterPaneProps} props - The component props
+ * @param {React.ReactNode} props.children - Pane content
+ * @param {string} [props.initialSize] - Starting size (`%` or `px`)
+ * @param {string} [props.minSize] - Minimum size (`%` or `px`)
+ * @param {string} [props.maxSize] - Maximum size (`%` or `px`)
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the pane
+ *
+ * @returns {JSX.Element} A scrollable pane container
+ */
 const SplitterPane = forwardRef<HTMLDivElement, SplitterPaneProps>(
   ({ children, className, ...rest }, ref) => (
     <div ref={ref} className={cn('h-full overflow-auto', className)} {...rest}>

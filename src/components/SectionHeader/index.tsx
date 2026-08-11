@@ -53,17 +53,23 @@ const subtitleVariants: Record<Size, string> = {
 
 interface SectionHeaderRootProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size'> {
+  /** Visual style of the header container */
   variant?: VariantProps<typeof sectionHeaderVariants>['variant'];
+  /** Size that cascades to title and subtitle @default 'md' */
   size?: Size;
+  /** Horizontal alignment of content */
   align?: VariantProps<typeof sectionHeaderVariants>['align'];
+  /** Reserved for asChild composition patterns */
   asChild?: boolean;
 }
 
+/** Props for the section title heading */
 type SectionHeaderTitleProps = Omit<
   React.HTMLAttributes<HTMLHeadingElement>,
   'size'
 >;
 
+/** Props for the section subtitle paragraph */
 type SectionHeaderSubTitleProps = Omit<
   React.HTMLAttributes<HTMLParagraphElement>,
   'size'
@@ -87,6 +93,28 @@ const useSectionHeaderContext = () => {
 // #endregion Create context for SectionHeader
 
 // #region SectionHeader components
+/**
+ * A page or card section header that provides shared size context to Title and SubTitle.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <SectionHeader variant="outline" size="md" align="left">
+ *   <SectionHeader.Title>Team members</SectionHeader.Title>
+ *   <SectionHeader.SubTitle>Manage access and roles</SectionHeader.SubTitle>
+ * </SectionHeader>
+ * ```
+ *
+ * @param {SectionHeaderRootProps} props - The component props
+ * @param {'default'|'transparent'|'outline'} [props.variant='default'] - Container style
+ * @param {'sm'|'md'|'lg'} [props.size='md'] - Size shared with title/subtitle
+ * @param {'left'|'center'|'right'} [props.align='left'] - Content alignment
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.ReactNode} props.children - Title / SubTitle children
+ * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the container
+ *
+ * @returns {JSX.Element} A section header container with context provider
+ */
 const SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderRootProps>(
   ({ className, variant, size = 'md', align, children, ...props }, ref) => {
     return (
@@ -106,6 +134,22 @@ const SectionHeader = React.forwardRef<HTMLDivElement, SectionHeaderRootProps>(
 );
 SectionHeader.displayName = 'SectionHeader';
 
+/**
+ * Primary heading for a SectionHeader, sized from parent context.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <SectionHeader.Title>Overview</SectionHeader.Title>
+ * ```
+ *
+ * @param {SectionHeaderTitleProps} props - Standard heading HTML attributes
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.ReactNode} props.children - Title text
+ * @param {React.Ref<HTMLHeadingElement>} ref - Forwarded ref to the `h2`
+ *
+ * @returns {JSX.Element} An `h2` title element
+ */
 const SectionHeaderTitle = React.forwardRef<
   HTMLHeadingElement,
   SectionHeaderTitleProps
@@ -119,6 +163,22 @@ const SectionHeaderTitle = React.forwardRef<
 });
 SectionHeaderTitle.displayName = 'SectionHeaderTitle';
 
+/**
+ * Supporting subtitle for a SectionHeader, sized from parent context.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <SectionHeader.SubTitle>Last updated today</SectionHeader.SubTitle>
+ * ```
+ *
+ * @param {SectionHeaderSubTitleProps} props - Standard paragraph HTML attributes
+ * @param {string} [props.className] - Additional CSS classes
+ * @param {React.ReactNode} props.children - Subtitle text
+ * @param {React.Ref<HTMLParagraphElement>} ref - Forwarded ref to the `p`
+ *
+ * @returns {JSX.Element} A subtitle paragraph
+ */
 const SectionHeaderSubTitle = React.forwardRef<
   HTMLParagraphElement,
   SectionHeaderSubTitleProps
