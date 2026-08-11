@@ -56,41 +56,136 @@ This project empowers developers to create stunning user interfaces effortlessly
 
 ---
 
+## Components
+
+### Layout & Structure
+
+| Component | Description |
+| --- | --- |
+| `Box` | Flexible layout container |
+| `Div` | Styled div primitive with variants |
+| `Stack` / `StackItem` | Flexbox stack layout |
+| `Splitter` / `SplitterPane` | Resizable split panes |
+| `Separator` | Visual divider |
+| `DotSeparator` | Dot-style separator |
+| `SectionHeader` | Section title and subtitle |
+
+### Navigation
+
+| Component | Description |
+| --- | --- |
+| `Breadcrumb` / `BreadcrumbItem` | Hierarchical navigation trail |
+| `Link` | Styled anchor link |
+| `LinkBar` | Horizontal link navigation bar |
+| `LinkButton` | Link styled as a button |
+| `Tabs` / `Tab` | Tabbed content navigation |
+| `ScrollToTop` | Scroll-to-top floating button |
+
+### Actions & Feedback
+
+| Component | Description |
+| --- | --- |
+| `Button` / `ButtonIcon` / `ButtonText` | Primary action button |
+| `CloseButton` | Dismiss / close control |
+| `Toggle` / `ToggleGroup` | Toggle and toggle group controls |
+| `Alert` | Alert with header, body, and footer |
+| `Banner` | Promotional or status banner |
+| `Badge` | Status or count badge |
+| `Tag` | Removable labeled tag |
+| `Spinner` | Loading spinner |
+| `Skeleton` | Placeholder loading state |
+| `Ripple` | Ripple interaction effect |
+| `Empty` | Empty state with media and content |
+| `ErrorPage` | Error / fallback page |
+
+### Content & Media
+
+| Component | Description |
+| --- | --- |
+| `Accordion` | Expandable content panels |
+| `Card` | Content card with header, body, and footer |
+| `Modal` | Dialog overlay |
+| `Drawer` | Side panel overlay |
+| `Carousel` | Image / content carousel |
+| `TextCarousel` | Rotating text carousel |
+| `Image` | Optimized image with object-fit options |
+| `GalleryImage` | Gallery image display |
+| `Figure` / `FigureImage` / `FigureCaption` | Figure with caption |
+| `Avatar` / `AvatarImage` / `AvatarFallback` | User avatar |
+| `FullScreenToggle` | Fullscreen mode toggle |
+| `ContentScrollable` | Scrollable content area |
+
+### Typography & Text
+
+| Component | Description |
+| --- | --- |
+| `Heading` | Semantic heading |
+| `Paragraph` | Paragraph text |
+| `Text` | Inline / body text |
+| `Code` | Inline or block code |
+| `Highlighter` | Text highlight utility |
+| `TextHighlighter` | Emphasis / highlight text styles |
+| `JsonViewer` | JSON data viewer |
+
+### Data Display
+
+| Component | Description |
+| --- | --- |
+| `Table` / `TableHead` / `TableBody` / `TableRow` / `TableCell` / `TableFooter` | Data table |
+| `TableList` | List-style table layout |
+| `ListGroups` / `ListGroupItem` | Grouped list items |
+| `OrderedList` / `OrderedListItem` | Ordered list |
+| `UnOrderedList` / `UnOrderedListItem` | Unordered list |
+
+---
+
 ## Installation
 
 ```sh
 npm install kalki-ui
 # or
 yarn add kalki-ui
-# or 
+# or
 pnpm add kalki-ui
 ```
+
+**Peer dependencies:** `react`, `react-dom`, and `tailwindcss`.
 
 ## Usage
 
 ```jsx
-import { Button } from 'kalki-ui';
+import { Button, Alert, Card } from 'kalki-ui';
 import 'kalki-ui/dist/index.css';
+
+function App() {
+  return (
+    <Card>
+      <Alert>
+        <Button>Get started</Button>
+      </Alert>
+    </Card>
+  );
+}
 ```
 
 ## Development
 
 1. Clone the repository
-2. Install dependencies
-3. Start development server
-4. Build the library
+2. Install dependencies with `npm install`
+3. Start the Vite development server with `npm run dev`
+4. Build the library with `npm run build`
 
 ## Scripts
 
-- `dev` - Start development mode with watch
-- `build` - Build the library for production
-- `clean` - Remove build artifacts
-- `lint` - Run ESLint checks
-- `lint:fix` - Fix ESLint issues
-- `format` - Format code with Prettier
-- `typecheck` - Run TypeScript type checks
-- `pre` - Start Vite development server
-- `pre:build` - Build with Vite
+| Script | Description |
+| --- | --- |
+| `dev` | Start Vite development server |
+| `build` | Clean and build the library with Rollup |
+| `clean` | Remove build artifacts |
+| `lint` | Run ESLint checks |
+| `lint:fix` | Fix ESLint issues |
+| `format` | Format code with Prettier |
+| `typecheck` | Run TypeScript type checks |
 
 ## Tech Stack
 
