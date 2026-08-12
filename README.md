@@ -147,9 +147,19 @@ yarn add kalki-ui
 pnpm add kalki-ui
 ```
 
-**Peer dependencies:** `react` / `react-dom` (^16.8 || ^17 || ^18 || ^19) and `tailwindcss` (^3.4 || ^4).
+**Peer dependencies:** `react` / `react-dom` (^16.8 || ^17 || ^18 || ^19).
+
+**Styles:** Kalki UI ships a **prebuilt** stylesheet. You do **not** need Tailwind CSS (any version) — or any other CSS framework — in your app for components to look correct. Import the stylesheet once:
+
+```js
+import 'kalki-ui/styles.css';
+```
 
 **TypeScript note:** Published `.d.ts` files are generated against **`@types/react` / `@types/react-dom` v18** so React 18 consumers (and monorepo docs apps) type-check cleanly. Use matching `@types/react@18` / `@types/react-dom@18` in your app when possible. React 19 runtimes are supported; if you use `@types/react@19`, keep a single version of those types across the workspace (avoid nested duplicates).
+
+### Migrating to v3.2
+
+- **Tailwind is no longer a peer dependency.** Component styles come from `kalki-ui/styles.css` only. Your app may use Tailwind v3, v4, another CSS setup, or none at all.
 
 ### Migrating to v3.1
 
@@ -165,11 +175,10 @@ v2 is a breaking release:
   - import Button from 'kalki-ui/button';
   + import { Button } from 'kalki-ui/button';
   ```
-- Built against **Tailwind CSS v4** (v3 peers still accepted).
 
 ## Usage
 
-Import only the components you need (recommended). Each component is a separate entry so unused code stays out of your bundle — always use **named** imports:
+Import only the components you need (recommended). Each component is a separate entry so unused code stays out of your bundle — always use **named** imports. Import styles **once** at your app root:
 
 ```jsx
 import { Button } from 'kalki-ui/button';
