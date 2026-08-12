@@ -16,10 +16,9 @@
 
   <img alt="React" src="https://img.shields.io/badge/React-61DAFB.svg?style=flat&logo=React&logoColor=black" />
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6.svg?style=flat&logo=TypeScript&logoColor=white" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-06B6D4.svg?style=flat&logo=Tailwind-CSS&logoColor=white" />
   <img alt="Vite" src="https://img.shields.io/badge/Vite-646CFF.svg?style=flat&logo=Vite&logoColor=white" />
-  <img alt="JSON" src="https://img.shields.io/badge/JSON-000000.svg?style=flat&logo=JSON&logoColor=white" />
   <img alt="npm" src="https://img.shields.io/badge/npm-CB3837.svg?style=flat&logo=npm&logoColor=white" />
-  <img alt="Autoprefixer" src="https://img.shields.io/badge/Autoprefixer-DD3735.svg?style=flat&logo=Autoprefixer&logoColor=white" />
   <img alt="PostCSS" src="https://img.shields.io/badge/PostCSS-DD3A0A.svg?style=flat&logo=PostCSS&logoColor=white" />
   <img alt="Prettier" src="https://img.shields.io/badge/Prettier-F7B93E.svg?style=flat&logo=Prettier&logoColor=black" />
   <img alt="ESLint" src="https://img.shields.io/badge/ESLint-4B32C3.svg?style=flat&logo=ESLint&logoColor=white" />
@@ -149,11 +148,22 @@ yarn add kalki-ui
 pnpm add kalki-ui
 ```
 
-**Peer dependencies:** `react`, `react-dom`, and `tailwindcss`.
+**Peer dependencies:** `react` / `react-dom` (^16.8 || ^17 || ^18 || ^19) and `tailwindcss` (^3.4 || ^4).
+
+### Migrating to v2
+
+v2 is a breaking release:
+
+- **Named exports only** — default imports are no longer supported.
+  ```diff
+  - import Button from 'kalki-ui/button';
+  + import { Button } from 'kalki-ui/button';
+  ```
+- Built against **Tailwind CSS v4** (v3 peers still accepted).
 
 ## Usage
 
-Import only the components you need (recommended). Each component is a separate entry so unused code stays out of your bundle:
+Import only the components you need (recommended). Each component is a separate entry so unused code stays out of your bundle — always use **named** imports:
 
 ```jsx
 import { Button } from 'kalki-ui/button';
