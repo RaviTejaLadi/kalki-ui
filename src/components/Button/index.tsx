@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Loader } from 'lucide-react';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -249,16 +249,7 @@ ButtonIcon.displayName = 'ButtonIcon';
 // #endregion
 
 // #region exports
-const ButtonRoot = Object.assign(
-  Button as React.ForwardRefExoticComponent<
-    ButtonProps & React.RefAttributes<HTMLButtonElement>
-  >,
-  {
-    Icon: ButtonIcon,
-    Text: ButtonText,
-  }
-);
 
-export { ButtonRoot as Button, ButtonIcon, ButtonText, buttonVariants };
+export { Button, ButtonIcon, ButtonText, buttonVariants };
 export type { ButtonProps, ButtonIconProps, ButtonTextProps };
 // #endregion

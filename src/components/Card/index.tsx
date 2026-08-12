@@ -196,21 +196,9 @@ CardFooter.displayName = 'CardFooter';
 // #endregion
 
 // #region exports
-const CardRoot = Object.assign(
-  Card as React.ForwardRefExoticComponent<
-    CardProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Header: CardHeader,
-    Footer: CardFooter,
-    Title: CardTitle,
-    Description: CardDescription,
-    Content: CardContent,
-  }
-);
 
 export {
-  CardRoot as Card,
+  Card,
   CardHeader,
   CardFooter,
   CardTitle,

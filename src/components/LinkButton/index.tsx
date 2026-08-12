@@ -232,16 +232,7 @@ LinkText.displayName = 'LinkText';
 // #endregion LinkButton Component
 
 // #region Export Components and Types
-const LinkButtonRoot = Object.assign(
-  LinkButton as React.ForwardRefExoticComponent<
-    LinkButtonProps & React.RefAttributes<HTMLAnchorElement>
-  >,
-  {
-    Icon: LinkIcon,
-    Text: LinkText,
-  }
-);
 
-export { LinkButtonRoot as LinkButton, LinkIcon, LinkText };
+export { LinkButton, LinkIcon, LinkText };
 export type { LinkButtonProps, LinkIconProps, LinkTextProps };
 // #endregion Export Components and Types

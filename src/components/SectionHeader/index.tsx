@@ -196,18 +196,11 @@ SectionHeaderSubTitle.displayName = 'SectionHeaderSubTitle';
 // #endregion SectionHeader components
 
 // #region Export components and types
-const SectionHeaderRoot = Object.assign(
-  SectionHeader as React.ForwardRefExoticComponent<
-    SectionHeaderRootProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Title: SectionHeaderTitle,
-    SubTitle: SectionHeaderSubTitle,
-  }
-);
 
 export {
-  SectionHeaderRoot as SectionHeader,
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderSubTitle,
   type SectionHeaderRootProps as SectionHeaderProps,
   type SectionHeaderTitleProps,
   type SectionHeaderSubTitleProps,

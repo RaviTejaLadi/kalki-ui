@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, ReactNode, useEffect } from 'react';
+import { CSSProperties, forwardRef, ReactNode, useEffect } from 'react';
 import { cn } from '@/utils';
 import { cva } from 'class-variance-authority';
 import { CloseButton } from '../CloseButton';
@@ -293,24 +293,8 @@ DrawerBody.displayName = 'DrawerBody';
 // #endregion
 
 // #region Export
-const DrawerRoot = Object.assign(
-  Drawer as React.ForwardRefExoticComponent<
-    DrawerProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Title: DrawerTitle,
-    Header: DrawerHeader,
-    Body: DrawerBody,
-  }
-);
 
-export {
-  DrawerRoot as Drawer,
-  DrawerTitle,
-  DrawerHeader,
-  DrawerBody,
-  drawerVariants,
-};
+export { Drawer, DrawerTitle, DrawerHeader, DrawerBody, drawerVariants };
 export type {
   DrawerProps,
   DrawerHeaderProps,

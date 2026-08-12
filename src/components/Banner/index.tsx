@@ -226,17 +226,8 @@ BannerSubTitle.displayName = 'BannerSubTitle';
 // #endregion
 
 // #region exports
-const BannerRoot = Object.assign(
-  Banner as React.ForwardRefExoticComponent<
-    BannerProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Title: BannerTitle,
-    SubTitle: BannerSubTitle,
-  }
-);
 
-export { BannerRoot as Banner, BannerTitle, BannerSubTitle, bannerVariants };
+export { Banner, BannerTitle, BannerSubTitle, bannerVariants };
 export type { BannerSize, BannerProps, BannerChildProps };
 
 // #endregion

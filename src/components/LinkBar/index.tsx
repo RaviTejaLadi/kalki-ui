@@ -1,4 +1,4 @@
-import React, {
+import {
   useRef,
   forwardRef,
   createContext,
@@ -409,19 +409,9 @@ LinkBarLink.displayName = 'LinkBar.Link';
 // #endregion components
 
 // #region exports
-const LinkBarRoot = Object.assign(
-  LinkBar as React.ForwardRefExoticComponent<
-    LinkBarProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Content: LinkBarContent,
-    Link: LinkBarLink,
-    Control: LinkBarControl,
-  }
-);
 
 export {
-  LinkBarRoot as LinkBar,
+  LinkBar,
   LinkBarContent,
   LinkBarLink,
   LinkBarControl,

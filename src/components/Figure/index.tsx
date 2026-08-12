@@ -192,16 +192,7 @@ FigureCaption.displayName = 'FigureCaption';
 // #endregion components
 
 // #region export
-const FigureRoot = Object.assign(
-  Figure as React.ForwardRefExoticComponent<
-    FigureProps & React.RefAttributes<HTMLElement>
-  >,
-  {
-    Image: FigureImage,
-    Caption: FigureCaption,
-  }
-);
 
-export { FigureRoot as Figure, FigureImage, FigureCaption };
+export { Figure, FigureImage, FigureCaption };
 export type { FigureProps, FigureImageProps, FigureCaptionProps };
 // #endregion export

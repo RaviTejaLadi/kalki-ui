@@ -212,12 +212,7 @@ AvatarImage.displayName = 'Avatar.Image';
 // #endregion
 
 // #region exports
-const AvatarRoot = Object.assign(Avatar as React.FC<AvatarProps>, {
-  Image: AvatarImage,
-  Fallback: AvatarFallback,
-});
-
-export { AvatarRoot as Avatar, AvatarFallback, AvatarImage, avatarVariants };
+export { Avatar, AvatarFallback, AvatarImage, avatarVariants };
 export type {
   AvatarContextType,
   AvatarProps,

@@ -302,26 +302,7 @@ const TableRow: React.FC<TableRowProps> = ({
 // #endregion
 
 // #region Exports
-const TableRoot = Object.assign(
-  Table as React.ForwardRefExoticComponent<
-    TableProps & React.RefAttributes<HTMLTableElement>
-  >,
-  {
-    Head: TableHead,
-    Body: TableBody,
-    Cell: TableCell,
-    Footer: TableFooter,
-    Row: TableRow,
-  }
-);
 
-export {
-  TableRoot as Table,
-  TableHead,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableRow,
-};
+export { Table, TableHead, TableBody, TableCell, TableFooter, TableRow };
 
 export type { TableProps, TableSectionProps, TableRowProps, TableCellProps };

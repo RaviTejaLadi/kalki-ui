@@ -199,13 +199,7 @@ BreadcrumbItem.displayName = 'BreadcrumbItem';
 // #endregion
 
 // #region exports
-const BreadcrumbRoot = Object.assign(
-  Breadcrumb as React.ForwardRefExoticComponent<
-    BreadcrumbProps & React.RefAttributes<HTMLDivElement>
-  >,
-  { Item: BreadcrumbItem }
-);
 
-export { BreadcrumbRoot as Breadcrumb, BreadcrumbItem, breadcrumbVariants };
+export { Breadcrumb, BreadcrumbItem, breadcrumbVariants };
 export type { BreadcrumbProps, BreadcrumbItemProps, SeparatorType };
 // #endregion

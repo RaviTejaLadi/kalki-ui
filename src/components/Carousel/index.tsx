@@ -414,20 +414,9 @@ const CarouselSlides: React.FC<CarouselSlidesProps> = ({
 // #endregion
 
 // #region exports
-const CarouselRoot = Object.assign(
-  Carousel as React.ForwardRefExoticComponent<
-    CarouselProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Slides: CarouselSlides,
-    Content: CarouselContent,
-    Controls: CarouselControls,
-    Dots: CarouselDots,
-  }
-);
 
 export {
-  CarouselRoot as Carousel,
+  Carousel,
   CarouselSlides,
   CarouselContent,
   CarouselControls,

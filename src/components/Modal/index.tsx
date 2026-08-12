@@ -349,20 +349,9 @@ Modal.displayName = 'Modal';
 // #endregion
 
 // #region export
-const ModalRoot = Object.assign(
-  Modal as React.ForwardRefExoticComponent<
-    ModalProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Header: ModalHeader,
-    Title: ModalTitle,
-    Body: ModalBody,
-    Footer: ModalFooter,
-  }
-);
 
 export {
-  ModalRoot as Modal,
+  Modal,
   ModalHeader,
   ModalTitle,
   ModalBody,

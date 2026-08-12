@@ -139,15 +139,7 @@ const GalleryImage = forwardRef<HTMLDivElement, ImageProps>(
 GalleryImage.displayName = 'GalleryImage';
 // #endregion
 // #region export
-const GalleryRoot = Object.assign(
-  Gallery as React.ForwardRefExoticComponent<
-    GalleryProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Image: GalleryImage,
-  }
-);
 
-export { GalleryRoot as Gallery, GalleryImage, galleryVariants };
+export { Gallery, GalleryImage, galleryVariants };
 export type { GalleryProps };
 // #endregion

@@ -278,19 +278,11 @@ ListGroupItem.displayName = 'ListGroupItem';
 // #endregion
 
 // #region exports
-const ListGroupsRoot = Object.assign(
-  ListGroups as React.ForwardRefExoticComponent<
-    ListGroupProps & React.RefAttributes<HTMLUListElement>
-  >,
-  {
-    Item: ListGroupItem,
-  }
-);
 
 ListGroups.displayName = 'ListGroups';
 
 export {
-  ListGroupsRoot as ListGroups,
+  ListGroups,
   ListGroupItem,
   listGroupVariants,
   itemVariants,

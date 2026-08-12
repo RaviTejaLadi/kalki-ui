@@ -189,7 +189,11 @@ export { Skeleton } from './components/Skeleton';
 // #endregion
 
 // #region SectionHeader
-export { SectionHeader } from './components/SectionHeader';
+export {
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderSubTitle,
+} from './components/SectionHeader';
 export type {
   SectionHeaderProps,
   SectionHeaderTitleProps,

@@ -1,5 +1,5 @@
 import React, { forwardRef, CSSProperties } from 'react';
-import { Table } from '.';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '.';
 import { Code } from '../Code';
 import { cn } from '@/utils';
 
@@ -85,20 +85,20 @@ const TableList = forwardRef<HTMLTableElement, TableListProps>(
 
     return (
       <Table ref={ref} className={cn(className)} style={style} {...rest}>
-        <Table.Head>
-          <Table.Row>
+        <TableHead>
+          <TableRow>
             {columns.map((column, index) => (
-              <Table.Cell isHeader key={index}>
+              <TableCell isHeader key={index}>
                 {column}
-              </Table.Cell>
+              </TableCell>
             ))}
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {rows.map((row, rowIndex) => (
-            <Table.Row key={rowIndex}>
+            <TableRow key={rowIndex}>
               {row.map((cell, cellIndex) => (
-                <Table.Cell key={cellIndex} data-th={columns[cellIndex]}>
+                <TableCell key={cellIndex} data-th={columns[cellIndex]}>
                   {code && codeColumns.includes(cellIndex) ? (
                     <Code
                       size={codeSize}
@@ -111,11 +111,11 @@ const TableList = forwardRef<HTMLTableElement, TableListProps>(
                   ) : (
                     cell
                   )}
-                </Table.Cell>
+                </TableCell>
               ))}
-            </Table.Row>
+            </TableRow>
           ))}
-        </Table.Body>
+        </TableBody>
       </Table>
     );
   }

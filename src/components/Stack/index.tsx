@@ -166,16 +166,8 @@ const StackItem: React.FC<StackItemProps> = ({
 // #endregion
 
 // #region exports
-const StackRoot = Object.assign(
-  Stack as React.ForwardRefExoticComponent<
-    StackProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Item: StackItem,
-  }
-);
 
-export { StackRoot as Stack, StackItem };
+export { Stack, StackItem };
 
 export type {
   StackProps,

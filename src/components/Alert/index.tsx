@@ -177,23 +177,7 @@ const AlertFooter: React.FC<SectionProps> = ({
 // #endRegion
 
 // #region exports
-const AlertRoot = Object.assign(
-  Alert as React.ForwardRefExoticComponent<
-    AlertProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Header: AlertHeader,
-    Body: AlertBody,
-    Footer: AlertFooter,
-  }
-);
 
-export {
-  AlertRoot as Alert,
-  AlertBody,
-  AlertHeader,
-  AlertFooter,
-  alertVariants,
-};
+export { Alert, AlertBody, AlertHeader, AlertFooter, alertVariants };
 export type { AlertProps, SectionProps };
 // #endRegion

@@ -417,19 +417,9 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 // #endRegion
 
 // #region exports
-const AccordionRoot = Object.assign(
-  Accordion as React.ForwardRefExoticComponent<
-    AccordionProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Header: AccordionHeader,
-    Body: AccordionBody,
-    Item: AccordionItem,
-  }
-);
 
 export {
-  AccordionRoot as Accordion,
+  Accordion,
   AccordionHeader,
   AccordionBody,
   AccordionItem,

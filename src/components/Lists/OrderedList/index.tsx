@@ -125,14 +125,6 @@ const OrderedListItem: React.FC<OrderedListItemProps> = ({
 // #endregion
 
 // #region exports
-const OrderedListRoot = Object.assign(
-  OrderedList as React.ForwardRefExoticComponent<
-    OrderedListProps & React.RefAttributes<HTMLOListElement>
-  >,
-  {
-    Item: OrderedListItem,
-  }
-);
 
-export { OrderedListRoot as OrderedList, OrderedListItem };
+export { OrderedList, OrderedListItem };
 export type { OrderedListProps, OrderedListItemProps, ListStyleType };

@@ -358,14 +358,5 @@ SplitterPane.displayName = 'SplitterPane';
 Splitter.displayName = 'Splitter';
 ResizeHandle.displayName = 'ResizeHandle';
 
-const SplitterRoot = Object.assign(
-  Splitter as React.ForwardRefExoticComponent<
-    SplitterProps & React.RefAttributes<HTMLDivElement>
-  >,
-  {
-    Pane: SplitterPane,
-  }
-);
-
-export { SplitterRoot as Splitter, SplitterPane };
+export { Splitter, SplitterPane };
 export type { SplitterProps, SplitterPaneProps };
