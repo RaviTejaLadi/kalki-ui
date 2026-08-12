@@ -320,7 +320,7 @@ export const Tabs: React.FC<TabsProps> = ({
         })}
       </div>
       <div
-        className="bg-background border flex items-center rounded-md overflow-y-auto dark:border-gray-200/10"
+        className="bg-background border flex items-center rounded-md overflow-y-auto border-gray-200/10"
         style={bodyStyles}
       >
         {React.Children.toArray(children).map((child) => {

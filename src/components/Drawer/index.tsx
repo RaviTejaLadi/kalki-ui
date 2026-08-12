@@ -5,7 +5,7 @@ import { CloseButton } from '../CloseButton';
 
 // #region drawerVariants
 const drawerVariants = cva(
-  'fixed z-50 p-4 bg-white shadow-lg  border bg-background  dark:bg-[#1b202e] text-foreground dark:border-gray-200/10 overflow-y-auto flex flex-col transition-all duration-300 ease-in-out transform',
+  'fixed z-50 p-4 bg-white shadow-lg  border bg-background  dark:bg-[#1b202e] text-foreground border-gray-200/10 overflow-y-auto flex flex-col transition-all duration-300 ease-in-out transform',
   {
     variants: {
       position: {

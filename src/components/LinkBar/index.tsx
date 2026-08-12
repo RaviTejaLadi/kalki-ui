@@ -46,7 +46,7 @@ const linkBarVariants = cva('flex items-center justify-center transition-all', {
       help: 'border border-purple-200 dark:border-purple-200/10',
       light: 'border border-gray-100',
       dark: 'border border-gray-400 dark:border-gray-400/10',
-      default: 'bg-background border-b border-gray-200 dark:border-gray-200/10',
+      default: 'bg-background border-b border-gray-200 border-gray-200/10',
       outline: 'border border-gray-200/10 bg-white shadow-sm',
     },
     size: {

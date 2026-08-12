@@ -5,7 +5,7 @@ import { cn } from '@/utils';
 
 // #region modalVariants
 const modalVariants = cva(
-  'bg-white dark:bg-[#1b202e] dark:border-gray-200/10 border rounded-md relative flex flex-col justify-start items-stretch shadow-md',
+  'bg-white dark:bg-[#1b202e] border-gray-200/10 border rounded-md relative flex flex-col justify-start items-stretch shadow-md',
   {
     variants: {
       size: {
