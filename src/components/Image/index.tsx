@@ -277,7 +277,6 @@ Image.displayName = 'Image';
 // #endRegion
 
 // #region export
-export default Image;
-export { imageVariants };
+export { Image, imageVariants };
 export type { ImageProps, ObjectFit, LoadingStrategy };
 // #endRegion

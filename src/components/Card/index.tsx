@@ -196,7 +196,7 @@ CardFooter.displayName = 'CardFooter';
 // #endregion
 
 // #region exports
-export default Object.assign(
+const CardRoot = Object.assign(
   Card as React.ForwardRefExoticComponent<
     CardProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -208,6 +208,14 @@ export default Object.assign(
     Content: CardContent,
   }
 );
-export { CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+
+export {
+  CardRoot as Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+};
 export type { CardProps };
 // #endregion

@@ -109,6 +109,5 @@ Div.displayName = 'Div';
 // #endregion
 
 // #region exports
-export default Div;
-export { divVariants, type DivProps };
+export { Div, divVariants, type DivProps };
 // #endregion

@@ -116,6 +116,5 @@ Code.displayName = 'Code';
 // #endregion
 
 // #region exports
-export default Code;
-export { codeVariants };
+export { Code, codeVariants };
 // #endregion

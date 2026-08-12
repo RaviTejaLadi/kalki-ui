@@ -249,7 +249,7 @@ ButtonIcon.displayName = 'ButtonIcon';
 // #endregion
 
 // #region exports
-export default Object.assign(
+const ButtonRoot = Object.assign(
   Button as React.ForwardRefExoticComponent<
     ButtonProps & React.RefAttributes<HTMLButtonElement>
   >,
@@ -259,6 +259,6 @@ export default Object.assign(
   }
 );
 
-export { ButtonIcon, ButtonText, buttonVariants };
+export { ButtonRoot as Button, ButtonIcon, ButtonText, buttonVariants };
 export type { ButtonProps, ButtonIconProps, ButtonTextProps };
 // #endregion

@@ -1,6 +1,6 @@
 import React, { forwardRef, CSSProperties, ReactNode } from 'react';
 import { cn } from '@/utils';
-import Box from '../Box';
+import { Box } from '../Box';
 
 // #region types
 type JustifyContent = 'start' | 'center' | 'end' | 'between' | 'around';
@@ -166,7 +166,7 @@ const StackItem: React.FC<StackItemProps> = ({
 // #endregion
 
 // #region exports
-export default Object.assign(
+const StackRoot = Object.assign(
   Stack as React.ForwardRefExoticComponent<
     StackProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -175,7 +175,7 @@ export default Object.assign(
   }
 );
 
-export { StackItem };
+export { StackRoot as Stack, StackItem };
 
 export type {
   StackProps,

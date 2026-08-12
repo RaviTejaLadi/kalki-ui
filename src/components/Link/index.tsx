@@ -160,7 +160,6 @@ Link.displayName = 'Link';
 // #endregion
 
 // #region exports
-export default Link;
-export { linkVariants };
+export { Link, linkVariants };
 export type { LinkProps };
 // #endregion

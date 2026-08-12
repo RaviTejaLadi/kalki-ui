@@ -6,7 +6,7 @@ import React, {
   forwardRef,
   KeyboardEvent,
 } from 'react';
-import Box from '../Box';
+import { Box } from '../Box';
 import { useMergedRef } from '@/hooks/useMergedRef';
 import { cn } from '@/utils';
 import { GripHorizontal, GripVertical } from 'lucide-react';
@@ -358,7 +358,7 @@ SplitterPane.displayName = 'SplitterPane';
 Splitter.displayName = 'Splitter';
 ResizeHandle.displayName = 'ResizeHandle';
 
-export default Object.assign(
+const SplitterRoot = Object.assign(
   Splitter as React.ForwardRefExoticComponent<
     SplitterProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -366,5 +366,6 @@ export default Object.assign(
     Pane: SplitterPane,
   }
 );
-export { SplitterPane };
+
+export { SplitterRoot as Splitter, SplitterPane };
 export type { SplitterProps, SplitterPaneProps };

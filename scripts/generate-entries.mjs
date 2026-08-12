@@ -9,7 +9,7 @@ const entriesDir = join(root, 'src', 'entries');
 /** @type {Record<string, string>} */
 const entries = {
   accordion: `export {
-  default as Accordion,
+  Accordion,
   AccordionHeader,
   AccordionBody,
   AccordionItem,
@@ -24,7 +24,7 @@ export type {
 } from '../components/Accordion';
 `,
   alert: `export {
-  default as Alert,
+  Alert,
   AlertHeader,
   AlertBody,
   AlertFooter,
@@ -33,18 +33,18 @@ export type {
 export type { AlertProps, SectionProps } from '../components/Alert';
 `,
   avatar: `export {
-  default as Avatar,
+  Avatar,
   AvatarFallback,
   AvatarImage,
   avatarVariants,
 } from '../components/Avatar';
 export type { AvatarProps, AvatarImageProps } from '../components/Avatar';
 `,
-  badge: `export { default as Badge, BadgeIcon, badgeVariants } from '../components/Badge';
+  badge: `export { Badge, BadgeIcon, badgeVariants } from '../components/Badge';
 export type { BadgeProps, BadgeIconProps } from '../components/Badge';
 `,
   banner: `export {
-  default as Banner,
+  Banner,
   BannerTitle,
   BannerSubTitle,
   bannerVariants,
@@ -55,11 +55,11 @@ export type {
   BannerChildProps,
 } from '../components/Banner';
 `,
-  box: `export { default as Box } from '../components/Box';
+  box: `export { Box } from '../components/Box';
 export type { BoxProps } from '../components/Box';
 `,
   breadcrumb: `export {
-  default as Breadcrumb,
+  Breadcrumb,
   BreadcrumbItem,
   breadcrumbVariants,
 } from '../components/Breadcrumb';
@@ -70,7 +70,7 @@ export type {
 } from '../components/Breadcrumb';
 `,
   button: `export {
-  default as Button,
+  Button,
   ButtonIcon,
   ButtonText,
   buttonVariants,
@@ -82,7 +82,7 @@ export type {
 } from '../components/Button';
 `,
   card: `export {
-  default as Card,
+  Card,
   CardHeader,
   CardFooter,
   CardTitle,
@@ -92,7 +92,7 @@ export type {
 export type { CardProps } from '../components/Card';
 `,
   carousel: `export {
-  default as Carousel,
+  Carousel,
   CarouselSlides,
   CarouselContent,
   CarouselControls,
@@ -107,21 +107,21 @@ export type {
   CarouselDotsProps,
 } from '../components/Carousel';
 `,
-  'close-button': `export { default as CloseButton } from '../components/CloseButton';
+  'close-button': `export { CloseButton } from '../components/CloseButton';
 `,
-  code: `export { default as Code, codeVariants } from '../components/Code';
+  code: `export { Code, codeVariants } from '../components/Code';
 `,
   'content-scrollable': `export {
-  default as ContentScrollable,
+  ContentScrollable,
   contentScrollableVariants,
 } from '../components/ContentScrollable';
 export type { ContentScrollableProps } from '../components/ContentScrollable';
 `,
-  div: `export { default as Div, divVariants } from '../components/Div';
+  div: `export { Div, divVariants } from '../components/Div';
 export type { DivProps } from '../components/Div';
 `,
   drawer: `export {
-  default as Drawer,
+  Drawer,
   DrawerHeader,
   DrawerTitle,
   DrawerBody,
@@ -147,7 +147,7 @@ export type {
 export type { ErrorPageProps } from '../components/ErrorPage';
 `,
   figure: `export {
-  default as Figure,
+  Figure,
   FigureImage,
   FigureCaption,
 } from '../components/Figure';
@@ -157,33 +157,33 @@ export type {
   FigureCaptionProps,
 } from '../components/Figure';
 `,
-  'full-screen-toggle': `export { default as FullScreenToggle } from '../components/FullScreenToggle';
+  'full-screen-toggle': `export { FullScreenToggle } from '../components/FullScreenToggle';
 `,
-  gallery: `export { default as GalleryImage, galleryVariants } from '../components/Gallery';
+  gallery: `export { Gallery as GalleryImage, galleryVariants } from '../components/Gallery';
 export type { GalleryProps } from '../components/Gallery';
 `,
   highlighter: `export {
-  default as Highlighter,
+  Highlighter,
   highlightedTextVariants,
   defaultColors,
 } from '../components/Highlighter';
 export type { HighlighterProps } from '../components/Highlighter';
 `,
-  image: `export { default as Image, imageVariants } from '../components/Image';
+  image: `export { Image, imageVariants } from '../components/Image';
 export type {
   ImageProps,
   LoadingStrategy,
   ObjectFit,
 } from '../components/Image';
 `,
-  'json-viewer': `export { default as JsonViewer } from '../components/JsonViewer';
+  'json-viewer': `export { JsonViewer } from '../components/JsonViewer';
 export type { JsonViewerProps, JsonReplacer } from '../components/JsonViewer';
 `,
-  link: `export { default as Link, linkVariants } from '../components/Link';
+  link: `export { Link, linkVariants } from '../components/Link';
 export type { LinkProps } from '../components/Link';
 `,
   'link-bar': `export {
-  default as LinkBar,
+  LinkBar,
   LinkBarContent,
   LinkBarLink,
   LinkBarControl,
@@ -197,7 +197,7 @@ export type {
 } from '../components/LinkBar';
 `,
   'link-button': `export {
-  default as LinkButton,
+  LinkButton,
   LinkIcon,
   LinkText,
 } from '../components/LinkButton';
@@ -208,7 +208,7 @@ export type {
 } from '../components/LinkButton';
 `,
   'list-groups': `export {
-  default as ListGroups,
+  ListGroups,
   ListGroupItem,
   listGroupVariants,
   itemVariants,
@@ -221,7 +221,7 @@ export type {
 } from '../components/Lists/ListGroups';
 `,
   'ordered-list': `export {
-  default as OrderedList,
+  OrderedList,
   OrderedListItem,
 } from '../components/Lists/OrderedList';
 export type {
@@ -231,7 +231,7 @@ export type {
 } from '../components/Lists/OrderedList';
 `,
   'unordered-list': `export {
-  default as UnOrderedList,
+  UnOrderedList,
   UnOrderedListItem,
 } from '../components/Lists/UnOrderedList';
 export type {
@@ -240,7 +240,7 @@ export type {
 } from '../components/Lists/UnOrderedList';
 `,
   modal: `export {
-  default as Modal,
+  Modal,
   ModalHeader,
   ModalTitle,
   ModalBody,
@@ -255,11 +255,11 @@ export type {
   ModalFooterProps,
 } from '../components/Modal';
 `,
-  ripple: `export { default as Ripple } from '../components/Ripple';
+  ripple: `export { Ripple } from '../components/Ripple';
 export type { RippleProps } from '../components/Ripple';
 `,
   'scroll-to-top': `export {
-  default as ScrollToTop,
+  ScrollToTop,
   scrollButtonVariants,
 } from '../components/ScrollToTop';
 `,
@@ -271,20 +271,20 @@ export type {
 } from '../components/SectionHeader';
 `,
   separator: `export {
-  default as Separator,
+  Separator,
   separatorVariants,
 } from '../components/Separator';
 export type { SeparatorProps } from '../components/Separator';
 `,
   skeleton: `export { Skeleton } from '../components/Skeleton';
 `,
-  spinner: `export { default as Spinner, spinnerVariants } from '../components/Spinner';
+  spinner: `export { Spinner, spinnerVariants } from '../components/Spinner';
 export type { SpinnerProps } from '../components/Spinner';
 `,
-  splitter: `export { default as Splitter, SplitterPane } from '../components/Splitter';
+  splitter: `export { Splitter, SplitterPane } from '../components/Splitter';
 export type { SplitterProps, SplitterPaneProps } from '../components/Splitter';
 `,
-  stack: `export { default as Stack, StackItem } from '../components/Stack';
+  stack: `export { Stack, StackItem } from '../components/Stack';
 export type {
   StackProps,
   StackItemProps,
@@ -296,7 +296,7 @@ export type {
 } from '../components/Stack';
 `,
   table: `export {
-  default as Table,
+  Table,
   TableHead,
   TableBody,
   TableCell,
@@ -310,14 +310,14 @@ export type {
   TableCellProps,
 } from '../components/Table';
 `,
-  'table-list': `export { default as TableList } from '../components/Table/TableList';
+  'table-list': `export { TableList } from '../components/Table/TableList';
 export type { TableListProps } from '../components/Table/TableList';
 `,
   tabs: `export { Tabs, Tab } from '../components/Tabs';
 export type { TabsProps, TabProps } from '../components/Tabs';
 `,
   tag: `export {
-  default as Tag,
+  Tag,
   TagIcon,
   TagClose,
   TagText,
@@ -330,11 +330,11 @@ export type {
   TagCloseButtonProps,
 } from '../components/Tag';
 `,
-  'text-carousel': `export { default as TextCarousel } from '../components/TextCarousel';
+  'text-carousel': `export { TextCarousel } from '../components/TextCarousel';
 export type { TextCarouselProps } from '../components/TextCarousel';
 `,
   'text-highlighter': `export {
-  default as TextHighlighter,
+  TextHighlighter,
   TextHighlighterText,
   textHighlighterVariants,
 } from '../components/TextHighlighter';
@@ -356,16 +356,16 @@ export type {
 `,
   typography: `export { Heading, Paragraph, Text } from '../components/Typography';
 `,
-  heading: `export { default as Heading, headingVariants } from '../components/Typography/Heading';
+  heading: `export { Heading, headingVariants } from '../components/Typography/Heading';
 export type { HeadingProps } from '../components/Typography/Heading';
 `,
-  paragraph: `export { default as Paragraph, paragraphVariants } from '../components/Typography/Paragraph';
+  paragraph: `export { Paragraph, paragraphVariants } from '../components/Typography/Paragraph';
 export type { ParagraphProps } from '../components/Typography/Paragraph';
 `,
-  text: `export { default as Text, textVariants } from '../components/Typography/Text';
+  text: `export { Text, textVariants } from '../components/Typography/Text';
 export type { TextProps } from '../components/Typography/Text';
 `,
-  'dot-separator': `export { default as DotSeparator } from '../components/DotSeparator';
+  'dot-separator': `export { DotSeparator } from '../components/DotSeparator';
 `,
 };
 

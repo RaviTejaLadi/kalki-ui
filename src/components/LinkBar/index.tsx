@@ -11,8 +11,8 @@ import React, {
 } from 'react';
 import { cn } from '@/utils';
 import { cva, VariantProps } from 'class-variance-authority';
-import Link from '../Link';
-import Button from '../Button';
+import { Link } from '../Link';
+import { Button } from '../Button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // #region linkVariants
@@ -409,7 +409,7 @@ LinkBarLink.displayName = 'LinkBar.Link';
 // #endregion components
 
 // #region exports
-export default Object.assign(
+const LinkBarRoot = Object.assign(
   LinkBar as React.ForwardRefExoticComponent<
     LinkBarProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -421,6 +421,7 @@ export default Object.assign(
 );
 
 export {
+  LinkBarRoot as LinkBar,
   LinkBarContent,
   LinkBarLink,
   LinkBarControl,

@@ -8,8 +8,8 @@ import React, {
   ReactElement,
 } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Box from '../Box';
-import Button from '../Button';
+import { Box } from '../Box';
+import { Button } from '../Button';
 import { cn } from '@/utils';
 
 // #region type
@@ -142,5 +142,5 @@ TextCarousel.displayName = 'TextCarousel';
 // #endregion
 
 // #region export
-export default TextCarousel;
+export { TextCarousel };
 export type { TextCarouselProps };

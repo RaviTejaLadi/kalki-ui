@@ -1,7 +1,7 @@
 import React, { CSSProperties, forwardRef, ReactNode, useEffect } from 'react';
 import { cn } from '@/utils';
 import { cva } from 'class-variance-authority';
-import CloseButton from '../CloseButton';
+import { CloseButton } from '../CloseButton';
 
 // #region drawerVariants
 const drawerVariants = cva(
@@ -293,7 +293,7 @@ DrawerBody.displayName = 'DrawerBody';
 // #endregion
 
 // #region Export
-export default Object.assign(
+const DrawerRoot = Object.assign(
   Drawer as React.ForwardRefExoticComponent<
     DrawerProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -303,7 +303,14 @@ export default Object.assign(
     Body: DrawerBody,
   }
 );
-export { DrawerTitle, DrawerHeader, DrawerBody, drawerVariants };
+
+export {
+  DrawerRoot as Drawer,
+  DrawerTitle,
+  DrawerHeader,
+  DrawerBody,
+  drawerVariants,
+};
 export type {
   DrawerProps,
   DrawerHeaderProps,

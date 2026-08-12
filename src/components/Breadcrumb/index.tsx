@@ -3,8 +3,8 @@ import { ChevronRight, ArrowRight, Dot, Slash, Circle } from 'lucide-react';
 import { cn } from '@/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { CSSProperties, ReactNode } from 'react';
-import Box, { BoxProps } from '../Box';
-import Link from '../Link';
+import { Box, type BoxProps } from '../Box';
+import { Link } from '../Link';
 
 // #region breadcrumbVariants
 const breadcrumbVariants = cva(
@@ -199,13 +199,13 @@ BreadcrumbItem.displayName = 'BreadcrumbItem';
 // #endregion
 
 // #region exports
-export default Object.assign(
+const BreadcrumbRoot = Object.assign(
   Breadcrumb as React.ForwardRefExoticComponent<
     BreadcrumbProps & React.RefAttributes<HTMLDivElement>
   >,
   { Item: BreadcrumbItem }
 );
 
-export { BreadcrumbItem, breadcrumbVariants };
+export { BreadcrumbRoot as Breadcrumb, BreadcrumbItem, breadcrumbVariants };
 export type { BreadcrumbProps, BreadcrumbItemProps, SeparatorType };
 // #endregion

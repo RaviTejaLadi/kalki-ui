@@ -118,5 +118,5 @@ CloseButton.displayName = 'CloseButton';
 // #endregion
 
 // #region exports
-export default CloseButton;
+export { CloseButton };
 // #endregion

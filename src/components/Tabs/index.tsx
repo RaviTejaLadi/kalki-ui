@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from 'react';
 import { cva } from 'class-variance-authority';
-import Box, { BoxProps } from '../Box';
+import { Box, type BoxProps } from '../Box';
 import { cn } from '@/utils';
 
 // #region tabButtonStyles

@@ -31,4 +31,4 @@ const DotSeparator = ({ className }: DotSeparatorProps) => {
   );
 };
 
-export default DotSeparator;
+export { DotSeparator };

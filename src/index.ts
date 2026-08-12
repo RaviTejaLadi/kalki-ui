@@ -1,6 +1,6 @@
 // #region Accordion
 export {
-  default as Accordion,
+  Accordion,
   AccordionHeader,
   AccordionBody,
   AccordionItem,
@@ -17,14 +17,14 @@ export type {
 // #endregion Accordion
 
 // #region Box
-export { default as Box } from './components/Box';
+export { Box } from './components/Box';
 
 export type { BoxProps } from './components/Box';
 // #endregion Box
 
 // #region Alert
 export {
-  default as Alert,
+  Alert,
   AlertHeader,
   AlertBody,
   AlertFooter,
@@ -36,7 +36,7 @@ export type { AlertProps, SectionProps } from './components/Alert';
 
 // #region Avatar
 export {
-  default as Avatar,
+  Avatar,
   AvatarFallback,
   AvatarImage,
   avatarVariants,
@@ -46,14 +46,14 @@ export type { AvatarProps, AvatarImageProps } from './components/Avatar';
 // #endregion
 
 // #region Badge
-export { default as Badge, BadgeIcon, badgeVariants } from './components/Badge';
+export { Badge, BadgeIcon, badgeVariants } from './components/Badge';
 
 export type { BadgeProps, BadgeIconProps } from './components/Badge';
 // #endregion
 
 // #region Banner
 export {
-  default as Banner,
+  Banner,
   BannerTitle,
   BannerSubTitle,
   bannerVariants,
@@ -68,7 +68,7 @@ export type {
 
 // #region BreadCrumb
 export {
-  default as Breadcrumb,
+  Breadcrumb,
   BreadcrumbItem,
   breadcrumbVariants,
 } from './components/Breadcrumb';
@@ -81,13 +81,13 @@ export type {
 // #endregion
 
 // #region Link
-export { default as Link, linkVariants } from './components/Link';
+export { Link, linkVariants } from './components/Link';
 export type { LinkProps } from './components/Link';
 // #endregion
 
 // #region Button
 export {
-  default as Button,
+  Button,
   ButtonIcon,
   ButtonText,
   buttonVariants,
@@ -102,7 +102,7 @@ export type {
 
 // #region Card
 export {
-  default as Card,
+  Card,
   CardHeader,
   CardFooter,
   CardTitle,
@@ -115,7 +115,7 @@ export type { CardProps } from './components/Card';
 
 // #region Carousel
 export {
-  default as Carousel,
+  Carousel,
   CarouselSlides,
   CarouselContent,
   CarouselControls,
@@ -133,29 +133,29 @@ export type {
 // #endregion
 
 // #region CloseButton
-export { default as CloseButton } from './components/CloseButton';
+export { CloseButton } from './components/CloseButton';
 // #endregion
 
 // #region Code
-export { default as Code, codeVariants } from './components/Code';
+export { Code, codeVariants } from './components/Code';
 // #endregion
 
 // #region ContentScrollable
 export {
-  default as ContentScrollable,
+  ContentScrollable,
   contentScrollableVariants,
 } from './components/ContentScrollable';
 export type { ContentScrollableProps } from './components/ContentScrollable';
 // #endregion
 
 // #region Div
-export { default as Div, divVariants } from './components/Div';
+export { Div, divVariants } from './components/Div';
 export type { DivProps } from './components/Div';
 // #endregion
 
 // #region Drawer
 export {
-  default as Drawer,
+  Drawer,
   DrawerHeader,
   DrawerTitle,
   DrawerBody,
@@ -171,7 +171,7 @@ export type {
 // #endregion
 
 // #region Image
-export { default as Image, imageVariants } from './components/Image';
+export { Image, imageVariants } from './components/Image';
 export type {
   ImageProps,
   LoadingStrategy,
@@ -180,7 +180,7 @@ export type {
 // #endregion
 
 // #region Spinner
-export { default as Spinner, spinnerVariants } from './components/Spinner';
+export { Spinner, spinnerVariants } from './components/Spinner';
 export type { SpinnerProps } from './components/Spinner';
 // #endregion
 
@@ -198,20 +198,17 @@ export type {
 // #endregion
 
 // #region ScrollToTop
-export {
-  default as ScrollToTop,
-  scrollButtonVariants,
-} from './components/ScrollToTop';
+export { ScrollToTop, scrollButtonVariants } from './components/ScrollToTop';
 // #endregion
 
 // #region Ripple
-export { default as Ripple } from './components/Ripple';
+export { Ripple } from './components/Ripple';
 export type { RippleProps } from './components/Ripple';
 // #endregion
 
 // #region Modal
 export {
-  default as Modal,
+  Modal,
   ModalHeader,
   ModalTitle,
   ModalBody,
@@ -229,7 +226,7 @@ export type {
 
 // #region ListGroups
 export {
-  default as ListGroups,
+  ListGroups,
   ListGroupItem,
   listGroupVariants,
   itemVariants,
@@ -243,10 +240,7 @@ export type {
 // #endregion
 
 // #region OrderedList
-export {
-  default as OrderedList,
-  OrderedListItem,
-} from './components/Lists/OrderedList';
+export { OrderedList, OrderedListItem } from './components/Lists/OrderedList';
 export type {
   OrderedListProps,
   OrderedListItemProps,
@@ -256,7 +250,7 @@ export type {
 
 // #region UnOrderedList
 export {
-  default as UnOrderedList,
+  UnOrderedList,
   UnOrderedListItem,
 } from './components/Lists/UnOrderedList';
 export type {
@@ -266,11 +260,7 @@ export type {
 // #endregion
 
 // #region LinkButton
-export {
-  default as LinkButton,
-  LinkIcon,
-  LinkText,
-} from './components/LinkButton';
+export { LinkButton, LinkIcon, LinkText } from './components/LinkButton';
 export type {
   LinkButtonProps,
   LinkIconProps,
@@ -280,7 +270,7 @@ export type {
 
 // #region LinkBar
 export {
-  default as LinkBar,
+  LinkBar,
   LinkBarContent,
   LinkBarLink,
   LinkBarControl,
@@ -295,25 +285,21 @@ export type {
 // #endregion
 
 // #region JsonViewer
-export { default as JsonViewer } from './components/JsonViewer';
+export { JsonViewer } from './components/JsonViewer';
 export type { JsonViewerProps, JsonReplacer } from './components/JsonViewer';
 // #endregion
 
 // #region Gallery
-export { default as GalleryImage, galleryVariants } from './components/Gallery';
+export { Gallery as GalleryImage, galleryVariants } from './components/Gallery';
 export type { GalleryProps } from './components/Gallery';
 // #endregion
 
 // #region FullScreenToggle
-export { default as FullScreenToggle } from './components/FullScreenToggle';
+export { FullScreenToggle } from './components/FullScreenToggle';
 // #endregion
 
 // #region Figure
-export {
-  default as Figure,
-  FigureImage,
-  FigureCaption,
-} from './components/Figure';
+export { Figure, FigureImage, FigureCaption } from './components/Figure';
 export type {
   FigureProps,
   FigureImageProps,
@@ -322,7 +308,7 @@ export type {
 // #endregion
 
 // #region DotSeparator
-export { default as DotSeparator } from './components/DotSeparator';
+export { DotSeparator } from './components/DotSeparator';
 // #endregion
 
 // #region Typography
@@ -332,7 +318,7 @@ export * from './components/Typography';
 
 // #region TextHighlighter
 export {
-  default as TextHighlighter,
+  TextHighlighter,
   TextHighlighterText,
   textHighlighterVariants,
 } from './components/TextHighlighter';
@@ -365,7 +351,7 @@ export type { ErrorPageProps } from './components/ErrorPage';
 
 // #region Highlighter
 export {
-  default as Highlighter,
+  Highlighter,
   highlightedTextVariants,
   defaultColors,
 } from './components/Highlighter';
@@ -373,20 +359,17 @@ export type { HighlighterProps } from './components/Highlighter';
 // #endregion
 
 // #region Separator
-export {
-  default as Separator,
-  separatorVariants,
-} from './components/Separator';
+export { Separator, separatorVariants } from './components/Separator';
 export type { SeparatorProps } from './components/Separator';
 // #endregion
 
 // #region Splitter
-export { default as Splitter, SplitterPane } from './components/Splitter';
+export { Splitter, SplitterPane } from './components/Splitter';
 export type { SplitterProps, SplitterPaneProps } from './components/Splitter';
 // #endregion
 
 // #region Stack
-export { default as Stack, StackItem } from './components/Stack';
+export { Stack, StackItem } from './components/Stack';
 export type {
   StackProps,
   StackItemProps,
@@ -400,7 +383,7 @@ export type {
 
 // #region Table
 export {
-  default as Table,
+  Table,
   TableHead,
   TableBody,
   TableCell,
@@ -413,7 +396,7 @@ export type {
   TableRowProps,
   TableCellProps,
 } from './components/Table';
-export { default as TableList } from './components/Table/TableList';
+export { TableList } from './components/Table/TableList';
 export type { TableListProps } from './components/Table/TableList';
 // #endregion
 
@@ -423,13 +406,7 @@ export type { TabsProps, TabProps } from './components/Tabs';
 // #endregion
 
 // #region Tag
-export {
-  default as Tag,
-  TagIcon,
-  TagClose,
-  TagText,
-  tagVariants,
-} from './components/Tag';
+export { Tag, TagIcon, TagClose, TagText, tagVariants } from './components/Tag';
 export type {
   TagProps,
   TagIconProps,
@@ -439,7 +416,7 @@ export type {
 // #endregion
 
 // #region TextCarousel
-export { default as TextCarousel } from './components/TextCarousel';
+export { TextCarousel } from './components/TextCarousel';
 export type { TextCarouselProps } from './components/TextCarousel';
 // #endregion
 

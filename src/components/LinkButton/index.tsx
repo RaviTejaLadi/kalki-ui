@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
-import Link from '../Link';
+import { Link } from '../Link';
 import { cn } from '@/utils';
 
 // #region linkVariants
@@ -232,7 +232,7 @@ LinkText.displayName = 'LinkText';
 // #endregion LinkButton Component
 
 // #region Export Components and Types
-export default Object.assign(
+const LinkButtonRoot = Object.assign(
   LinkButton as React.ForwardRefExoticComponent<
     LinkButtonProps & React.RefAttributes<HTMLAnchorElement>
   >,
@@ -242,6 +242,6 @@ export default Object.assign(
   }
 );
 
-export { LinkIcon, LinkText };
+export { LinkButtonRoot as LinkButton, LinkIcon, LinkText };
 export type { LinkButtonProps, LinkIconProps, LinkTextProps };
 // #endregion Export Components and Types

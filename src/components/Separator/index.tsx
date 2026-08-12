@@ -125,6 +125,5 @@ Separator.displayName = 'Separator';
 // #endregion
 
 // #region exports
-export default Separator;
+export { Separator, separatorVariants };
 export type { SeparatorProps };
-export { separatorVariants };

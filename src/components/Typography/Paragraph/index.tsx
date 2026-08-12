@@ -132,7 +132,6 @@ Paragraph.displayName = 'Paragraph';
 // #endregion
 
 // #region export
-export default Paragraph;
-export { paragraphVariants };
+export { Paragraph, paragraphVariants };
 export type { ParagraphProps };
 // #endregion

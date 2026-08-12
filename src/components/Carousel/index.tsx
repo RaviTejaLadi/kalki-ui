@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { cn } from '@/utils';
 import { cva } from 'class-variance-authority';
-import Box, { BoxProps } from '../Box';
+import { Box, type BoxProps } from '../Box';
 
 // #region carouselVariants
 const carouselVariants = cva('flex flex-col mx-auto', {
@@ -414,7 +414,7 @@ const CarouselSlides: React.FC<CarouselSlidesProps> = ({
 // #endregion
 
 // #region exports
-export default Object.assign(
+const CarouselRoot = Object.assign(
   Carousel as React.ForwardRefExoticComponent<
     CarouselProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -425,7 +425,9 @@ export default Object.assign(
     Dots: CarouselDots,
   }
 );
+
 export {
+  CarouselRoot as Carousel,
   CarouselSlides,
   CarouselContent,
   CarouselControls,

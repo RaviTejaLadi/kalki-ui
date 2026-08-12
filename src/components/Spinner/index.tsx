@@ -99,7 +99,6 @@ Spinner.displayName = 'Spinner';
 // #endregion
 
 // #region exports
-export default Spinner;
-export { spinnerVariants };
+export { Spinner, spinnerVariants };
 export type { SpinnerProps };
 // #endregion

@@ -169,6 +169,5 @@ Text.displayName = 'Text';
 // #endregion
 
 // #region export
-export default Text;
-export { textVariants };
+export { Text, textVariants };
 export type { TextProps };

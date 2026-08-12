@@ -129,6 +129,5 @@ Heading.displayName = 'Heading';
 // #endregion
 
 // #region export
-export default Heading;
-export { headingVariants };
+export { Heading, headingVariants };
 export type { HeadingProps };

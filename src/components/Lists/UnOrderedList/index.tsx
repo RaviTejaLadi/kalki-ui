@@ -108,7 +108,7 @@ const UnOrderedListItem: React.FC<UnOrderedListItemProps> = ({
 // #endregion
 
 // #region exports
-export default Object.assign(
+const UnOrderedListRoot = Object.assign(
   UnOrderedList as React.ForwardRefExoticComponent<
     UnOrderedListProps & React.RefAttributes<HTMLUListElement>
   >,
@@ -117,5 +117,5 @@ export default Object.assign(
   }
 );
 
-export { UnOrderedListItem };
+export { UnOrderedListRoot as UnOrderedList, UnOrderedListItem };
 export type { UnOrderedListProps, UnOrderedListItemProps };

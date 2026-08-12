@@ -109,7 +109,6 @@ ContentScrollable.displayName = 'ContentScrollable';
 // #endregion
 
 // #region exports
-export default ContentScrollable;
-export { contentScrollableVariants };
+export { ContentScrollable, contentScrollableVariants };
 export type { ContentScrollableProps };
 // #endregion

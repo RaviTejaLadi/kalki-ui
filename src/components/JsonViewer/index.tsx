@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import { Clipboard, ClipboardCheck } from 'lucide-react';
-import Button from '../Button';
+import { Button } from '../Button';
 import { cn } from '@/utils';
-import Div from '../Div';
+import { Div } from '../Div';
 
 // #region types
 type JsonReplacer =
@@ -206,7 +206,7 @@ JsonViewer.displayName = 'JsonViewer';
 // #endregion
 
 // #region export
-export default JsonViewer;
+export { JsonViewer };
 
 export type { JsonViewerProps, JsonReplacer };
 // #endregion

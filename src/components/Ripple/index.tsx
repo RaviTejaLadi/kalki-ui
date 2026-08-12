@@ -159,5 +159,5 @@ const Ripple = forwardRef<HTMLDivElement, RippleProps>(
 
 Ripple.displayName = 'Ripple';
 
-export default Ripple;
+export { Ripple };
 export type { RippleProps };

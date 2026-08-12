@@ -333,7 +333,7 @@ const TextHighlighterText = forwardRef<
 TextHighlighterText.displayName = 'TextHighlighterText';
 
 // #region exports
-export default Object.assign(
+const TextHighlighterRoot = Object.assign(
   TextHighlighter as React.ForwardRefExoticComponent<
     TextHighlighterProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -342,7 +342,11 @@ export default Object.assign(
   }
 );
 
-export { TextHighlighterText, textHighlighterVariants };
+export {
+  TextHighlighterRoot as TextHighlighter,
+  TextHighlighterText,
+  textHighlighterVariants,
+};
 export type {
   Variant,
   Emphasis,

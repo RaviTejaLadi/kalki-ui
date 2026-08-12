@@ -137,5 +137,4 @@ const ScrollToTop: React.FC<ScrollToTopProps> = ({
 // #endregion
 
 // #region exports
-export default ScrollToTop;
-export { scrollButtonVariants };
+export { ScrollToTop, scrollButtonVariants };

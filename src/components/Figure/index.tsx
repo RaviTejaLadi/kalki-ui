@@ -1,6 +1,6 @@
 import React, { CSSProperties, forwardRef, ReactNode } from 'react';
 import { cn } from '@/utils';
-import Image, { ImageProps } from '../Image';
+import { Image, type ImageProps } from '../Image';
 
 // #region types
 /**
@@ -192,7 +192,7 @@ FigureCaption.displayName = 'FigureCaption';
 // #endregion components
 
 // #region export
-export default Object.assign(
+const FigureRoot = Object.assign(
   Figure as React.ForwardRefExoticComponent<
     FigureProps & React.RefAttributes<HTMLElement>
   >,
@@ -202,6 +202,6 @@ export default Object.assign(
   }
 );
 
-export { FigureImage, FigureCaption };
+export { FigureRoot as Figure, FigureImage, FigureCaption };
 export type { FigureProps, FigureImageProps, FigureCaptionProps };
 // #endregion export

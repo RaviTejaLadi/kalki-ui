@@ -121,7 +121,7 @@ BadgeIcon.displayName = 'BadgeIcon';
 // #endregion
 
 // #region exports
-export default Object.assign(
+const BadgeRoot = Object.assign(
   Badge as React.ForwardRefExoticComponent<
     BadgeProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -130,6 +130,6 @@ export default Object.assign(
   }
 );
 
-export { BadgeIcon, badgeVariants };
+export { BadgeRoot as Badge, BadgeIcon, badgeVariants };
 export type { BadgeProps, BadgeIconProps };
 // #endregion

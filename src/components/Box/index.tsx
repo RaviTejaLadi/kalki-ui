@@ -194,6 +194,6 @@ Box.displayName = 'Box';
 // #endregion
 
 // #region exports
-export default Box;
+export { Box };
 export type { BoxProps };
 // #endregion

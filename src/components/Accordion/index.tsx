@@ -417,7 +417,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 // #endRegion
 
 // #region exports
-export default Object.assign(
+const AccordionRoot = Object.assign(
   Accordion as React.ForwardRefExoticComponent<
     AccordionProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -428,7 +428,13 @@ export default Object.assign(
   }
 );
 
-export { AccordionHeader, AccordionBody, AccordionItem, accordionVariants };
+export {
+  AccordionRoot as Accordion,
+  AccordionHeader,
+  AccordionBody,
+  AccordionItem,
+  accordionVariants,
+};
 export type {
   AccordionVariant,
   AccordionSize,

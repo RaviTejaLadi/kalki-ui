@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode, useEffect } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import CloseButton from '../CloseButton';
+import { CloseButton } from '../CloseButton';
 import { cn } from '@/utils';
 
 // #region modalVariants
@@ -349,7 +349,7 @@ Modal.displayName = 'Modal';
 // #endregion
 
 // #region export
-export default Object.assign(
+const ModalRoot = Object.assign(
   Modal as React.ForwardRefExoticComponent<
     ModalProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -361,7 +361,14 @@ export default Object.assign(
   }
 );
 
-export { ModalHeader, ModalTitle, ModalBody, ModalFooter, modalVariants };
+export {
+  ModalRoot as Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalBody,
+  ModalFooter,
+  modalVariants,
+};
 export type {
   ModalProps,
   ModalHeaderProps,

@@ -204,7 +204,7 @@ const TagText: React.FC<TagTextProps> = ({ children, className, ...rest }) => (
 // #endregion
 
 // #region exports
-export default Object.assign(
+const TagRoot = Object.assign(
   Tag as React.ForwardRefExoticComponent<
     TagProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -215,6 +215,6 @@ export default Object.assign(
   }
 );
 
-export { TagIcon, TagClose, TagText, tagVariants };
+export { TagRoot as Tag, TagIcon, TagClose, TagText, tagVariants };
 
 export type { TagProps, TagIconProps, TagTextProps, TagCloseButtonProps };

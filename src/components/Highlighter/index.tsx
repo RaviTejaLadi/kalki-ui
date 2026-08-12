@@ -295,6 +295,10 @@ Highlighter.displayName = 'Highlighter';
 // #endregion
 
 // #region export
-export default Highlighter;
-export { type HighlighterProps, defaultColors, highlightedTextVariants };
+export {
+  Highlighter,
+  type HighlighterProps,
+  defaultColors,
+  highlightedTextVariants,
+};
 // #endregion

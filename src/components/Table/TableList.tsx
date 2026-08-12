@@ -1,6 +1,6 @@
 import React, { forwardRef, CSSProperties } from 'react';
-import Table from '.';
-import Code from '../Code';
+import { Table } from '.';
+import { Code } from '../Code';
 import { cn } from '@/utils';
 
 interface TableListProps {
@@ -122,5 +122,5 @@ const TableList = forwardRef<HTMLTableElement, TableListProps>(
 );
 
 TableList.displayName = 'TableList';
-export default TableList;
+export { TableList };
 export type { TableListProps };

@@ -1,7 +1,7 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { cn } from '@/utils';
 import { cva, VariantProps } from 'class-variance-authority';
-import Image, { ImageProps } from '../Image';
+import { Image, type ImageProps } from '../Image';
 
 // #region galleryVariants
 const galleryVariants = cva('gap-4', {
@@ -139,7 +139,7 @@ const GalleryImage = forwardRef<HTMLDivElement, ImageProps>(
 GalleryImage.displayName = 'GalleryImage';
 // #endregion
 // #region export
-export default Object.assign(
+const GalleryRoot = Object.assign(
   Gallery as React.ForwardRefExoticComponent<
     GalleryProps & React.RefAttributes<HTMLDivElement>
   >,
@@ -148,6 +148,6 @@ export default Object.assign(
   }
 );
 
-export { GalleryImage, galleryVariants };
+export { GalleryRoot as Gallery, GalleryImage, galleryVariants };
 export type { GalleryProps };
 // #endregion
