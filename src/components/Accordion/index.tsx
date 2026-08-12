@@ -18,7 +18,7 @@ import { ChevronDown } from 'lucide-react';
 
 // #region accordionVariants
 const accordionVariants = cva(
-  'w-full border-[.5px] border-gray-200/10 rounded-md overflow-hidden',
+  'w-full border border-border rounded-md overflow-hidden',
   {
     variants: {
       size: {

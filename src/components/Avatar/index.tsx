@@ -142,7 +142,7 @@ const AvatarFallback = React.forwardRef<HTMLDivElement, AvatarFallbackProps>(
         ref={ref}
         className={cn(
           avatarVariants({ size, shape }),
-          'bg-background dark:bg-background/40 border border-gray-200/10 text-foreground font-medium',
+          'bg-background dark:bg-background/40 border border-border text-foreground font-medium',
           className
         )}
         {...props}

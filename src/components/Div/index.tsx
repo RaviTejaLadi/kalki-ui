@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority';
 
 // #region divVariants
 const divVariants = cva(
-  'rounded-lg transition-all duration-300 border-gray-200/10',
+  'rounded-lg transition-all duration-300 border-border',
   {
     variants: {
       borderStyle: {

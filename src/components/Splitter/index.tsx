@@ -162,7 +162,7 @@ const ResizeHandle = React.memo(
       aria-valuemax={95}
       tabIndex={0}
       className={cn(
-        'flex items-center justify-center border border-gray-200/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+        'flex items-center justify-center border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         orientation === 'horizontal'
           ? 'w-[.5px] cursor-ew-resize'
           : 'h-[.5px] cursor-ns-resize'
@@ -271,7 +271,7 @@ const Splitter = forwardRef<HTMLDivElement, SplitterProps>(
         className={cn(
           'flex',
           orientation === 'horizontal' ? 'flex-row' : 'flex-col',
-          'w-full h-full border border-gray-200/10',
+          'w-full h-full border border-border',
           className
         )}
         style={{ height }}

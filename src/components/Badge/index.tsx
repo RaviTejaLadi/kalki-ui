@@ -23,7 +23,7 @@ const badgeVariants = cva(
         help: 'bg-help text-white',
         light: 'bg-light text-foreground',
         dark: 'bg-dark text-white',
-        outline: 'border border-gray-200/10 text-foreground',
+        outline: 'border border-border text-foreground',
       },
       pill: {
         true: 'rounded-full',

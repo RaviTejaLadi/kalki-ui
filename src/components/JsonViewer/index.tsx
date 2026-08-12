@@ -176,7 +176,7 @@ const JsonViewer = forwardRef<HTMLDivElement, JsonViewerProps>(
       <Div
         ref={ref}
         className={cn(
-          'border group border-gray-200/10 relative rounded-lg overflow-auto',
+          'border group border-border relative rounded-lg overflow-auto',
           className
         )}
         style={{ ...style }}

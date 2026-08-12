@@ -85,11 +85,11 @@ interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
 const Table = forwardRef<HTMLTableElement, TableProps>(
   ({ children, className, style, ...rest }, ref) => {
     return (
-      <div className="overflow-x-auto rounded-md border border-gray-200/10">
+      <div className="overflow-x-auto rounded-md border border-border">
         <table
           ref={ref}
           className={cn(
-            'w-full border-collapse border border-gray-200 rounded-md text-sm bg-background border-gray-200/10 shadow-sm overflow-hidden',
+            'w-full border-collapse border rounded-md text-sm bg-background border-border shadow-sm overflow-hidden',
             className
           )}
           style={style}
@@ -131,7 +131,7 @@ const TableHead: React.FC<TableSectionProps> = ({
   return (
     <thead
       className={cn(
-        'bg-background border-gray-200/10 text-foreground text-left uppercase text-xs font-semibold border-b border-gray-200',
+        'bg-background text-foreground text-left uppercase text-xs font-semibold border-b border-border',
         className
       )}
       style={style}

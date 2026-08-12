@@ -107,7 +107,7 @@ const Tag = forwardRef<HTMLDivElement, TagProps>(
         className={cn(
           tagVariants({ variant, size }),
           'clip-path-tag',
-          'before:content-[""] before:absolute before:left-3 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gray-300 before:border-[1px] before:border-gray-200/10  before:opacity-70',
+          'before:content-[""] before:absolute before:left-3 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-2 before:rounded-full before:bg-gray-300 before:border before:border-border before:opacity-70',
           'before:ring-1 before:ring-current before:ring-opacity-30',
           className
         )}
