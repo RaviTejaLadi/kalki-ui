@@ -143,11 +143,12 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     }, [isOpen, onClose]);
 
     return (
-      <div ref={ref} {...rest}>
+      <div ref={ref} className={cn()} {...rest}>
         <div
-          className={`fixed  z-50 inset-0 bg-black/80 bg-opacity-10 transition-opacity ${
+          className={cn(
+            'fixed z-50 inset-0 bg-black/80 bg-opacity-10 transition-opacity',
             isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
+          )}
           style={{ backgroundColor: overLayColor }}
           onClick={onClose}
         />

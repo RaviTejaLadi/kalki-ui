@@ -70,7 +70,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
   ({ variant, children, className, style, ...rest }, ref) => {
     return (
       <div
-        className={alertVariants({ variant, className })}
+        className={cn(alertVariants({ variant }), className)}
         ref={ref}
         style={style}
         {...rest}

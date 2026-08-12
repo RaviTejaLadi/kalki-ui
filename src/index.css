@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* Build-time only: compile theme + utilities into dist/kalki-ui.css.
-   - Skip Preflight so consumer apps keep their own base styles.
-   - Omit cascade layers so utilities are not outranked by unlayered consumer CSS. */
+/*
+  Build-time only: compile theme + utilities into dist/kalki-ui.css.
+  - Skip Preflight so consumer apps keep their own base styles.
+  - postcss-kalki-scope rewrites selectors under `.kalki-ui` so nothing leaks globally.
+*/
 @import 'tailwindcss/theme.css';
 @import 'tailwindcss/utilities.css';
 @config '../tailwind.config.cjs';
@@ -12,8 +14,8 @@
   background: inherit !important;
 }
 
-/* Unlayered tokens so they apply regardless of the consumer's CSS layer setup. */
-:root {
+/* Design tokens — scoped to `.kalki-ui` (also rewritten by postcss-kalki-scope). */
+.kalki-ui {
   --background: 210 25% 98%;
   --foreground: 222 30% 12%;
 
@@ -64,7 +66,8 @@
   --icon-color: #334155;
 }
 
-.dark {
+.dark .kalki-ui,
+.kalki-ui.dark {
   --background: 222 28% 7%;
   --foreground: 210 25% 96%;
 
@@ -117,26 +120,32 @@
   --icon-color: #cbd5e1;
 }
 
-::-webkit-scrollbar {
+.kalki-ui::-webkit-scrollbar,
+.kalki-ui *::-webkit-scrollbar {
   width: 5px;
 }
-::-webkit-scrollbar-track {
+.kalki-ui::-webkit-scrollbar-track,
+.kalki-ui *::-webkit-scrollbar-track {
   background: transparent;
 }
-::-webkit-scrollbar-thumb {
+.kalki-ui::-webkit-scrollbar-thumb,
+.kalki-ui *::-webkit-scrollbar-thumb {
   background: var(--icon-color);
   border-radius: 5px;
 }
-* {
+.kalki-ui,
+.kalki-ui * {
   scrollbar-width: thin;
   scrollbar-color: var(--icon-color) transparent;
 }
 
 @media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-thumb {
+  .kalki-ui::-webkit-scrollbar-thumb,
+  .kalki-ui *::-webkit-scrollbar-thumb {
     background: hsl(218, 11%, 65%);
   }
-  * {
+  .kalki-ui,
+  .kalki-ui * {
     scrollbar-color: hsl(218, 11%, 65%) transparent;
   }
 }

@@ -1,6 +1,7 @@
 import { cva } from 'class-variance-authority';
 import React from 'react';
 import { buttonVariants } from '../Button';
+import { cn } from '@/utils';
 
 // Error page variants configuration
 const errorPageVariants = cva(
@@ -154,9 +155,9 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
   };
 
   return (
-    <div className={errorPageVariants({ variant })}>
+    <div className={cn(errorPageVariants({ variant }))}>
       <div className="max-w-md mx-auto">
-        <h1 className={errorCodeVariants({ variant })}>{variant}</h1>
+        <h1 className={cn(errorCodeVariants({ variant }))}>{variant}</h1>
         <h2 className="text-2xl md:text-3xl font-bold mb-4">{content.title}</h2>
         <p className="text-lg opacity-80 mb-8 leading-relaxed">
           {content.description}
@@ -167,7 +168,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
               key={button.text}
               type="button"
               onClick={() => handleButtonClick(button.text)}
-              className={buttonVariants({ variant: button.variant })}
+              className={cn(buttonVariants({ variant: button.variant }))}
             >
               {button.text}
             </button>

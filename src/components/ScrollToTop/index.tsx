@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes, useEffect, useState } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ChevronUp } from 'lucide-react';
+import { cn } from '@/utils';
 
 // #region scrollButtonVariants
 const scrollButtonVariants = cva(
@@ -121,7 +122,7 @@ const ScrollToTop: React.FC<ScrollToTopProps> = ({
   return (
     <button
       onClick={scrollToTop}
-      className={scrollButtonVariants({ size, position, variant })}
+      className={cn(scrollButtonVariants({ size, position, variant }))}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: `scale(${isVisible ? 1 : 0.8}) ${position === 'center' ? 'translateX(-50%)' : ''}`,

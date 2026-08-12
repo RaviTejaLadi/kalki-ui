@@ -160,6 +160,7 @@ import 'kalki-ui/styles.css';
 ### Migrating to v3.2
 
 - **Tailwind is no longer a peer dependency.** Component styles come from `kalki-ui/styles.css` only. Your app may use Tailwind v3, v4, another CSS setup, or none at all.
+- **Styles are scoped** under the `kalki-ui` class (applied automatically by components). Importing `kalki-ui/styles.css` will not override your app’s global utilities, CSS variables, or scrollbars.
 
 ### Migrating to v3.1
 

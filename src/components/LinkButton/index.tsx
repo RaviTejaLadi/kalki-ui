@@ -156,7 +156,10 @@ const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
       <Link
         ref={ref}
         to={to}
-        className={linkVariants({ variant, size, raised, rounded, className })}
+        className={cn(
+          linkVariants({ variant, size, raised, rounded }),
+          className
+        )}
         {...rest}
       >
         {children}

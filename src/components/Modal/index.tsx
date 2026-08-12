@@ -176,7 +176,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     return (
       <div
         ref={ref}
-        className="fixed inset-0 flex justify-center items-center transition-opacity"
+        className={cn(
+          'fixed inset-0 flex justify-center items-center transition-opacity'
+        )}
         style={{
           backgroundColor: overLayColor || 'rgba(0, 0, 0, 0.75)',
           zIndex: overlayZIndex,
