@@ -155,14 +155,14 @@ const JsonViewer = forwardRef<HTMLDivElement, JsonViewerProps>(
           .writeText(textContent)
           .then(() => {
             setCopyButtonText(
-              <ClipboardCheck className="size-3 text-[var(--icon-color)]" />
+              <ClipboardCheck className="size-3 text-[--icon-color]" />
             );
             if (copyTimeoutRef.current) {
               clearTimeout(copyTimeoutRef.current);
             }
             copyTimeoutRef.current = setTimeout(() => {
               setCopyButtonText(
-                <Clipboard className="size-3 text-[var(--icon-color)]" />
+                <Clipboard className="size-3 text-[--icon-color]" />
               );
             }, 2000);
           })
@@ -193,7 +193,7 @@ const JsonViewer = forwardRef<HTMLDivElement, JsonViewerProps>(
         <pre
           ref={containerRef}
           className={cn(
-            'whitespace-pre-wrap p-2 bg-gray-50 dark:bg-gray-100/10 rounded max-h-[100vh] overflow-auto text-sm'
+            'whitespace-pre-wrap p-2 bg-gray-50 dark:bg-gray-100/10 rounded max-h-screen overflow-auto text-sm'
           )}
           dangerouslySetInnerHTML={{ __html: jsonData }}
         />

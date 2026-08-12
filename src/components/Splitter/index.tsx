@@ -179,7 +179,7 @@ const ResizeHandle = React.memo(
           outlined
         >
           <GripVertical
-            className="text-[var(--icon-color)] size-3"
+            className="text-[--icon-color] size-3"
             aria-hidden="true"
           />
         </Box>
@@ -192,7 +192,7 @@ const ResizeHandle = React.memo(
           outlined
         >
           <GripHorizontal
-            className="text-[var(--icon-color)] size-3"
+            className="text-[--icon-color] size-3"
             aria-hidden="true"
           />
         </Box>

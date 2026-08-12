@@ -296,7 +296,7 @@ const ModalBody = ({
   return (
     <div
       className={cn(
-        'p-2.5 w-full flex-grow overflow-auto text-muted-foreground',
+        'p-2.5 w-full grow overflow-auto text-muted-foreground',
         className
       )}
       style={{ height }}
