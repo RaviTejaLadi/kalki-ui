@@ -404,7 +404,7 @@ const CarouselSlides: React.FC<CarouselSlidesProps> = ({
         }}
       >
         {React.Children.map(children, (child) => (
-          <div className="w-full h-full flex-shrink-0">{child}</div>
+          <div className="w-full h-full shrink-0">{child}</div>
         ))}
       </div>
     </div>

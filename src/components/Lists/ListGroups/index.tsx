@@ -247,8 +247,8 @@ const ListGroupItem = forwardRef<HTMLLIElement, ListGroupItemProps>(
         role="button"
         {...props}
       >
-        {icon && <span className="flex-shrink-0 mr-2 w-5 h-5">{icon}</span>}
-        <div className="flex-grow min-w-0">
+        {icon && <span className="shrink-0 mr-2 w-5 h-5">{icon}</span>}
+        <div className="grow min-w-0">
           <div className="font-medium truncate">{label}</div>
           {description && (
             <div
@@ -264,7 +264,7 @@ const ListGroupItem = forwardRef<HTMLLIElement, ListGroupItemProps>(
         {showArrows && !disabled && (
           <ChevronRight
             className={cn(
-              'w-4 h-4 flex-shrink-0 transition-transform duration-200',
+              'w-4 h-4 shrink-0 transition-transform duration-200',
               'group-hover:translate-x-1'
             )}
           />

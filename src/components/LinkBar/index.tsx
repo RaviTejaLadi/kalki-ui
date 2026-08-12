@@ -262,9 +262,9 @@ const LinkBarContent = ({
 
   return (
     <div
-      ref={scrollRef}
+      ref={scrollRef as RefObject<HTMLDivElement>}
       className={cn(
-        'flex items-center gap-1 flex-grow overflow-x-auto scrollbar-none scroll-smooth',
+        'flex items-center gap-1 grow overflow-x-auto scrollbar-none scroll-smooth',
         className
       )}
       style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}

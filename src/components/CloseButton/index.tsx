@@ -105,7 +105,7 @@ const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
         {...rest}
       >
         <X
-          className="m-[-2px] text-foreground"
+          className="-m-0.5 text-foreground"
           width={iconSize}
           height={iconSize}
         />

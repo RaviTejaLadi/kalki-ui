@@ -140,7 +140,7 @@ const Banner = forwardRef<HTMLDivElement, BannerProps>(
         ref={ref}
         {...rest}
       >
-        <div className="flex-grow">
+        <div className="grow">
           {React.Children.map(children, (child) =>
             React.isValidElement<{ size?: BannerSize }>(child) &&
             (child.type === BannerTitle || child.type === BannerSubTitle)
