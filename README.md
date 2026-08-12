@@ -65,7 +65,6 @@ This project empowers developers to create stunning user interfaces effortlessly
 | `Div` | Styled div primitive with variants |
 | `Stack` / `StackItem` | Flexbox stack layout |
 | `Splitter` / `SplitterPane` | Resizable split panes |
-| `Separator` | Visual divider |
 | `DotSeparator` | Dot-style separator |
 | `SectionHeader` | Section title and subtitle |
 
@@ -150,6 +149,13 @@ pnpm add kalki-ui
 
 **Peer dependencies:** `react` / `react-dom` (^16.8 || ^17 || ^18 || ^19) and `tailwindcss` (^3.4 || ^4).
 
+**TypeScript note:** Published `.d.ts` files are generated against **`@types/react` / `@types/react-dom` v18** so React 18 consumers (and monorepo docs apps) type-check cleanly. Use matching `@types/react@18` / `@types/react-dom@18` in your app when possible. React 19 runtimes are supported; if you use `@types/react@19`, keep a single version of those types across the workspace (avoid nested duplicates).
+
+### Migrating to v3.1
+
+- **`Separator` removed** — the component was unreliable and is no longer exported (`kalki-ui/separator` and root `Separator` / `separatorVariants`). Use `DotSeparator` for inline dots, or your own divider markup.
+- Published types are built against **`@types/react` / `@types/react-dom` v18** for React 18 consumer compatibility (React 16–19 runtimes remain supported).
+
 ### Migrating to v2
 
 v2 is a breaking release:
@@ -193,7 +199,7 @@ import 'kalki-ui/styles.css';
 
 Use `kalki-ui/<name>` for any component, for example:
 
-`accordion`, `alert`, `avatar`, `badge`, `banner`, `box`, `breadcrumb`, `button`, `card`, `carousel`, `close-button`, `code`, `content-scrollable`, `div`, `dot-separator`, `drawer`, `empty`, `error-page`, `figure`, `full-screen-toggle`, `gallery`, `heading`, `highlighter`, `image`, `json-viewer`, `link`, `link-bar`, `link-button`, `list-groups`, `modal`, `ordered-list`, `paragraph`, `ripple`, `scroll-to-top`, `section-header`, `separator`, `skeleton`, `spinner`, `splitter`, `stack`, `table`, `table-list`, `tabs`, `tag`, `text`, `text-carousel`, `text-highlighter`, `toggle`, `typography`, `unordered-list`
+`accordion`, `alert`, `avatar`, `badge`, `banner`, `box`, `breadcrumb`, `button`, `card`, `carousel`, `close-button`, `code`, `content-scrollable`, `div`, `dot-separator`, `drawer`, `empty`, `error-page`, `figure`, `full-screen-toggle`, `gallery`, `heading`, `highlighter`, `image`, `json-viewer`, `link`, `link-bar`, `link-button`, `list-groups`, `modal`, `ordered-list`, `paragraph`, `ripple`, `scroll-to-top`, `section-header`, `skeleton`, `spinner`, `splitter`, `stack`, `table`, `table-list`, `tabs`, `tag`, `text`, `text-carousel`, `text-highlighter`, `toggle`, `typography`, `unordered-list`
 
 ## Development
 

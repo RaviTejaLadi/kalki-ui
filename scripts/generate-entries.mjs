@@ -270,12 +270,6 @@ export type {
   SectionHeaderSubTitleProps,
 } from '../components/SectionHeader';
 `,
-  separator: `export {
-  Separator,
-  separatorVariants,
-} from '../components/Separator';
-export type { SeparatorProps } from '../components/Separator';
-`,
   skeleton: `export { Skeleton } from '../components/Skeleton';
 `,
   spinner: `export { Spinner, spinnerVariants } from '../components/Spinner';

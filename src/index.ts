@@ -362,11 +362,6 @@ export {
 export type { HighlighterProps } from './components/Highlighter';
 // #endregion
 
-// #region Separator
-export { Separator, separatorVariants } from './components/Separator';
-export type { SeparatorProps } from './components/Separator';
-// #endregion
-
 // #region Splitter
 export { Splitter, SplitterPane } from './components/Splitter';
 export type { SplitterProps, SplitterPaneProps } from './components/Splitter';
