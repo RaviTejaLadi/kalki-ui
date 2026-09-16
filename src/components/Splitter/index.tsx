@@ -4,6 +4,7 @@ import React, {
   useRef,
   useEffect,
   forwardRef,
+  Fragment,
   KeyboardEvent,
 } from 'react';
 import { Box } from '../Box';
@@ -278,7 +279,7 @@ const Splitter = forwardRef<HTMLDivElement, SplitterProps>(
         ref={mergedRef}
       >
         {panes.map((pane, index) => (
-          <React.Fragment key={pane.key ?? `pane-${index}`}>
+          <Fragment key={pane.key ?? `pane-${index}`}>
             <div
               className="overflow-auto"
               style={{
@@ -318,7 +319,7 @@ const Splitter = forwardRef<HTMLDivElement, SplitterProps>(
                 orientation={orientation}
               />
             )}
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
     );
