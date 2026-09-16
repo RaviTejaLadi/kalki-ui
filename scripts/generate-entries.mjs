@@ -15,7 +15,6 @@ const entries = {
   AccordionItem,
 } from '../components/Accordion';
 export type {
-  AccordionVariant,
   AccordionSize,
   AccordionProps,
   AccordionItemProps,
@@ -134,6 +133,25 @@ export type {
   DrawerBodyProps,
 } from '../components/Drawer';
 `,
+  dropdown: `export {
+  Dropdown,
+  DropdownContent,
+  DropdownItem,
+  DropdownLabel,
+  DropdownSeparator,
+  DropdownTrigger,
+  DropdownValue,
+} from '../components/Dropdown';
+export type {
+  DropdownProps,
+  DropdownContentProps,
+  DropdownItemProps,
+  DropdownLabelProps,
+  DropdownSeparatorProps,
+  DropdownTriggerProps,
+  DropdownValueProps,
+} from '../components/Dropdown';
+`,
   empty: `export {
   Empty,
   EmptyHeader,
@@ -159,7 +177,7 @@ export type {
 `,
   'full-screen-toggle': `export { FullScreenToggle } from '../components/FullScreenToggle';
 `,
-  gallery: `export { Gallery as GalleryImage, galleryVariants } from '../components/Gallery';
+  gallery: `export { Gallery, GalleryImage, galleryVariants } from '../components/Gallery';
 export type { GalleryProps } from '../components/Gallery';
 `,
   highlighter: `export {
@@ -217,7 +235,6 @@ export type {
 export type {
   ListGroupProps,
   ListGroupItemProps,
-  VariantType,
 } from '../components/Lists/ListGroups';
 `,
   'ordered-list': `export {
@@ -255,9 +272,6 @@ export type {
   ModalFooterProps,
 } from '../components/Modal';
 `,
-  ripple: `export { Ripple } from '../components/Ripple';
-export type { RippleProps } from '../components/Ripple';
-`,
   'scroll-to-top': `export {
   ScrollToTop,
   scrollButtonVariants,
@@ -274,6 +288,15 @@ export type {
 `,
   spinner: `export { Spinner, spinnerVariants } from '../components/Spinner';
 export type { SpinnerProps } from '../components/Spinner';
+`,
+  stepper: `export { Stepper } from '../components/Stepper';
+export type {
+  StepStatus,
+  StepperProps,
+  StepperStepProps,
+  StepperDescriptionProps,
+  StepperCodeBlockProps,
+} from '../components/Stepper';
 `,
   splitter: `export { Splitter, SplitterPane } from '../components/Splitter';
 export type { SplitterProps, SplitterPaneProps } from '../components/Splitter';

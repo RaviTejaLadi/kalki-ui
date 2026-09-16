@@ -7,7 +7,6 @@ export {
 } from './components/Accordion';
 
 export type {
-  AccordionVariant,
   AccordionSize,
   AccordionProps,
   AccordionItemProps,
@@ -170,6 +169,27 @@ export type {
 } from './components/Drawer';
 // #endregion
 
+// #region Dropdown
+export {
+  Dropdown,
+  DropdownContent,
+  DropdownItem,
+  DropdownLabel,
+  DropdownSeparator,
+  DropdownTrigger,
+  DropdownValue,
+} from './components/Dropdown';
+export type {
+  DropdownProps,
+  DropdownContentProps,
+  DropdownItemProps,
+  DropdownLabelProps,
+  DropdownSeparatorProps,
+  DropdownTriggerProps,
+  DropdownValueProps,
+} from './components/Dropdown';
+// #endregion
+
 // #region Image
 export { Image, imageVariants } from './components/Image';
 export type {
@@ -205,11 +225,6 @@ export type {
 export { ScrollToTop, scrollButtonVariants } from './components/ScrollToTop';
 // #endregion
 
-// #region Ripple
-export { Ripple } from './components/Ripple';
-export type { RippleProps } from './components/Ripple';
-// #endregion
-
 // #region Modal
 export {
   Modal,
@@ -239,7 +254,6 @@ export {
 export type {
   ListGroupProps,
   ListGroupItemProps,
-  VariantType,
 } from './components/Lists/ListGroups';
 // #endregion
 
@@ -294,7 +308,7 @@ export type { JsonViewerProps, JsonReplacer } from './components/JsonViewer';
 // #endregion
 
 // #region Gallery
-export { Gallery as GalleryImage, galleryVariants } from './components/Gallery';
+export { Gallery, GalleryImage, galleryVariants } from './components/Gallery';
 export type { GalleryProps } from './components/Gallery';
 // #endregion
 
@@ -378,6 +392,17 @@ export type {
   FlexWrap,
   Direction,
 } from './components/Stack';
+// #endregion
+
+// #region Stepper
+export { Stepper } from './components/Stepper';
+export type {
+  StepStatus,
+  StepperProps,
+  StepperStepProps,
+  StepperDescriptionProps,
+  StepperCodeBlockProps,
+} from './components/Stepper';
 // #endregion
 
 // #region Table

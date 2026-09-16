@@ -1,7 +1,7 @@
 {
   "name": "kalki-ui",
   "description": "Kalki-UI is a powerful React-based UI component library designed to streamline the development of modern web applications, combining flexibility, performance, and accessibility.",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "type": "module",
   "license": "MIT",
   "files": [
@@ -98,6 +98,11 @@
       "import": "./dist/entries/drawer.js",
       "default": "./dist/entries/drawer.js"
     },
+    "./dropdown": {
+      "types": "./dist/entries/dropdown.d.ts",
+      "import": "./dist/entries/dropdown.js",
+      "default": "./dist/entries/dropdown.js"
+    },
     "./empty": {
       "types": "./dist/entries/empty.d.ts",
       "import": "./dist/entries/empty.js",
@@ -173,11 +178,6 @@
       "import": "./dist/entries/modal.js",
       "default": "./dist/entries/modal.js"
     },
-    "./ripple": {
-      "types": "./dist/entries/ripple.d.ts",
-      "import": "./dist/entries/ripple.js",
-      "default": "./dist/entries/ripple.js"
-    },
     "./scroll-to-top": {
       "types": "./dist/entries/scroll-to-top.d.ts",
       "import": "./dist/entries/scroll-to-top.js",
@@ -197,6 +197,11 @@
       "types": "./dist/entries/spinner.d.ts",
       "import": "./dist/entries/spinner.js",
       "default": "./dist/entries/spinner.js"
+    },
+    "./stepper": {
+      "types": "./dist/entries/stepper.d.ts",
+      "import": "./dist/entries/stepper.js",
+      "default": "./dist/entries/stepper.js"
     },
     "./splitter": {
       "types": "./dist/entries/splitter.d.ts",
@@ -378,6 +383,9 @@
       "drawer": [
         "dist/entries/drawer.d.ts"
       ],
+      "dropdown": [
+        "dist/entries/dropdown.d.ts"
+      ],
       "empty": [
         "dist/entries/empty.d.ts"
       ],
@@ -423,9 +431,6 @@
       "modal": [
         "dist/entries/modal.d.ts"
       ],
-      "ripple": [
-        "dist/entries/ripple.d.ts"
-      ],
       "scroll-to-top": [
         "dist/entries/scroll-to-top.d.ts"
       ],
@@ -437,6 +442,9 @@
       ],
       "spinner": [
         "dist/entries/spinner.d.ts"
+      ],
+      "stepper": [
+        "dist/entries/stepper.d.ts"
       ],
       "splitter": [
         "dist/entries/splitter.d.ts"

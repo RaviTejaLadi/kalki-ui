@@ -4,15 +4,16 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { Image, type ImageProps } from '../Image';
 
 // #region galleryVariants
-const galleryVariants = cva('gap-4', {
+const galleryVariants = cva('gap-2', {
   variants: {
     pattern: {
-      grid: 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ',
-      masonry: 'columns-2 md:columns-3 lg:columns-4 space-y-4',
+      grid: 'grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4',
+      masonry:
+        'columns-2 [column-gap:0.5rem] md:columns-3 lg:columns-4 [&>*]:mb-2',
       carousel:
-        'flex overflow-x-auto space-x-4 snap-x snap-mandatory scroll-smooth',
-      asymmetric: 'grid grid-cols-4 grid-rows-4',
-      compact: 'grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1',
+        'flex snap-x snap-mandatory gap-2 overflow-x-auto scroll-smooth pb-1',
+      asymmetric: 'grid grid-cols-2 auto-rows-[110px] gap-2 md:grid-cols-4',
+      compact: 'grid grid-cols-3 gap-1.5 md:grid-cols-4 lg:grid-cols-6',
     },
   },
   defaultVariants: {
@@ -64,12 +65,15 @@ interface GalleryProps extends VariantProps<typeof galleryVariants> {
  */
 const Gallery = forwardRef<HTMLDivElement, GalleryProps>(
   ({ children, pattern, className }, ref) => {
+    const childArray = React.Children.toArray(children);
+
     const renderContent = () => {
       if (pattern === 'asymmetric') {
-        return React.Children.map(children, (child, index) => (
+        return childArray.map((child, index) => (
           <div
+            key={index}
             className={cn(
-              'overflow-hidden rounded-lg',
+              'overflow-hidden rounded-md border border-border/40 bg-muted/20 transition-transform duration-200 hover:-translate-y-0.5',
               index % 5 === 0 && 'col-span-2 row-span-2',
               index % 5 === 3 && 'col-span-2',
               index % 5 === 4 && 'row-span-2'
@@ -81,12 +85,24 @@ const Gallery = forwardRef<HTMLDivElement, GalleryProps>(
       }
 
       if (pattern === 'carousel') {
-        return React.Children.map(children, (child) => (
-          <div className="snap-center flex-shrink-0 w-64">{child}</div>
+        return childArray.map((child, index) => (
+          <div
+            key={index}
+            className="w-56 shrink-0 snap-start overflow-hidden rounded-md border border-border/40"
+          >
+            {child}
+          </div>
         ));
       }
 
-      return children;
+      return childArray.map((child, index) => (
+        <div
+          key={index}
+          className="overflow-hidden rounded-md border border-border/30 bg-muted/10"
+        >
+          {child}
+        </div>
+      ));
     };
 
     return (
@@ -123,9 +139,12 @@ const GalleryImage = forwardRef<HTMLDivElement, ImageProps>(
     ref
   ) => {
     return (
-      <div ref={ref}>
+      <div ref={ref} className="aspect-square overflow-hidden rounded-md">
         <Image
-          imgClassName={cn('w-full h-full object-cover rounded-lg', className)}
+          imgClassName={cn(
+            'h-full w-full object-cover transition-transform duration-300 hover:scale-105',
+            className
+          )}
           src={src}
           alt={alt}
           variant={variant}

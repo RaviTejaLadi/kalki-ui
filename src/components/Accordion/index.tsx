@@ -1,24 +1,21 @@
-import * as React from 'react';
 import {
-  forwardRef,
-  useState,
-  useCallback,
-  useMemo,
-  ReactNode,
   CSSProperties,
+  ReactNode,
   createContext,
+  forwardRef,
+  useCallback,
   useContext,
-  useRef,
   useEffect,
-  KeyboardEvent,
+  useMemo,
+  useRef,
+  useState,
 } from 'react';
-import { cn } from '@/utils';
-import { cva, VariantProps } from 'class-variance-authority';
 import { ChevronDown } from 'lucide-react';
+import { cva, VariantProps } from 'class-variance-authority';
+import { cn } from '@/utils';
 
-// #region accordionVariants
 const accordionVariants = cva(
-  'w-full border border-border rounded-md overflow-hidden',
+  'w-full overflow-hidden rounded-lg border border-border bg-background text-foreground',
   {
     variants: {
       size: {
@@ -35,163 +32,91 @@ const accordionVariants = cva(
   }
 );
 
-// #endRegion
-
-// #region types
-type AccordionVariant =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'warning'
-  | 'help'
-  | 'info'
-  | 'dark'
-  | 'light';
-
 type AccordionSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
+/**
+ * Root accordion container that manages open/close state for nested items.
+ */
 interface AccordionProps extends VariantProps<typeof accordionVariants> {
-  /** Accordion item children */
   children: ReactNode;
-  /** Additional CSS classes */
   className?: string;
-  /** Inline styles */
   style?: CSSProperties;
-  /** Visual style variant for active headers */
-  variant?: AccordionVariant;
-  /** Text and header size */
   size?: AccordionSize;
 }
 
 interface AccordionItemProps {
-  /** Header and body content for this item */
   children: ReactNode;
-  /** Additional CSS classes */
   className?: string;
-  /** Inline styles */
   style?: CSSProperties;
 }
 
-interface AccordionHeaderProps {
-  /** Header label content */
-  children: ReactNode;
-  /** Unique key used to open/close this item */
-  eventKey: string;
-  /** Controlled open state; syncs with accordion context when set */
-  open?: boolean;
-  /** Custom expand/collapse icon; defaults to a chevron */
-  icon?: ReactNode;
-  /** Additional CSS classes */
-  className?: string;
-  /** Inline styles */
-  style?: CSSProperties;
-}
-
-interface AccordionBodyProps {
-  /** Collapsible panel content */
-  children: ReactNode;
-  /** Unique key matching the related header */
-  eventKey: string;
-  /** Additional CSS classes */
-  className?: string;
-  /** Inline styles */
-  style?: CSSProperties;
-}
-
-interface AccordionContextType {
-  /** Set of currently open item keys */
-  activeKeys: Set<string>;
-  /** Toggle an item open or closed */
-  toggleItem: (eventKey: string) => void;
-  /** Open an item by key */
-  openItem: (eventKey: string) => void;
-  /** Close an item by key */
-  closeItem: (eventKey: string) => void;
-  /** Active header color variant */
-  variant: AccordionVariant;
-  /** Accordion size */
-  size: AccordionSize;
-}
-// #endRegion
-
-// #region utils
-export const backgroundColorMap: Record<AccordionVariant, string> = {
-  primary: 'bg-primary',
-  secondary: 'bg-secondary',
-  success: 'bg-success',
-  danger: 'bg-danger',
-  warning: 'bg-warning',
-  help: 'bg-help',
-  info: 'bg-info',
-  dark: 'bg-dark',
-  light: 'bg-light',
-};
-
-export const bodySizesMap: Record<AccordionSize, string> = {
-  sm: 'h-auto px-3 py-2',
-  md: 'h-auto p-2',
-  lg: 'h-auto px-3 py-2',
-  xl: 'h-auto px-4 py-2',
-  '2xl': 'h-auto px-5 py-2',
-};
-
-export const sizesMap: Record<AccordionSize, string> = {
-  sm: 'h-10',
-  md: 'h-11',
-  lg: 'h-12',
-  xl: 'h-[3.25rem]',
-  '2xl': 'h-14',
-};
-// #endRegion
-
-// #region context
-export const AccordionContext = createContext<AccordionContextType | null>(
-  null
-);
-// #endRegion
-
-// #region components
 /**
- * A collapsible accordion container that manages open/closed item state.
+ * The clickable header that toggles an accordion item open or closed.
  *
  * @component
  * @example
  * ```tsx
- * <Accordion variant="primary" size="md">
- *   <Accordion.Item>
- *     <Accordion.Header eventKey="1">Section 1</Accordion.Header>
- *     <Accordion.Body eventKey="1">Content for section 1</Accordion.Body>
- *   </Accordion.Item>
- * </Accordion>
+ * <AccordionHeader eventKey="1">Section title</AccordionHeader>
  * ```
- *
- * @param {AccordionProps} props - The component props
- * @param {React.ReactNode} props.children - Accordion item children
- * @param {AccordionVariant} [props.variant='primary'] - Visual style variant for active headers
- * @param {AccordionSize} [props.size='sm'] - Text and header size
- * @param {string} [props.className] - Additional CSS classes
- * @param {React.CSSProperties} [props.style] - Inline styles
- * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the root element
- *
- * @returns {JSX.Element} An accordion container with context for child items
+ */
+interface AccordionHeaderProps {
+  children: ReactNode;
+  eventKey: string;
+  open?: boolean;
+  icon?: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+}
+
+interface AccordionBodyProps {
+  children: ReactNode;
+  eventKey: string;
+  className?: string;
+  style?: CSSProperties;
+}
+
+interface AccordionContextType {
+  activeKeys: Set<string>;
+  toggleItem: (eventKey: string) => void;
+  openItem: (eventKey: string) => void;
+  closeItem: (eventKey: string) => void;
+  size: AccordionSize;
+}
+
+const headerSizeMap: Record<AccordionSize, string> = {
+  sm: 'min-h-10 px-3 py-2',
+  md: 'min-h-11 px-3.5 py-2.5',
+  lg: 'min-h-12 px-4 py-3',
+  xl: 'min-h-[3.25rem] px-4 py-3',
+  '2xl': 'min-h-14 px-5 py-3',
+};
+
+const bodySizeMap: Record<AccordionSize, string> = {
+  sm: 'px-3 pb-3 pt-2',
+  md: 'px-3.5 pb-3.5 pt-2.5',
+  lg: 'px-4 pb-4 pt-3',
+  xl: 'px-4 pb-4 pt-3',
+  '2xl': 'px-5 pb-4 pt-3',
+};
+
+const AccordionContext = createContext<AccordionContextType | null>(null);
+
+/**
+ * Container component for grouping accordion items with shared behavior.
  */
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
-  (
-    { children, variant = 'primary', size = 'sm', className, style, ...rest },
-    ref
-  ) => {
+  ({ children, size = 'sm', className, style, ...rest }, ref) => {
     const [activeKeys, setActiveKeys] = useState<Set<string>>(new Set());
 
     const toggleItem = useCallback((eventKey: string) => {
       setActiveKeys((prevKeys) => {
-        const newKeys = new Set(prevKeys);
-        if (newKeys.has(eventKey)) {
-          newKeys.delete(eventKey);
+        const next = new Set(prevKeys);
+        if (next.has(eventKey)) {
+          next.delete(eventKey);
         } else {
-          newKeys.add(eventKey);
+          next.add(eventKey);
         }
-        return newKeys;
+        return next;
       });
     }, []);
 
@@ -201,22 +126,15 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     const closeItem = useCallback((eventKey: string) => {
       setActiveKeys((prevKeys) => {
-        const newKeys = new Set(prevKeys);
-        newKeys.delete(eventKey);
-        return newKeys;
+        const next = new Set(prevKeys);
+        next.delete(eventKey);
+        return next;
       });
     }, []);
 
     const contextValue = useMemo(
-      () => ({
-        activeKeys,
-        toggleItem,
-        openItem,
-        closeItem,
-        variant,
-        size,
-      }),
-      [activeKeys, toggleItem, openItem, closeItem, variant, size]
+      () => ({ activeKeys, toggleItem, openItem, closeItem, size }),
+      [activeKeys, closeItem, openItem, size, toggleItem]
     );
 
     return (
@@ -234,60 +152,42 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   }
 );
 
-Accordion.displayName = 'Accordion';
-
-/**
- * The collapsible content panel of an accordion item.
- *
- * @component
- * @example
- * ```tsx
- * <Accordion.Body eventKey="1">Panel content</Accordion.Body>
- * ```
- *
- * @param {AccordionBodyProps} props - The component props
- * @param {React.ReactNode} props.children - Collapsible panel content
- * @param {string} props.eventKey - Unique key matching the related header
- * @param {string} [props.className] - Additional CSS classes
- * @param {React.CSSProperties} [props.style] - Inline styles
- *
- * @returns {JSX.Element} An animated collapsible content panel
- */
-const AccordionBody: React.FC<AccordionBodyProps> = ({
+const AccordionBody = ({
   children,
   eventKey,
   className,
   style,
   ...rest
-}) => {
+}: AccordionBodyProps) => {
   const context = useContext(AccordionContext);
-  const [maxHeight, setMaxHeight] = useState<string>('0px');
   const contentRef = useRef<HTMLDivElement>(null);
+  const [maxHeight, setMaxHeight] = useState('0px');
 
-  if (!context)
+  if (!context) {
     throw new Error('AccordionBody must be used within an Accordion');
+  }
 
-  const { activeKeys, size } = context;
-  const isActive = activeKeys.has(eventKey);
-  const dimensions = bodySizesMap[size];
+  const isActive = context.activeKeys.has(eventKey);
 
   useEffect(() => {
-    if (contentRef.current) {
-      setMaxHeight(isActive ? `${contentRef.current.scrollHeight}px` : '0px');
-    }
-  }, [isActive]);
+    if (!contentRef.current) return;
+    setMaxHeight(isActive ? `${contentRef.current.scrollHeight}px` : '0px');
+  }, [isActive, children]);
 
   return (
     <div
-      ref={contentRef}
       className={cn(
-        'overflow-hidden transition-[max-height] duration-500 ease-in-out',
+        'overflow-hidden transition-[max-height] duration-300 ease-out',
         className
       )}
       style={{ ...style, maxHeight }}
       {...rest}
     >
-      <div className={cn('overflow-auto text-muted-foreground', dimensions)}>
+      <div
+        ref={contentRef}
+        id={`accordion-body-${eventKey}`}
+        className={cn(bodySizeMap[context.size], 'text-muted-foreground')}
+      >
         {children}
       </div>
     </div>
@@ -300,20 +200,20 @@ const AccordionBody: React.FC<AccordionBodyProps> = ({
  * @component
  * @example
  * ```tsx
- * <Accordion.Header eventKey="1">Section title</Accordion.Header>
+ * <AccordionHeader eventKey="1">Section title</AccordionHeader>
  * ```
  *
  * @param {AccordionHeaderProps} props - The component props
- * @param {React.ReactNode} props.children - Header label content
+ * @param {ReactNode} props.children - Header label content
  * @param {string} props.eventKey - Unique key used to open/close this item
  * @param {boolean} [props.open] - Controlled open state
- * @param {React.ReactNode} [props.icon] - Custom expand/collapse icon
+ * @param {ReactNode} [props.icon] - Custom expand/collapse icon
  * @param {string} [props.className] - Additional CSS classes
- * @param {React.CSSProperties} [props.style] - Inline styles
+ * @param {CSSProperties} [props.style] - Inline styles
  *
  * @returns {JSX.Element} A keyboard-accessible accordion header button
  */
-const AccordionHeader: React.FC<AccordionHeaderProps> = ({
+const AccordionHeader = ({
   children,
   eventKey,
   icon,
@@ -321,13 +221,14 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   className,
   style,
   ...rest
-}) => {
+}: AccordionHeaderProps) => {
   const context = useContext(AccordionContext);
-  if (!context)
-    throw new Error('AccordionHeader must be used within an Accordion');
 
-  const { activeKeys, toggleItem, openItem, closeItem, variant, size } =
-    context;
+  if (!context) {
+    throw new Error('AccordionHeader must be used within an Accordion');
+  }
+
+  const { activeKeys, toggleItem, openItem, closeItem, size } = context;
   const isActive = activeKeys.has(eventKey);
 
   useEffect(() => {
@@ -336,87 +237,60 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     } else if (open === false && isActive) {
       closeItem(eventKey);
     }
-  }, [open, eventKey, openItem, closeItem, isActive]);
+  }, [closeItem, eventKey, isActive, open, openItem]);
 
-  const backgroundColor = isActive
-    ? backgroundColorMap[variant]
-    : 'bg-transparent';
-  const dimensions = sizesMap[size];
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleItem(eventKey);
-    }
-  };
   return (
-    <div
+    <button
+      type="button"
+      aria-expanded={isActive}
+      aria-controls={`accordion-body-${eventKey}`}
+      onClick={() => toggleItem(eventKey)}
       className={cn(
-        'flex justify-between font-medium items-center cursor-pointer text-foreground dark:text-foreground p-4 transition-colors duration-300',
-        isActive ? 'text-white' : 'text-black',
-        backgroundColor,
-        dimensions,
+        'flex w-full items-center justify-between text-left font-medium transition-colors duration-200',
+        headerSizeMap[size],
+        isActive
+          ? 'bg-muted text-foreground'
+          : 'text-foreground hover:bg-muted',
         className
       )}
-      tabIndex={0}
-      role="button"
-      onClick={() => toggleItem(eventKey)}
-      onKeyDown={handleKeyDown}
       style={style}
       {...rest}
     >
-      {children}
+      <span className="truncate">{children}</span>
       {icon || (
         <ChevronDown
           className={cn(
-            'transition-transform size-4',
-            isActive ? 'rotate-180' : ''
+            'size-4 shrink-0 transition-transform',
+            isActive && 'rotate-180'
           )}
         />
       )}
-    </div>
+    </button>
   );
 };
 
 /**
- * A single accordion section wrapping a header and body.
- *
- * @component
- * @example
- * ```tsx
- * <Accordion.Item>
- *   <Accordion.Header eventKey="1">Title</Accordion.Header>
- *   <Accordion.Body eventKey="1">Content</Accordion.Body>
- * </Accordion.Item>
- * ```
- *
- * @param {AccordionItemProps} props - The component props
- * @param {React.ReactNode} props.children - Header and body content
- * @param {string} [props.className] - Additional CSS classes
- * @param {React.CSSProperties} [props.style] - Inline styles
- *
- * @returns {JSX.Element} A bordered accordion item container
+ * Wrapper for a single accordion section (header + body).
  */
-const AccordionItem: React.FC<AccordionItemProps> = ({
+const AccordionItem = ({
   children,
   className,
   style,
   ...rest
-}) => {
-  return (
-    <div
-      className={cn('border-b border-input last:border-b-0', className)}
-      style={style}
-      {...rest}
-    >
-      {children}
-    </div>
-  );
-};
+}: AccordionItemProps) => (
+  <div
+    className={cn('border-b border-border last:border-b-0', className)}
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+);
 
-// #endRegion
-
-// #region exports
+Accordion.displayName = 'Accordion';
+AccordionBody.displayName = 'AccordionBody';
+AccordionHeader.displayName = 'AccordionHeader';
+AccordionItem.displayName = 'AccordionItem';
 
 export {
   Accordion,
@@ -426,11 +300,9 @@ export {
   accordionVariants,
 };
 export type {
-  AccordionVariant,
   AccordionSize,
   AccordionProps,
   AccordionItemProps,
   AccordionHeaderProps,
   AccordionBodyProps,
 };
-// #endRegion

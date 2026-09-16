@@ -1,11 +1,9 @@
 import React, {
   useState,
   useEffect,
-  cloneElement,
   forwardRef,
   ReactNode,
   CSSProperties,
-  ReactElement,
 } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Box } from '../Box';
@@ -27,17 +25,6 @@ interface TextCarouselProps {
   style?: CSSProperties;
   /** Prev/next button size @default 'xs' */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-  /** Prev/next button variant */
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'info'
-    | 'warning'
-    | 'danger'
-    | 'light'
-    | 'dark'
-    | 'outline';
 }
 // #endregion
 
@@ -47,7 +34,7 @@ interface TextCarouselProps {
  * @component
  * @example
  * ```tsx
- * <TextCarousel interval={5000} variant="outline" size="sm">
+ * <TextCarousel interval={5000} size="sm">
  *   <p>Slide one</p>
  *   <p>Slide two</p>
  * </TextCarousel>
@@ -57,7 +44,6 @@ interface TextCarouselProps {
  * @param {React.ReactNode} props.children - Slide elements
  * @param {number} [props.interval=0] - Auto-advance interval in ms (`0` = off)
  * @param {'xs'|'sm'|'md'|'lg'|'xl'|'2xl'|'3xl'} [props.size='xs'] - Control button size
- * @param {string} [props.variant] - Control button variant
  * @param {string} [props.className] - Additional CSS classes
  * @param {React.CSSProperties} [props.style] - Additional inline styles
  * @param {React.Ref<HTMLDivElement>} ref - Forwarded ref to the root Box
@@ -73,7 +59,6 @@ const TextCarousel = forwardRef<HTMLDivElement, TextCarouselProps>(
       className = '',
       style,
       size = 'xs',
-      variant,
       ...rest
     },
     ref
@@ -81,10 +66,11 @@ const TextCarousel = forwardRef<HTMLDivElement, TextCarouselProps>(
     const [index, setIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
-    const items = React.Children.toArray(children) as ReactElement[];
+    const items = React.Children.toArray(children);
     const itemCount = items.length;
 
     const goToPrev = () => {
+      if (itemCount < 2) return;
       setIsTransitioning(true);
       setIndex((prevIndex) =>
         prevIndex === 0 ? itemCount - 1 : prevIndex - 1
@@ -92,6 +78,7 @@ const TextCarousel = forwardRef<HTMLDivElement, TextCarouselProps>(
     };
 
     const goToNext = React.useCallback(() => {
+      if (itemCount < 2) return;
       setIsTransitioning(true);
       setIndex((prevIndex) =>
         prevIndex === itemCount - 1 ? 0 : prevIndex + 1
@@ -99,11 +86,11 @@ const TextCarousel = forwardRef<HTMLDivElement, TextCarouselProps>(
     }, [itemCount]);
 
     useEffect(() => {
-      if (interval > 0) {
+      if (interval > 0 && itemCount > 1) {
         const timer = setInterval(goToNext, interval);
         return () => clearInterval(timer);
       }
-    }, [interval, goToNext]);
+    }, [interval, itemCount, goToNext]);
 
     useEffect(() => {
       if (isTransitioning) {
@@ -120,16 +107,42 @@ const TextCarousel = forwardRef<HTMLDivElement, TextCarouselProps>(
         style={style}
         {...rest}
       >
-        <Box padding="6px" className="relative overflow-hidden">
-          <div className="transition-opacity duration-500">
-            {cloneElement(items[index])}
+        <Box
+          padding="6px"
+          className="relative overflow-hidden rounded-md border border-border bg-muted/30"
+        >
+          <div
+            className={cn(
+              'min-h-10 w-full transform transition-all duration-300 ease-out',
+              isTransitioning
+                ? 'translate-y-1 opacity-65'
+                : 'translate-y-0 opacity-100'
+            )}
+          >
+            {itemCount > 0 ? (
+              <div key={index} className="animate-fade-in">
+                {items[index]}
+              </div>
+            ) : null}
           </div>
         </Box>
-        <Box className="flex gap-5 ">
-          <Button onClick={goToPrev} variant={variant} size={size}>
+        <Box className="mt-3 flex items-center gap-2">
+          <Button
+            onClick={goToPrev}
+            variant="ghost"
+            size={size}
+            disabled={itemCount < 2}
+            className="transition-transform duration-200 hover:-translate-y-0.5"
+          >
             <ChevronLeft className="size-4" />
           </Button>
-          <Button onClick={goToNext} variant={variant} size={size}>
+          <Button
+            onClick={goToNext}
+            variant="ghost"
+            size={size}
+            disabled={itemCount < 2}
+            className="transition-transform duration-200 hover:-translate-y-0.5"
+          >
             <ChevronRight className="size-4" />
           </Button>
         </Box>

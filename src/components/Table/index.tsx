@@ -89,7 +89,7 @@ const Table = forwardRef<HTMLTableElement, TableProps>(
         <table
           ref={ref}
           className={cn(
-            'w-full border-collapse border rounded-md text-sm bg-background border-border shadow-sm overflow-hidden',
+            'w-full border-collapse overflow-hidden rounded-md bg-background text-sm text-foreground shadow-sm',
             className
           )}
           style={style}
@@ -131,7 +131,7 @@ const TableHead: React.FC<TableSectionProps> = ({
   return (
     <thead
       className={cn(
-        'bg-background text-foreground text-left uppercase text-xs font-semibold border-b border-border',
+        'border-b border-border bg-muted/30 text-left text-xs font-semibold uppercase text-foreground',
         className
       )}
       style={style}
@@ -169,7 +169,7 @@ const TableBody: React.FC<TableSectionProps> = ({
   return (
     <tbody
       className={cn(
-        'divide-y divide-gray-200 dark:divide-gray-200/10',
+        'divide-y divide-border',
         className
       )}
       style={style}
@@ -250,7 +250,7 @@ const TableFooter: React.FC<TableSectionProps> = ({
   return (
     <tfoot
       className={cn(
-        'bg-gray-50 text-muted-foreground font-medium text-sm border-t border-gray-200',
+        'border-t border-border bg-muted/40 text-sm text-foreground [&_td]:font-medium [&_td]:text-foreground [&_tr:hover]:bg-transparent',
         className
       )}
       style={style}
@@ -289,7 +289,7 @@ const TableRow: React.FC<TableRowProps> = ({
   return (
     <tr
       className={cn(
-        'hover:bg-gray-50 dark:hover:bg-gray-100/10 focus-within:bg-gray-100 transition-colors',
+        'transition-colors duration-200 hover:bg-muted/40 focus-within:bg-muted/50',
         className
       )}
       style={style}
